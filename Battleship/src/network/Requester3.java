@@ -5,10 +5,12 @@ package network;
 import java.io.*;
 import java.net.*;
 
+import javax.swing.JOptionPane;
+
 public class Requester3 {
     Socket requestSocket; 	// skapar en referens till requestSocket av typen Socket i klassen java.net
-    String server = "mymachine.abo.fi";
-    int port = 2004;
+    private String server = "mymachine.abo.fi";
+    private int port = 2004;
     String message, sistaHalsning;   
     PrintWriter output;
 	BufferedReader input;
@@ -20,17 +22,26 @@ public class Requester3 {
 	    	// tomt object requester med instansvariabler 
     }
 	   
+	
+	//used for testing
 public static void main(String args[]) {
         Requester3 client = new Requester3(); // an object wi
-        client.run();
+        
+        client.setServer(JOptionPane.showInputDialog("IP to connect to")); //IP to connect to
+        
+        int cordX = Integer.parseInt(JOptionPane.showInputDialog("cord X"));
+        int cordY = Integer.parseInt(JOptionPane.showInputDialog("cord Y"));
+        int[] cords = {cordX, cordY};
+        
+        client.run(cords);
     }
 	    
-    void run()
+    void run(int[] cords)
     {
         try{
             // Skapar en socket via vilken ett försök att koppla till servern sker som ligger på mymachine... och port 2004
             requestSocket = new Socket(server, port); // ändra detta till någon av dina maskiner
-            System.out.println("Connected to mymachine.abo.fi on port 2004 on " + requestSocket.getLocalPort());
+            System.out.println("Connected to "+ server +" on port "+ port +" on " + requestSocket.getLocalPort());
             // Skapar sockets för input och outputströmmarna 
             
             // märk!! en bufferedReader för inström, en Printwriter för utström och en bufferedreader för inläsning
@@ -41,11 +52,13 @@ public static void main(String args[]) {
             // Skapar en input socket lokalt på klientmaskinen
             do {
                 try{
+                    //message = (String)JOptionPane.showInputDialog("Send info to client");
                     message = (String)input.readLine(); // läser in vad servern skickat
                     System.out.println("server>" + message); 
-
-                    System.out.println("ange vad du vill göra (skriv alltså 'add') ");
-                    message = konsolInlast.readLine();
+                    
+                    System.out.println("Sending cords "+cords[0]+","+cords[1]);
+                    //message = konsolInlast.readLine();
+                    message = cords[0]+","+cords[1];
                     sendMessage(message); // skickar meddelandet add till metoden sendMessage 
                     
                     message = (String)input.readLine(); // läser in vad servern skickat
@@ -118,8 +131,8 @@ public static void main(String args[]) {
     /*
      * sets IP to what you want to connect to.
      */
-    public void setServer(String server) {
-    	this.server = server;
+    public void setServer(String ip) {
+    	this.server = ip;
     }
     
     /*
@@ -142,8 +155,17 @@ public static void main(String args[]) {
     public int getPort() {
     	return port;
     }
+
+    /*
+     * use me to send stuff to log
+     */
+    public void appendLog(String string) {
+    	//add stuff that makes this add stuff to log
+    }
     
-    
+    /*
+     * i am used to see if game is lost
+     */
     
     
     

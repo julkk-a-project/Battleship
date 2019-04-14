@@ -1,6 +1,7 @@
 // allmänt tillgänglig på nätet, editerat från t.ex. http://zerioh.tripod.com/ressources/sockets.html
 
 package network;
+
 import java.io.*;
 import java.net.*;
 
@@ -33,6 +34,7 @@ public class Provider3 {
                 try{
                 	System.out.println("kommit hit");
                     message = (String)in.readLine();
+                    //add message handling here
                     System.out.println("client>" + message);
                     while (message.equals("add")) {
                     		sendMessage("du angav addition");                        
@@ -108,4 +110,12 @@ public class Provider3 {
     public int getPort() {
     	return port;
     }
+    
+    /*
+     * use me to send stuff to log
+     */
+    public void appendLog(String string) {
+    	//add stuff that makes this add stuff to log
+    }
+    
 }
