@@ -7,6 +7,7 @@ import java.net.*;
 public class Provider3 {
     ServerSocket providerSocket;
     Socket connection = null;
+    int port = 2004;
     String message;
     PrintWriter out;
     BufferedReader in;
@@ -18,7 +19,7 @@ public class Provider3 {
     {
         try{
             //1. creating a server socket
-            providerSocket = new ServerSocket(2004, 10);
+            providerSocket = new ServerSocket(port, 10);
             //2. Wait for connection
             System.out.println("Waiting for connection");
             connection = providerSocket.accept();
@@ -88,5 +89,23 @@ public class Provider3 {
         while(true){
             server.run();
         }
+    }
+    
+    ///////////////////
+    //Personal edits://
+    ///////////////////
+    
+    /*
+     * sets port to what you want to connect to.
+     */
+    public void setPort(int port) {
+    	this.port = port;
+    }
+    
+    /*
+     * use me to get port from memory
+     */
+    public int getPort() {
+    	return port;
     }
 }

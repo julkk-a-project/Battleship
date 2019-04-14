@@ -108,4 +108,44 @@ public static void main(String args[]) {
             ioException.printStackTrace();
         }
     }
+    
+    
+    ///////////////////
+    //Personal edits://
+    ///////////////////
+    
+    
+    /*
+     * sets IP to what you want to connect to.
+     */
+    public void setServer(String server) {
+    	this.server = server;
+    }
+    
+    /*
+     * use me to get server address from memory
+     */
+    public String getServer() {
+    	return server;
+    }
+    
+    /*
+     * sets port to what you want to connect to.
+     */
+    public void setPort(int port) {
+    	this.port = port;
+    }
+    
+    /*
+     * use me to get port from memory
+     */
+    public int getPort() {
+    	return port;
+    }
+    
+    
+    
+    
+    
+    
 }
