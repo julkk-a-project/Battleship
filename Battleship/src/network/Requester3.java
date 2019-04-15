@@ -18,7 +18,7 @@ public class Requester3 {
 
 
 	
-	Requester3 () {
+	public Requester3 () {
 	    	// tomt object requester med instansvariabler 
     }
 	   
@@ -36,7 +36,7 @@ public static void main(String args[]) {
         client.run(cords);
     }
 	    
-    void run(int[] cords)
+    public void run(int[] cords)
     {
         try{
             // Skapar en socket via vilken ett försök att koppla till servern sker som ligger på mymachine... och port 2004

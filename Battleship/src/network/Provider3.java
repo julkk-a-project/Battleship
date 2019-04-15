@@ -15,8 +15,8 @@ public class Provider3 {
 	String [] ok = new String [50];    
 	int i = 0;
     
-    Provider3(){}
-    void run()
+    public Provider3(){}
+    public void run()
     {
         try{
             //1. creating a server socket
