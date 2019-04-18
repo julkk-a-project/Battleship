@@ -15,10 +15,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class Window extends Application {
-	
-
-
-
 
 	public static void main(String[] args) {
 		launch(args);
@@ -43,12 +39,12 @@ public class Window extends Application {
 		
 		primaryStage.setScene(scene);
 		//Button btn = new Button();
-		//btn.setText("Say 'Hello World'");
+		//btn.setText("Say 'Hi'");
 		//btn.setOnAction(new EventHandler<ActionEvent>() {
 
 			//@Override
 			//public void handle(ActionEvent event) {
-				//System.out.println("Hello World!");
+				//System.out.println("Hailo!");
 			
 		//});
 
