@@ -32,26 +32,30 @@ public class Window extends Application {
 
 		Scene scene = new Scene(grid, 300, 275);
 		
-		Text scenetitle = new Text("Welcome");
-		scenetitle.setFont(Font.font("Verdana", FontWeight.NORMAL, 20));
+		Text scenetitle = new Text("Welcome to BattleShip");
+		scenetitle.setFont(Font.font("Gruppo", FontWeight.THIN, 20));
 		grid.add(scenetitle, 0, 0, 2, 1);
 		
-		
 		primaryStage.setScene(scene);
-		//Button btn = new Button();
-		//btn.setText("Say 'Hi'");
-		//btn.setOnAction(new EventHandler<ActionEvent>() {
-
-			//@Override
-			//public void handle(ActionEvent event) {
-				//System.out.println("Hailo!");
-			
-		//});
+		
+		/*Button btn = new Button();
+		btn.setText("Say 'Hi'");
+		
+		btn.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				System.out.println("Hailo!");
+			}
+		});*/
+		
 
 		StackPane root = new StackPane();
 		//root.getChildren().add(btn);
+		root.getChildren().add(grid);
 		primaryStage.setScene(new Scene(root, 300, 250));
 		primaryStage.show();
+		
+		
 	}
 
 }
