@@ -22,7 +22,7 @@ public class Main {
 		if (host.equals("y")) {
 			//Hoster
 
-	        Provider3 server = new Prov ider3();
+	        Provider3 server = new Provider3();
 	        while(true){
 	            server.run();
 	        }
