@@ -32,24 +32,18 @@ public class Provider3 {
             //4. The two parts communicate via the input and output streams
             do{
                 try{
-                	System.out.println("kommit hit");
+                	//System.out.println("kommit hit");
                     message = (String)in.readLine();
                     //add message handling here
-                    System.out.println("client>" + message);
-                    while (message.equals("add")) {
-                    		sendMessage("du angav addition");                        
-                    		double x, y;
-                    		message = (String)in.readLine();
-                    		System.out.println("läst in x ");
-                    		x = Double.parseDouble(message);
-                    		sendMessage("läste in " + x);
-                    		message = (String)in.readLine();
-                    		y = Double.parseDouble(message);
-                    		System.out.println("läst in y ");
-                    		sendMessage("läste in " + y);
-                    		sendMessage("Summan av " + x + " + "+ y + " är " + (x+y));
+                    System.out.println("client>" + message); //only shows message
+                    
+                    
+                    //Waits untill message is a cordinate
+                    while (isCordinate(message)) {
+                    		sendMessage(cordinateHandler(message));
                         }
   
+                    
                     if (message.equals("bye")) sendMessage("Hejdå, det här gick ju bra");
                 }
                 catch(Exception classnot){
@@ -62,7 +56,7 @@ public class Provider3 {
         }
 
         finally{
-        	System.out.println("kommit hit2");
+        	System.out.println("connection closing");
         	//4: Closing connection
             try{
                 in.close();
@@ -74,7 +68,7 @@ public class Provider3 {
             }
         }
     }
-    void sendMessage(String msg)
+	void sendMessage(String msg)
     {
         try{
             out.println(msg);
@@ -117,5 +111,38 @@ public class Provider3 {
     public void appendLog(String string) {
     	//add stuff that makes this add stuff to log
     }
+    
+    /*
+     * use me to determen if a cordinate was sent
+     */
+    public boolean isCordinate(String message) {
+    	try {
+        	String[] cords = message.split(",", 2);
+        	return true;
+    	}catch(Exception e){
+    		appendLog(e+"");
+    		return false;
+    	}
+    }
+    
+    /*
+     * use me to change what the matrixes look like, and return HitMiss, shipSunk and WinLoose message.
+     */
+    private String cordinateHandler(String message2) {
+    	String string = "";
+    	
+    	//handle message here
+    	
+    	string += "1,1,0"; //Example
+    	
+    	
+    	
+    	
+		return string;
+	}
+    
+    
+    
+    
     
 }

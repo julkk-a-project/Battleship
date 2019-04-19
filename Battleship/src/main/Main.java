@@ -22,6 +22,9 @@ public class Main {
 		if (host.equals("y")) {
 			//Hoster
 
+			//current model of thougth says that this should be run when waiting for a resposne from the other player
+			
+			
 	        Provider3 server = new Provider3();
 	        while(true){
 	            server.run();
