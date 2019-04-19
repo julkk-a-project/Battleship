@@ -14,11 +14,14 @@ public class Provider3 {
     BufferedReader in;
 	String [] ok = new String [50];    
 	int i = 0;
+	private boolean turnNotOver;
     
     public Provider3(){}
-    public void run()
-    {
+    public boolean run() {
         try{
+
+            turnNotOver = true;
+        	
             //1. creating a server socket
             providerSocket = new ServerSocket(port, 10);
             //2. Wait for connection
@@ -30,6 +33,8 @@ public class Provider3 {
             out = new PrintWriter (new BufferedWriter ( new OutputStreamWriter(connection.getOutputStream())), true);
             sendMessage("Connection successful");
             //4. The two parts communicate via the input and output streams
+            
+            
             do{
                 try{
                 	//System.out.println("kommit hit");
@@ -45,12 +50,15 @@ public class Provider3 {
                     
   
                     
-                    if (message.equals("copy")) sendMessage("my turn...");
+                    if (message.equals("copy")) {
+                        turnNotOver = false;
+                    }
                 }
                 catch(Exception classnot){
                     System.err.println("Data received in unknown format");
                 }
             }while(!message.equals("copy"));
+            turnNotOver = false;
         }
         catch(IOException ioException){
             ioException.printStackTrace();
@@ -68,6 +76,7 @@ public class Provider3 {
                 ioException.printStackTrace();
             }
         }
+        return turnNotOver;
     }
 	void sendMessage(String msg)
     {

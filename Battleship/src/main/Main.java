@@ -24,26 +24,52 @@ public class Main {
 
 			//current model of thougth says that this should be run when waiting for a resposne from the other player
 			
-			
+			boolean hisTurn = true;
 	        Provider3 server = new Provider3();
-	        while(true){
-	            server.run();
+	        Requester3 client = new Requester3(); // an object wi
+	        
+
+	        //Temporary because i'm lazy and don't know how to do it automatically
+	        client.setServer(JOptionPane.showInputDialog("IP to connect to")); //IP to connect to
+	        
+	        
+	        
+	        for (int i = 0; i < 10; i++) {
+		        while(hisTurn){
+		            hisTurn = server.run();
+		        }
+		        int cordX = Integer.parseInt(JOptionPane.showInputDialog("cord X"));
+		        int cordY = Integer.parseInt(JOptionPane.showInputDialog("cord Y"));
+		        int[] cords = {cordX, cordY};
+		        
+		        client.run(cords);
+		        
 	        }
 			
 		}
 		else {
 			//Joiner
 
+	        Provider3 server = new Provider3();
 	        Requester3 client = new Requester3(); // an object wi
 	        
 	        client.setServer(JOptionPane.showInputDialog("IP to connect to")); //IP to connect to
+	        
+	        boolean hisTurn = false;
+	        
 	        
 	        for (int i = 0; i < 10; i++) {
 		        int cordX = Integer.parseInt(JOptionPane.showInputDialog("cord X"));
 		        int cordY = Integer.parseInt(JOptionPane.showInputDialog("cord Y"));
 		        int[] cords = {cordX, cordY};
 		        
-		        client.run(cords);	        	
+		        client.run(cords);
+		        
+		        hisTurn = true;
+		        while(hisTurn){
+		            hisTurn = server.run();
+		        }
+		        
 	        }
 		}
 		
