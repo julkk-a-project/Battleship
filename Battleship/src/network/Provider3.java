@@ -39,7 +39,7 @@ public class Provider3 {
                     
                     
                     //Waits untill message is a cordinate
-                    while (isCordinate(message)) {
+                    if (isCordinate(message)) {
                     		sendMessage(cordinateHandler(message));
                         }
   
