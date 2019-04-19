@@ -35,6 +35,7 @@ public class Main {
 	        
 	        
 	        for (int i = 0; i < 10; i++) {
+	        	hisTurn = true;
 		        while(hisTurn){
 		            hisTurn = server.run();
 		        }
