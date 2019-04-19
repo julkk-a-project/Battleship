@@ -57,31 +57,13 @@ public static void main(String args[]) {
                     System.out.println("server>" + message); 
                     
                     System.out.println("Sending cords "+cords[0]+","+cords[1]);
-                    //message = konsolInlast.readLine();
                     message = cords[0]+","+cords[1];
                     sendMessage(message); // skickar meddelandet add till metoden sendMessage 
                     
                     message = (String)input.readLine(); // läser in vad servern skickat
                     System.out.println("server>" + message);
                     
-                    System.out.println("ange första heltalet:");
-                    message = "42";
-                    sendMessage(message); // message till metoden sendMessage 
-
-                    message = (String)input.readLine(); // läser in vad servern skickat
-                    System.out.println("server>" + message);
-                    
-                    System.out.println("ange andra heltalet:");
-                    message = konsolInlast.readLine();
-                    sendMessage(message); // message till metoden sendMessage
-                    
-                    message = (String)input.readLine(); // läser in vad servern skickat
-                    System.out.println("server>" + message);
-                    
-                    message = input.readLine(); // läser svaret
-                    System.out.println(message);
-
-                    message = "bye";  
+                    message = "copy";  
                     sendMessage(message); // skickar bye till metoden sendMessage
                     
                     sistaHalsning = input.readLine(); // läser svaret
@@ -90,7 +72,7 @@ public static void main(String args[]) {
                 catch(Exception e){
                     System.err.println("data received in unknown format");
                 }
-            } while(!message.equals("bye"));
+            } while(!message.equals("copy"));
         }
         catch(UnknownHostException unknownHost){
             System.err.println("You are trying to connect to an unknown host!");
@@ -166,7 +148,9 @@ public static void main(String args[]) {
     /*
      * i am used to see if game is lost
      */
-    
+    public boolean isLost(String message) {
+    	return false;
+    }
     
     
     

@@ -42,14 +42,15 @@ public class Provider3 {
                     if (isCordinate(message)) {
                     		sendMessage(cordinateHandler(message));
                         }
+                    
   
                     
-                    if (message.equals("bye")) sendMessage("Hejdå, det här gick ju bra");
+                    if (message.equals("copy")) sendMessage("my turn...");
                 }
                 catch(Exception classnot){
                     System.err.println("Data received in unknown format");
                 }
-            }while(!message.equals("bye"));
+            }while(!message.equals("copy"));
         }
         catch(IOException ioException){
             ioException.printStackTrace();

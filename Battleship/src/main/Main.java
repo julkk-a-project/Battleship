@@ -38,11 +38,13 @@ public class Main {
 	        
 	        client.setServer(JOptionPane.showInputDialog("IP to connect to")); //IP to connect to
 	        
-	        int cordX = Integer.parseInt(JOptionPane.showInputDialog("cord X"));
-	        int cordY = Integer.parseInt(JOptionPane.showInputDialog("cord Y"));
-	        int[] cords = {cordX, cordY};
-	        
-	        client.run(cords);
+	        for (int i = 0; i < 10; i++) {
+		        int cordX = Integer.parseInt(JOptionPane.showInputDialog("cord X"));
+		        int cordY = Integer.parseInt(JOptionPane.showInputDialog("cord Y"));
+		        int[] cords = {cordX, cordY};
+		        
+		        client.run(cords);	        	
+	        }
 		}
 		
 		
