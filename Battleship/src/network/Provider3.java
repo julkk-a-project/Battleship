@@ -19,10 +19,7 @@ public class Provider3 {
     public Provider3(){}
     
     
-    public void connect() {
-    	boolean notConnected = true;
-    	while(notConnected) {
-
+    public boolean connect() {
         	try{
                 //1. creating a server socket
                 providerSocket = new ServerSocket(port, 10);
@@ -34,13 +31,13 @@ public class Provider3 {
                 in = new BufferedReader (new InputStreamReader (connection.getInputStream()));
                 out = new PrintWriter (new BufferedWriter ( new OutputStreamWriter(connection.getOutputStream())), true);
                 sendMessage("Connection successful");
-                notConnected = false;
                 //4. The two parts communicate via the input and output streams
+                return true;
             }
             catch(IOException ioException){
                 ioException.printStackTrace();
-            }	
-    	}
+                return false;
+            }
 
     }
     
