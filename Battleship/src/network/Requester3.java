@@ -40,7 +40,10 @@ public static void main(String args[]) {
 
 	public boolean connect() {
 		 try{
+			 System.out.println("A");
 	            // Skapar en socket via vilken ett försök att koppla till servern sker som ligger på mymachine... och port 2004
+			 
+			 System.out.println(server+","+port);
 	            requestSocket = new Socket(server, port); // ändra detta till någon av dina maskiner
 	            System.out.println("Connected to "+ server +" on port "+ port +" on " + requestSocket.getLocalPort());
 	            // Skapar sockets för input och outputströmmarna 
@@ -54,10 +57,12 @@ public static void main(String args[]) {
 	      	  	return true;
 	        }
 	        catch(UnknownHostException unknownHost){
+				 System.out.println("B");
 	            System.err.println("You are trying to connect to an unknown host!");
 	            return false;
 	        }
 	        catch(IOException ioException){
+	   			 System.out.println("C");
 	            ioException.printStackTrace();
 	            return false;
 	        }
