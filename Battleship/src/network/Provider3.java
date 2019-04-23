@@ -20,22 +20,27 @@ public class Provider3 {
     
     
     public void connect() {
-    	try{
-            //1. creating a server socket
-            providerSocket = new ServerSocket(port, 10);
-            //2. Wait for connection
-            System.out.println("Waiting for connection");
-            connection = providerSocket.accept();
-            System.out.println("Connection received from " + connection.getInetAddress().getHostName() + " and accepted on " + connection.getLocalSocketAddress() + " blahaa: " + connection.getOutputStream());
-            //3. get Input and Output streams
-            in = new BufferedReader (new InputStreamReader (connection.getInputStream()));
-            out = new PrintWriter (new BufferedWriter ( new OutputStreamWriter(connection.getOutputStream())), true);
-            sendMessage("Connection successful");
-            //4. The two parts communicate via the input and output streams
-        }
-        catch(IOException ioException){
-            ioException.printStackTrace();
-        }
+    	boolean notConnected = true;
+    	while(notConnected) {
+
+        	try{
+                //1. creating a server socket
+                providerSocket = new ServerSocket(port, 10);
+                //2. Wait for connection
+                System.out.println("Waiting for connection");
+                connection = providerSocket.accept();
+                System.out.println("Connection received from " + connection.getInetAddress().getHostName() + " and accepted on " + connection.getLocalSocketAddress() + " blahaa: " + connection.getOutputStream());
+                //3. get Input and Output streams
+                in = new BufferedReader (new InputStreamReader (connection.getInputStream()));
+                out = new PrintWriter (new BufferedWriter ( new OutputStreamWriter(connection.getOutputStream())), true);
+                sendMessage("Connection successful");
+                notConnected = false;
+                //4. The two parts communicate via the input and output streams
+            }
+            catch(IOException ioException){
+                ioException.printStackTrace();
+            }	
+    	}
 
     }
     
