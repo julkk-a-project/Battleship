@@ -34,7 +34,6 @@ public class Main {
 	        
 	        
 
-	        client.connect();
 	        server.connect();
 	        
 	        
@@ -42,6 +41,11 @@ public class Main {
 	        	hisTurn = true;
 		        while(hisTurn){
 		            hisTurn = server.run();
+		        }
+		        
+
+		        if(i == 0) {
+			        client.connect();		        	
 		        }
 		        int cordX = Integer.parseInt(JOptionPane.showInputDialog("cord X"));
 		        int cordY = Integer.parseInt(JOptionPane.showInputDialog("cord Y"));
@@ -70,7 +74,6 @@ public class Main {
 	        
 	        
 	        client.connect();
-	        server.connect();
 	        
 	        for (int i = 0; i < 10; i++) {
 	        	
@@ -84,6 +87,9 @@ public class Main {
 		        client.run(cords);
 		        
 		        hisTurn = true;
+		        if(i == 0) {
+			        server.connect();
+		        }
 		        while(hisTurn){
 		            hisTurn = server.run();
 		        }
