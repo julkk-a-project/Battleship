@@ -43,9 +43,15 @@ public class Main {
 		        int cordY = Integer.parseInt(JOptionPane.showInputDialog("cord Y"));
 		        int[] cords = {cordX, cordY};
 		        
+		        //Chek if cords point to a water tile on own map to avoid dumb shooting.
+		        
 		        client.run(cords);
 		        
 	        }
+	        
+
+	        client.disconnect();
+	        server.disconnect();
 			
 		}
 		else {
@@ -59,10 +65,17 @@ public class Main {
 	        boolean hisTurn = false;
 	        
 	        
+	        client.connect();
+	        server.connect();
+	        
 	        for (int i = 0; i < 10; i++) {
+	        	
+	        	
 		        int cordX = Integer.parseInt(JOptionPane.showInputDialog("cord X"));
 		        int cordY = Integer.parseInt(JOptionPane.showInputDialog("cord Y"));
 		        int[] cords = {cordX, cordY};
+		        
+		        //Chek if cords point to a water tile on own map to avoid dumb shooting.
 		        
 		        client.run(cords);
 		        
@@ -72,6 +85,10 @@ public class Main {
 		        }
 		        
 	        }
+	        client.disconnect();
+	        server.disconnect();
+	        
+	        
 		}
 		
 		
