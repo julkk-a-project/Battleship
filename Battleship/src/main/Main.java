@@ -33,6 +33,10 @@ public class Main {
 	        client.setServer(JOptionPane.showInputDialog("IP to connect to")); //IP to connect to
 	        
 	        
+
+	        client.connect();
+	        server.connect();
+	        
 	        
 	        for (int i = 0; i < 10; i++) {
 	        	hisTurn = true;
