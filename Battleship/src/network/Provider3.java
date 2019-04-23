@@ -17,11 +17,10 @@ public class Provider3 {
 	private boolean turnNotOver;
     
     public Provider3(){}
-    public boolean run() {
-        try{
-
-            turnNotOver = true;
-        	
+    
+    
+    public void connect() {
+    	try{
             //1. creating a server socket
             providerSocket = new ServerSocket(port, 10);
             //2. Wait for connection
@@ -33,8 +32,33 @@ public class Provider3 {
             out = new PrintWriter (new BufferedWriter ( new OutputStreamWriter(connection.getOutputStream())), true);
             sendMessage("Connection successful");
             //4. The two parts communicate via the input and output streams
-            
-            
+        }
+        catch(IOException ioException){
+            ioException.printStackTrace();
+        }
+
+    }
+    
+    public void disconnect() {
+
+    	System.out.println("connection closing");
+    	//4: Closing connection
+    	try{
+    		in.close();
+    		out.close();
+    		providerSocket.close();
+    	}
+    	catch(IOException ioException){
+    		ioException.printStackTrace();
+    	}
+    }
+    
+    
+    
+    public boolean run() {
+
+            turnNotOver = true;
+        	
             do{
                 try{
                 	//System.out.println("kommit hit");
@@ -59,27 +83,13 @@ public class Provider3 {
                 }
             }while(!message.equals("copy"));
             turnNotOver = false;
-        }
-        catch(IOException ioException){
-            ioException.printStackTrace();
-        }
 
-        finally{
-        	System.out.println("connection closing");
-        	//4: Closing connection
-            try{
-                in.close();
-                out.close();
-                providerSocket.close();
-            }
-            catch(IOException ioException){
-                ioException.printStackTrace();
-            }
-        }
         return turnNotOver;
     }
-	void sendMessage(String msg)
-    {
+    
+    
+    
+	void sendMessage(String msg){
         try{
             out.println(msg);
             out.flush();
@@ -89,8 +99,7 @@ public class Provider3 {
             ioException.printStackTrace();
         }
     }
-    public static void main(String args[])
-    {
+    public static void main(String args[]) {
         Provider3 server = new Provider3();
         while(true){
             server.run();
