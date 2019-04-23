@@ -38,7 +38,7 @@ public static void main(String args[]) {
 
 
 
-	public void connect() {
+	public boolean connect() {
 		 try{
 	            // Skapar en socket via vilken ett försök att koppla till servern sker som ligger på mymachine... och port 2004
 	            requestSocket = new Socket(server, port); // ändra detta till någon av dina maskiner
@@ -51,12 +51,15 @@ public static void main(String args[]) {
 	      	  	konsolInlast = new BufferedReader (new InputStreamReader (System.in));
 
 	            // Skapar en input socket lokalt på klientmaskinen
+	      	  	return true;
 	        }
 	        catch(UnknownHostException unknownHost){
 	            System.err.println("You are trying to connect to an unknown host!");
+	            return false;
 	        }
 	        catch(IOException ioException){
 	            ioException.printStackTrace();
+	            return false;
 	        }
 	}
 	

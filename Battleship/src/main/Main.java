@@ -33,8 +33,11 @@ public class Main {
 	        client.setServer(JOptionPane.showInputDialog("IP to connect to")); //IP to connect to
 	        
 	        
-
-	        server.connect();
+	        boolean connected = false;
+	        while (!connected) {
+	        	connected = server.connect();
+	        }
+	        
 	        
 	        
 	        for (int i = 0; i < 10; i++) {
@@ -43,7 +46,7 @@ public class Main {
 		            hisTurn = server.run();
 		        }
 		        
-
+		        /*
 		        if(i == 0) {
 			        client.connect();		        	
 		        }
@@ -54,29 +57,34 @@ public class Main {
 		        //Chek if cords point to a water tile on own map to avoid dumb shooting.
 		        
 		        client.run(cords);
-		        
+		        */
 	        }
 	        
 
-	        client.disconnect();
+	        //client.disconnect();
 	        server.disconnect();
 			
 		}
 		else {
 			//Joiner
 
-	        Provider3 server = new Provider3();
+	        //Provider3 server = new Provider3();
 	        Requester3 client = new Requester3(); // an object wi
 	        
 	        client.setServer(JOptionPane.showInputDialog("IP to connect to")); //IP to connect to
 	        
 	        boolean hisTurn = false;
 	        
-	        
-	        client.connect();
+	        System.out.println("1");
+	        boolean connected = false;
+	        while (!connected) {
+		        client.connect();	        	
+	        }
+	        System.out.println("2");
 	        
 	        for (int i = 0; i < 10; i++) {
-	        	
+
+		        System.out.println("i+3");
 	        	
 		        int cordX = Integer.parseInt(JOptionPane.showInputDialog("cord X"));
 		        int cordY = Integer.parseInt(JOptionPane.showInputDialog("cord Y"));
@@ -85,18 +93,18 @@ public class Main {
 		        //Chek if cords point to a water tile on own map to avoid dumb shooting.
 		        
 		        client.run(cords);
-		        
+		        /*
 		        hisTurn = true;
 		        if(i == 0) {
 			        server.connect();
 		        }
 		        while(hisTurn){
 		            hisTurn = server.run();
-		        }
+		        }*/
 		        
 	        }
 	        client.disconnect();
-	        server.disconnect();
+	        //server.disconnect();
 	        
 	        
 		}
