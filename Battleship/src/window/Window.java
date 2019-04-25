@@ -1,26 +1,21 @@
 package window;
 
 import javafx.application.Application;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableRow;
-import javafx.scene.control.TableView;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-import javafx.scene.transform.*;
 import javafx.stage.Stage;
+import javafx.scene.paint.*;
 import matrix.Matrix;
  
 public class Window extends Application {
+	
+	private Matrix matrix = new Matrix(10,10);
+	Tile tile = new Tile();
+	Color myColor = Tile.getColor(matrix.getTile(1, 2).getRep());
+	
+	
 	public static void main(String[] args) {
-		//Matrix matrix = new Matrix(10,10);
 		launch(args);
 	}
 	
