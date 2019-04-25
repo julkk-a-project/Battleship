@@ -2,6 +2,7 @@ package window;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -9,29 +10,42 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import javafx.scene.transform.*;
 import javafx.stage.Stage;
+import matrix.Matrix;
  
 public class Window extends Application {
 	public static void main(String[] args) {
+		//Matrix matrix = new Matrix(10,10);
 		launch(args);
-
 	}
+	
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		primaryStage.setScene(new Scene(createContent()));
-		primaryStage.show();
-		
+		primaryStage.show();	
 	}
+	
+	
 	private Parent createContent() {
-		Pane root = new Pane();
-		root.setPrefSize(1000,650);
-		
-		return root;
-		
+		GridPane root = new GridPane();
+		root.setPrefSize(600,600);
+	
+		for(int i = 0; i < 10; i++) {
+			for(int j = 0; j < 10; j++) {
+				Tile tile = new Tile();
+				tile.setTranslateX(j * 30);
+				tile.setTranslateY(i * 30);
+				root.getChildren().add(tile);			
+			}
+		}
+
+		return root;		
 	}
  
     /*SOME OLD SHIT

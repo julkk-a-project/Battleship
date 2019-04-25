@@ -32,4 +32,8 @@ public abstract class AbstractTile {
 	public boolean AICanHit() {
 		return AICanHit;
 	}
+	
+	public void drawTile() {
+		rep = 0;
+	}
 }
