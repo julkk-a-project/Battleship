@@ -30,7 +30,7 @@ public class Main {
 			
 			boolean hisTurn = true;
 	        Provider3 server = new Provider3();
-	        Requester3 client = new Requester3(); // an object wi
+	        Requester3 client = new Requester3();
 	        
 
 	        //Temporary because i'm lazy and don't know how to do it automatically
@@ -47,7 +47,7 @@ public class Main {
 	        }
 	        connected = false;
         	while(!connected) {
-		        connected = client.connect();	
+		        connected = client.connect();
         	}
 	        
 	        for (int i = 0; i < 10; i++) {
