@@ -115,7 +115,7 @@ public class Provider3 {
                     }
                 }
                 catch(Exception classnot){
-                    System.err.println("Data received in unknown format");
+        			System.err.println("data received in unknown format: \""+message+"\"");
                 }
             }while(!message.equals("copy"));
             turnNotOver = false;
