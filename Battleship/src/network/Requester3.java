@@ -94,7 +94,7 @@ public static void main(String args[]) {
     			message = (String)input.readLine(); // läser in vad servern skickat
     			System.out.println("server>" + message); 
 
-    			System.out.println("Sending cords "+cords[0]+","+cords[1]);
+    			//System.out.println("Sending cords "+cords[0]+","+cords[1]); //<-- this is dumb
     			message = cords[0]+","+cords[1];
     			sendMessage(message); // skickar meddelandet add till metoden sendMessage 
 
@@ -119,7 +119,8 @@ public static void main(String args[]) {
     public boolean run() {
 
             turnNotOver = true;
-        	
+        	message = "";
+            
             do{
                 try{
                 	//System.out.println("kommit hit");

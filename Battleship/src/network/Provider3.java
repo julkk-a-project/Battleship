@@ -94,6 +94,7 @@ public class Provider3 {
     public boolean run() {
 
             turnNotOver = true;
+        	message = "";
         	
             do{
                 try{
