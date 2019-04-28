@@ -2,6 +2,7 @@ package main;
 
 import javax.swing.JOptionPane;
 
+import matrix.Matrix;
 import network.Provider3;
 import network.Requester3;
 
@@ -33,7 +34,7 @@ public class Main {
 	        client.setServer(JOptionPane.showInputDialog("IP to connect to")); //IP to connect to
 	        
 	        
-	        
+	        Matrix myMatrix = new Matrix(10,10);
 	        for (int i = 0; i < 10; i++) {
 	        	hisTurn = true;
 		        while(hisTurn){

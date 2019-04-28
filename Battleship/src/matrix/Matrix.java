@@ -1,6 +1,8 @@
 package matrix;
 
 import tiles.AbstractTile;
+import tiles.Hull;
+import tiles.Water;
 
 
 /*
@@ -23,10 +25,16 @@ public class Matrix {
 	/*
 	 * create a matrix with x*y tiles of tile type "defaultTile"
 	 */
-	public Matrix(AbstractTile  defaultTile, int x, int y){
+	public Matrix(/*AbstractTile defaultTile,*/ int x, int y){
 		this.x = x;
 		this.y = y;
 		matrix = new AbstractTile[x][y];
+
+		for(int i = 0; i < x; i++) {
+			for(int j = 0; j < y; j++) {
+				matrix[i][j] = new Water();
+			}
+		}
 	}
 	
 	
@@ -68,6 +76,18 @@ public class Matrix {
 			}
 		}
 		return total;
+	}
+	
+	/*
+	 * temporary autofill for testing porpouses
+	 */
+	public void putHull() {
+		for(int i = 0; i < x; i++) {
+			for(int j = 0; j < y; j++) {
+				if(((i+j) % 3) == 0)
+				matrix[i][j] = new Hull();
+			}
+		}
 	}
 	
 	
