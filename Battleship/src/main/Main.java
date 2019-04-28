@@ -23,6 +23,12 @@ public class Main {
 		
 		String host = JOptionPane.showInputDialog("host (y/n)");
 		
+
+		//Creates ur playingfield
+        myMatrix = new Matrix(10,10);
+        myMatrix.putHull();
+		
+		
 		if (host.equals("y")) {
 			//Hoster
 
@@ -40,8 +46,6 @@ public class Main {
 	        	//server.setServer(JOptionPane.showInputDialog("IP to connect to")); //IP to connect to
 	        
 	        
-	        myMatrix = new Matrix(10,10);
-	        myMatrix.putHull();
 	        
 	        
 	        boolean connected = false;
