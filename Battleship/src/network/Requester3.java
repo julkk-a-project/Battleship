@@ -41,7 +41,6 @@ public static void main(String args[]) {
 
 	public boolean connect() {
 		 try{
-			 System.out.println("A");
 	            // Skapar en socket via vilken ett försök att koppla till servern sker som ligger på mymachine... och port 2004
 			 
 			 System.out.println(server+","+port);
@@ -55,16 +54,13 @@ public static void main(String args[]) {
 	      	  	konsolInlast = new BufferedReader (new InputStreamReader (System.in));
 
 	            // Skapar en input socket lokalt på klientmaskinen
-				 System.out.println("A2");
 	      	  	return true;
 	        }
 	        catch(UnknownHostException unknownHost){
-				 System.out.println("B");
 	            System.err.println("You are trying to connect to an unknown host!");
 	            return false;
 	        }
 	        catch(IOException ioException){
-	   			 System.out.println("C");
 	            ioException.printStackTrace();
 	            return false;
 	        }
@@ -104,8 +100,8 @@ public static void main(String args[]) {
     			message = "copy";  
     			sendMessage(message); // skickar bye till metoden sendMessage
 
-    			sistaHalsning = input.readLine(); // läser svaret
-    			System.out.println(sistaHalsning);
+    			//sistaHalsning = input.readLine(); // läser svaret
+    			//System.out.println(sistaHalsning);
     		}
     		catch(Exception e){
     			System.err.println("data received in unknown format");
