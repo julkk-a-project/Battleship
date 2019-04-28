@@ -30,11 +30,14 @@ public class Main {
 			
 			boolean hisTurn = true;
 	        Provider3 server = new Provider3();
-	        Requester3 client = new Requester3();
+	        //Requester3 client = new Requester3();
 	        
 
-	        //Temporary because i'm lazy and don't know how to do it automatically
-	        client.setServer(JOptionPane.showInputDialog("IP to connect to")); //IP to connect to
+	        
+	        
+	        //We'll see if this is even needed now :)))
+	        	//Temporary because i'm lazy and don't know how to do it automatically
+	        	//server.setServer(JOptionPane.showInputDialog("IP to connect to")); //IP to connect to
 	        
 	        
 	        myMatrix = new Matrix(10,10);
@@ -45,10 +48,14 @@ public class Main {
 	        while (!connected) {
 	        	connected = server.connect();
 	        }
+	        /*
 	        connected = false;
         	while(!connected) {
+        		System.out.println("123");
 		        connected = client.connect();
+        		System.out.println("312");
         	}
+        	*/
 	        
 	        for (int i = 0; i < 10; i++) {
 	        	hisTurn = true;
@@ -64,18 +71,17 @@ public class Main {
 		        
 		        //Chek if cords point to a water tile on own map to avoid dumb shooting.
 		        
-		        client.run(cords);
+		        server.run(cords);
 	        }
 	        
 
-	        client.disconnect();
 	        server.disconnect();
 			
 		}
 		else {
 			//Joiner
 
-	        Provider3 server = new Provider3();
+	        //Provider3 server = new Provider3();
 	        Requester3 client = new Requester3(); // an object wi
 	        
 	        client.setServer(JOptionPane.showInputDialog("IP to connect to")); //IP to connect to
@@ -87,9 +93,6 @@ public class Main {
 	        while (!connected) {
 		        connected = client.connect();	        	
 	        }
-	        while (!connected) {
-	        	connected = server.connect();
-	        }
 	        
 	        
 	        
@@ -97,7 +100,7 @@ public class Main {
 	        
 	        for (int i = 0; i < 10; i++) {
 
-		        System.out.println("i+3");
+		        System.out.println(i+3);
 	        	
 		        int cordX = Integer.parseInt(JOptionPane.showInputDialog("cord X"));
 		        int cordY = Integer.parseInt(JOptionPane.showInputDialog("cord Y"));
@@ -108,15 +111,14 @@ public class Main {
 		        client.run(cords);
 		        hisTurn = true;
 		        if(i == 0) {
-			        server.connect();
+			        client.connect();
 		        }
 		        while(hisTurn){
-		            hisTurn = server.run();
+		            hisTurn = client.run();
 		        }
 		        
 	        }
 	        client.disconnect();
-	        server.disconnect();
 	        
 	        
 		}

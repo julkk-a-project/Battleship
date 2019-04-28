@@ -15,6 +15,7 @@ public class Requester3 {
     PrintWriter output;
 	BufferedReader input;
 	BufferedReader konsolInlast;
+	private boolean turnNotOver;
 
 
 	
@@ -83,6 +84,8 @@ public static void main(String args[]) {
 	}
 
 	    
+	
+	//SendMessage
     public void run(int[] cords)
     {
     	do {
@@ -109,6 +112,45 @@ public static void main(String args[]) {
     		}
     	} while(!message.equals("copy"));
     }
+    
+    
+    
+    //WaitForMessage
+    public boolean run() {
+
+            turnNotOver = true;
+        	
+            do{
+                try{
+                	//System.out.println("kommit hit");
+                    message = (String)input.readLine();
+                    //add message handling here
+                    System.out.println("client>" + message); //only shows message
+                    
+                    
+                    //Waits untill message is a cordinate
+                    if (Provider3.isCordinate(message)) {
+                    		sendMessage(Provider3.cordinateHandler(message));
+                        }
+                    
+  
+                    
+                    if (message.equals("copy")) {
+                        turnNotOver = false;
+                    }
+                }
+                catch(Exception classnot){
+                    System.err.println("Data received in unknown format");
+                }
+            }while(!message.equals("copy"));
+            turnNotOver = false;
+
+        return turnNotOver;
+    }
+    
+    
+    
+    
     void sendMessage(String msg)
     {
         try{
