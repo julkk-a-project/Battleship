@@ -82,8 +82,8 @@ public class Provider3 {
     			message = "copy";  
     			sendMessage(message); // skickar bye till metoden sendMessage
 
-    			sistaHalsning = input.readLine(); // läser svaret
-    			System.out.println(sistaHalsning);
+    			//sistaHalsning = input.readLine(); // läser svaret
+    			//System.out.println(sistaHalsning);
     		}
     		catch(Exception e){
     			System.err.println("data received in unknown format: \""+message+"\"");
@@ -123,11 +123,11 @@ public class Provider3 {
                     }*/
                 }
                 catch(Exception classnot){
-        			System.err.println("data received in unknown format: \""+message+"\"");
-        			System.out.println(classnot);
+        			//System.err.println("data received in unknown format: \""+message+"\"");
+        			//System.out.println(classnot);
                 }
             }while(!message.equals("copy"));
-            System.out.println("HostTurnOver");
+            System.out.println("HostStopsListening");
             turnNotOver = false;
 
         return turnNotOver;

@@ -96,7 +96,7 @@ public static void main(String args[]) {
     			//message = (String)input.readLine(); // läser in vad servern skickat
     			//System.out.println("server>" + message); 
 
-    			//System.out.println("Sending cords "+cords[0]+","+cords[1]); //<-- this is dumb
+    			System.out.println("Sending cords "+cords[0]+","+cords[1]); //<-- this is dumb (?)
     			message = cords[0]+","+cords[1];
     			sendMessage(message); // skickar meddelandet add till metoden sendMessage 
 
@@ -110,7 +110,7 @@ public static void main(String args[]) {
     			//System.out.println(sistaHalsning);
     		}
     		catch(Exception e){
-    			System.err.println("data received in unknown format");
+    			System.err.println("data received in unknown format: \""+message+"\"");
     		}
     	} while(!message.equals("copy"));
     }
@@ -128,7 +128,7 @@ public static void main(String args[]) {
                 	//System.out.println("kommit hit");
                     message = (String)input.readLine();
                     //add message handling here
-                    System.out.println("client>" + message); //only shows message
+                    System.out.println("Server>" + message); //only shows message
                     
                     
                     //Waits untill message is a cordinate
@@ -143,11 +143,11 @@ public static void main(String args[]) {
                     }*/
                 }
                 catch(Exception classnot){
-        			System.err.println("data received in unknown format: \""+message+"\"");
-        			System.out.println(classnot);
+        			//System.err.println("data received in unknown format: \""+message+"\"");
+        			//System.out.println(classnot);
                 }
             }while(!message.equals("copy"));
-            System.out.println("ClientTurnOver");
+            System.out.println("ClientStopsListening");
             turnNotOver = false;
 
         return turnNotOver;
