@@ -63,6 +63,9 @@ public class Provider3 {
 	//SendMessage
     public void run(int[] cords)
     {
+
+    	message = "";
+    	
     	do {
     		try{
     			//message = (String)JOptionPane.showInputDialog("Send info to client");

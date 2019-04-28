@@ -84,6 +84,9 @@ public static void main(String args[]) {
 	//SendMessage
     public void run(int[] cords)
     {
+
+    	message = "";
+    	
     	do {
     		try{
     			//message = (String)JOptionPane.showInputDialog("Send info to client");
