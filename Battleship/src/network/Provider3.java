@@ -83,7 +83,7 @@ public class Provider3 {
     			System.out.println(sistaHalsning);
     		}
     		catch(Exception e){
-    			System.err.println("data received in unknown format");
+    			System.err.println("data received in unknown format: \""+message+"\"");
     		}
     	} while(!message.equals("copy"));
     }
