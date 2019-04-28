@@ -35,18 +35,37 @@ public class Main {
 	        
 	        
 	        Matrix myMatrix = new Matrix(10,10);
+	        
+	        
+	        boolean connected = false;
+	        while (!connected) {
+	        	connected = server.connect();
+	        }
+	        connected = false;
+        	while(!connected) {
+		        connected = client.connect();	
+        	}
+	        
 	        for (int i = 0; i < 10; i++) {
 	        	hisTurn = true;
 		        while(hisTurn){
 		            hisTurn = server.run();
 		        }
+		        
+		        if(i == 0) {	
+		        }
 		        int cordX = Integer.parseInt(JOptionPane.showInputDialog("cord X"));
 		        int cordY = Integer.parseInt(JOptionPane.showInputDialog("cord Y"));
 		        int[] cords = {cordX, cordY};
 		        
-		        client.run(cords);
+		        //Chek if cords point to a water tile on own map to avoid dumb shooting.
 		        
+		        client.run(cords);
 	        }
+	        
+
+	        client.disconnect();
+	        server.disconnect();
 			
 		}
 		else {
@@ -59,20 +78,43 @@ public class Main {
 	        
 	        boolean hisTurn = false;
 	        
+	        System.out.println("1");
+	        boolean connected = false;
+	        while (!connected) {
+		        connected = client.connect();	        	
+	        }
+	        while (!connected) {
+	        	connected = server.connect();
+	        }
+	        
+	        
+	        
+	        System.out.println("2");
 	        
 	        for (int i = 0; i < 10; i++) {
+
+		        System.out.println("i+3");
+	        	
 		        int cordX = Integer.parseInt(JOptionPane.showInputDialog("cord X"));
 		        int cordY = Integer.parseInt(JOptionPane.showInputDialog("cord Y"));
 		        int[] cords = {cordX, cordY};
 		        
-		        client.run(cords);
+		        //Chek if cords point to a water tile on own map to avoid dumb shooting.
 		        
+		        client.run(cords);
 		        hisTurn = true;
+		        if(i == 0) {
+			        server.connect();
+		        }
 		        while(hisTurn){
 		            hisTurn = server.run();
 		        }
 		        
 	        }
+	        client.disconnect();
+	        server.disconnect();
+	        
+	        
 		}
 		
 		

@@ -35,62 +35,78 @@ public static void main(String args[]) {
         
         client.run(cords);
     }
+
+
+
+	public boolean connect() {
+		 try{
+			 System.out.println("A");
+	            // Skapar en socket via vilken ett försök att koppla till servern sker som ligger på mymachine... och port 2004
+			 
+			 System.out.println(server+","+port);
+	            requestSocket = new Socket(server, port); // ändra detta till någon av dina maskiner
+	            System.out.println("Connected to "+ server +" on port "+ port +" on " + requestSocket.getLocalPort());
+	            // Skapar sockets för input och outputströmmarna 
+	            
+	            // märk!! en bufferedReader för inström, en Printwriter för utström och en bufferedreader för inläsning
+	        	input = new BufferedReader (new InputStreamReader (requestSocket.getInputStream()));
+	        	output = new PrintWriter(new BufferedWriter (new OutputStreamWriter (requestSocket.getOutputStream())), true);
+	      	  	konsolInlast = new BufferedReader (new InputStreamReader (System.in));
+
+	            // Skapar en input socket lokalt på klientmaskinen
+	      	  	return true;
+	        }
+	        catch(UnknownHostException unknownHost){
+				 System.out.println("B");
+	            System.err.println("You are trying to connect to an unknown host!");
+	            return false;
+	        }
+	        catch(IOException ioException){
+	   			 System.out.println("C");
+	            ioException.printStackTrace();
+	            return false;
+	        }
+	}
+	
+
+	public void disconnect() {
+		try{
+			input.close(); // stänger in socketen
+			output.close(); // stänger out socketen
+			requestSocket.close(); // avslutar referensen 
+		}
+		catch(IOException ioException){
+			ioException.printStackTrace();
+		}
+
+	}
+
 	    
     public void run(int[] cords)
     {
-        try{
-            // Skapar en socket via vilken ett försök att koppla till servern sker som ligger på mymachine... och port 2004
-            requestSocket = new Socket(server, port); // ändra detta till någon av dina maskiner
-            System.out.println("Connected to "+ server +" on port "+ port +" on " + requestSocket.getLocalPort());
-            // Skapar sockets för input och outputströmmarna 
-            
-            // märk!! en bufferedReader för inström, en Printwriter för utström och en bufferedreader för inläsning
-        	input = new BufferedReader (new InputStreamReader (requestSocket.getInputStream()));
-        	output = new PrintWriter(new BufferedWriter (new OutputStreamWriter (requestSocket.getOutputStream())), true);
-      	  	konsolInlast = new BufferedReader (new InputStreamReader (System.in));
+    	do {
+    		try{
+    			//message = (String)JOptionPane.showInputDialog("Send info to client");
+    			message = (String)input.readLine(); // läser in vad servern skickat
+    			System.out.println("server>" + message); 
 
-            // Skapar en input socket lokalt på klientmaskinen
-            do {
-                try{
-                    //message = (String)JOptionPane.showInputDialog("Send info to client");
-                    message = (String)input.readLine(); // läser in vad servern skickat
-                    System.out.println("server>" + message); 
-                    
-                    System.out.println("Sending cords "+cords[0]+","+cords[1]);
-                    message = cords[0]+","+cords[1];
-                    sendMessage(message); // skickar meddelandet add till metoden sendMessage 
-                    
-                    message = (String)input.readLine(); // läser in vad servern skickat
-                    System.out.println("server>" + message);
-                    
-                    message = "copy";  
-                    sendMessage(message); // skickar bye till metoden sendMessage
-                    
-                    sistaHalsning = input.readLine(); // läser svaret
-                    System.out.println(sistaHalsning);
-                }
-                catch(Exception e){
-                    System.err.println("data received in unknown format");
-                }
-            } while(!message.equals("copy"));
-        }
-        catch(UnknownHostException unknownHost){
-            System.err.println("You are trying to connect to an unknown host!");
-        }
-        catch(IOException ioException){
-            ioException.printStackTrace();
-        }
-        finally{
-            // Stänger av kommunikationen
-            try{
-                input.close(); // stänger in socketen
-                output.close(); // stänger out socketen
-                requestSocket.close(); // avslutar referensen 
-            }
-            catch(IOException ioException){
-                ioException.printStackTrace();
-            }
-        }
+    			System.out.println("Sending cords "+cords[0]+","+cords[1]);
+    			message = cords[0]+","+cords[1];
+    			sendMessage(message); // skickar meddelandet add till metoden sendMessage 
+
+    			message = (String)input.readLine(); // läser in vad servern skickat
+    			System.out.println("server>" + message);
+
+    			message = "copy";  
+    			sendMessage(message); // skickar bye till metoden sendMessage
+
+    			sistaHalsning = input.readLine(); // läser svaret
+    			System.out.println(sistaHalsning);
+    		}
+    		catch(Exception e){
+    			System.err.println("data received in unknown format");
+    		}
+    	} while(!message.equals("copy"));
     }
     void sendMessage(String msg)
     {

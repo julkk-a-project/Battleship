@@ -25,7 +25,7 @@ public class Matrix {
 	/*
 	 * create a matrix with x*y tiles of tile type "defaultTile"
 	 */
-	public Matrix(/*AbstractTile defaultTile,*/ int x, int y){
+	public Matrix(int x, int y){
 		this.x = x;
 		this.y = y;
 		matrix = new AbstractTile[x][y];

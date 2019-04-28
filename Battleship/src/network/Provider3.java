@@ -17,24 +17,50 @@ public class Provider3 {
 	private boolean turnNotOver;
     
     public Provider3(){}
+    
+    
+    public boolean connect() {
+        	try{
+                //1. creating a server socket
+                providerSocket = new ServerSocket(port, 10);
+                //2. Wait for connection
+                System.out.println("Waiting for connection");
+                connection = providerSocket.accept();
+                System.out.println("Connection received from " + connection.getInetAddress().getHostName() + " and accepted on " + connection.getLocalSocketAddress() + " blahaa: " + connection.getOutputStream());
+                //3. get Input and Output streams
+                in = new BufferedReader (new InputStreamReader (connection.getInputStream()));
+                out = new PrintWriter (new BufferedWriter ( new OutputStreamWriter(connection.getOutputStream())), true);
+                sendMessage("Connection successful");
+                //4. The two parts communicate via the input and output streams
+                return true;
+            }
+            catch(IOException ioException){
+                ioException.printStackTrace();
+                return false;
+            }
+
+    }
+    
+    public void disconnect() {
+
+    	System.out.println("connection closing");
+    	//4: Closing connection
+    	try{
+    		in.close();
+    		out.close();
+    		providerSocket.close();
+    	}
+    	catch(IOException ioException){
+    		ioException.printStackTrace();
+    	}
+    }
+    
+    
+    
     public boolean run() {
-        try{
 
             turnNotOver = true;
         	
-            //1. creating a server socket
-            providerSocket = new ServerSocket(port, 10);
-            //2. Wait for connection
-            System.out.println("Waiting for connection");
-            connection = providerSocket.accept();
-            System.out.println("Connection received from " + connection.getInetAddress().getHostName() + " and accepted on " + connection.getLocalSocketAddress() + " blahaa: " + connection.getOutputStream());
-            //3. get Input and Output streams
-            in = new BufferedReader (new InputStreamReader (connection.getInputStream()));
-            out = new PrintWriter (new BufferedWriter ( new OutputStreamWriter(connection.getOutputStream())), true);
-            sendMessage("Connection successful");
-            //4. The two parts communicate via the input and output streams
-            
-            
             do{
                 try{
                 	//System.out.println("kommit hit");
@@ -59,27 +85,13 @@ public class Provider3 {
                 }
             }while(!message.equals("copy"));
             turnNotOver = false;
-        }
-        catch(IOException ioException){
-            ioException.printStackTrace();
-        }
 
-        finally{
-        	System.out.println("connection closing");
-        	//4: Closing connection
-            try{
-                in.close();
-                out.close();
-                providerSocket.close();
-            }
-            catch(IOException ioException){
-                ioException.printStackTrace();
-            }
-        }
         return turnNotOver;
     }
-	void sendMessage(String msg)
-    {
+    
+    
+    
+	void sendMessage(String msg){
         try{
             out.println(msg);
             out.flush();
@@ -89,8 +101,7 @@ public class Provider3 {
             ioException.printStackTrace();
         }
     }
-    public static void main(String args[])
-    {
+    public static void main(String args[]) {
         Provider3 server = new Provider3();
         while(true){
             server.run();
