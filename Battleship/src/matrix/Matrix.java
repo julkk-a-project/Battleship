@@ -239,7 +239,7 @@ public class Matrix {
 		
 		//did you just loose?
 		
-				if (countTiles(new Hull()) > 0) {
+				if (countTiles(new Hull()) <= 0) {
 					anserw += "1";
 				}else {
 					anserw += "0";
