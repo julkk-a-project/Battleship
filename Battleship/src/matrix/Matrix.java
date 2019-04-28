@@ -91,7 +91,101 @@ public class Matrix {
 			}
 		}
 	}
+	
+	/*
+	 * ShipPlacementChekker. cheks if a ship can be placed where you want it to be placed.
+	 * first two parameters for north-western corner
+	 * 3rd for how long the ship is in tiles
+	 * 4th boolean for if the ship is vertical, else horizontal.
+	 */
+	private boolean canPlaceShip(int x, int y, int length, boolean vertical) {
+		boolean anserw = false;
+		
+		
+		//Chek if it can fit where you want it to
+		if (vertical) {
+			//when vertical
+			if ((this.y - y) >= length) {
+				anserw = true;
+			}else {
+				return false;
+			}
+		}else {
+			//when horizontal
+			if ((this.x - x) >= length) {
+				anserw = true;
+			}else {
+				return false;
+			}
+		}
+		
+		
+		//Chek if it intersects only "Water"
+		if (vertical) {
+			//when vertical
+			for (int i = 0; i < length; i++) {
+				if (!(getTile(x,y+i).getRep() == 0)) {
+					anserw = false;
+				}
+			}
+		}else {
+			//when horizontal
+			for (int i = 0; i < length; i++) {
+				if (!(getTile(x+i,y).getRep() == 0)) {
+					anserw = false;
+				}
+			}
+		}
+		
+		return anserw;
+	}
+	
+	
+	/*
+	 * ShipPlacer
+	 * Returns true if it placed the ship, false if it can't place.
+	 * first two parameters for north-western corner
+	 * 3rd for how long the ship is in tiles
+	 * 4th boolean for if the ship is vertical, else horizontal.
+	 */
+	public boolean placeShip(int x, int y, int length, boolean vertical) {
 
+		//tests if can place...
+		boolean test = canPlaceShip(x,y,length,vertical);
+		if (!test) {
+			return false;
+		}
+		
+		//Places ship on matrix if can place.
+		if (vertical) {
+			//when vertical
+			for (int i = 0; i < length; i++) {
+				setTile(x,y+i, new Hull());
+			}
+		}else {
+			//when horizontal
+			for (int i = 0; i < length; i++) {
+				setTile(x+i,y, new Hull());
+			}
+		}
+		
+		return true;
+	}
+	
+	
+	
+	
+	
+	
+	/*
+	 * IlogicalPlacer
+	 */
+	//TODO: ADD ME
+	
+	
+	
+	
+	
 	/*
 	 * replaces tile on cordinate x,y to 3rd parameter (AbstractTile). make sure to make it a new object.
 	 */
@@ -127,7 +221,7 @@ public class Matrix {
 		int x = Integer.parseInt(xString);
 		int y = Integer.parseInt(yString);
 		
-		AbstractTile target = this.getTile(x, y);
+		AbstractTile target = this.getTile(x, y); //idk if usefull?
 		
 		
 		//Was it a hull?
@@ -145,11 +239,11 @@ public class Matrix {
 		
 		//did you just loose?
 		
-				//HANDLE THAT SHIT
-				
-			//temporary:
-				anserw += "0";
-		
+				if (countTiles(new Hull()) > 0) {
+					anserw += "1";
+				}else {
+					anserw += "0";
+				}
 		
 		
 		return anserw;
