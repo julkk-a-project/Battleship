@@ -69,15 +69,15 @@ public class Provider3 {
     	do {
     		try{
     			//message = (String)JOptionPane.showInputDialog("Send info to client");
-    			message = (String)input.readLine(); // läser in vad servern skickat
-    			System.out.println("server>" + message); 
+    			//message = (String)input.readLine(); // läser in vad servern skickat
+    			//System.out.println("server>" + message); 
 
     			System.out.println("Sending cords "+cords[0]+","+cords[1]);
     			message = cords[0]+","+cords[1];
     			sendMessage(message); // skickar meddelandet add till metoden sendMessage 
 
     			message = (String)input.readLine(); // läser in vad servern skickat
-    			System.out.println("server>" + message);
+    			System.out.println("client>" + message);
 
     			message = "copy";  
     			sendMessage(message); // skickar bye till metoden sendMessage

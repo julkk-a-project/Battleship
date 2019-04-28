@@ -90,8 +90,8 @@ public static void main(String args[]) {
     	do {
     		try{
     			//message = (String)JOptionPane.showInputDialog("Send info to client");
-    			message = (String)input.readLine(); // läser in vad servern skickat
-    			System.out.println("server>" + message); 
+    			//message = (String)input.readLine(); // läser in vad servern skickat
+    			//System.out.println("server>" + message); 
 
     			//System.out.println("Sending cords "+cords[0]+","+cords[1]); //<-- this is dumb
     			message = cords[0]+","+cords[1];
