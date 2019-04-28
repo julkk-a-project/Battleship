@@ -54,6 +54,9 @@ public static void main(String args[]) {
 	      	  	konsolInlast = new BufferedReader (new InputStreamReader (System.in));
 
 	            // Skapar en input socket lokalt på klientmaskinen
+
+    			message = (String)input.readLine(); // läser in vad servern skickat
+    			System.out.println("server>" + message); 
 	      	  	return true;
 	        }
 	        catch(UnknownHostException unknownHost){
