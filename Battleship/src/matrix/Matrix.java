@@ -1,7 +1,9 @@
 package matrix;
 
 import tiles.AbstractTile;
+import tiles.Hit;
 import tiles.Hull;
+import tiles.Miss;
 import tiles.Water;
 
 
@@ -23,7 +25,7 @@ public class Matrix {
 	private int y;
 	
 	/*
-	 * create a matrix with x*y tiles of tile type "defaultTile"
+	 * create a matrix with x*y tiles of tile type "Water"
 	 */
 	public Matrix(int x, int y){
 		this.x = x;
@@ -88,6 +90,69 @@ public class Matrix {
 				matrix[i][j] = new Hull();
 			}
 		}
+	}
+
+	/*
+	 * replaces tile on cordinate x,y to 3rd parameter (AbstractTile). make sure to make it a new object.
+	 */
+	private void setTile(int x, int y, AbstractTile replacement) {
+		matrix[x][y] = replacement;	
+	}
+
+	/*
+	 * HitEffectHandler
+	 */
+	private String hitEffectHandler(int x, int y){
+		AbstractTile target = getTile(x,y);
+		if(target.hit()) {
+			setTile(x,y, new Hit());
+			return "1,";
+		}else {
+			setTile(x,y, new Miss());
+			return "0,";
+		}
+	}
+	
+	
+
+
+
+	/*
+	 * Handle hits on main board
+	 */
+	public String hitOrMiss(String xString, String yString) {
+		String anserw = "";
+		
+		//parse
+		int x = Integer.parseInt(xString);
+		int y = Integer.parseInt(yString);
+		
+		AbstractTile target = this.getTile(x, y);
+		
+		
+		//Was it a hull?
+		
+				anserw += hitEffectHandler(x,y);
+		
+		//Was there a boat that got sunk?
+		
+				//Handle that shit here :S AAMUJA!!!!
+			
+			//temporary:
+				anserw += "0,";
+		
+		
+		
+		//did you just loose?
+		
+				//HANDLE THAT SHIT
+				
+			//temporary:
+				anserw += "0";
+		
+		
+		
+		return anserw;
 	}
 	
 	

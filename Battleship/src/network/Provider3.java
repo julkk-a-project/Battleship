@@ -149,13 +149,18 @@ public class Provider3 {
     /*
      * use me to change what the matrixes look like, and return HitMiss, shipSunk and WinLoose message.
      */
-    private String cordinateHandler(String message2) {
+    private String cordinateHandler(String message) {
     	String string = "";
     	
     	//handle message here
     	
-    	string += "1,1,0"; //Example
+    	String[] cords = message.split(",");
     	
+    	string += main.Main.myMatrix.hitOrMiss(cords[0], cords[1]);
+    	
+    	/*//"Hit?,Sunk?,Won?"			<---REPLACED BY ABOVE
+    	string += "1,1,0"; //Example
+    	*/
     	
     	
     	

@@ -10,6 +10,9 @@ public class Main {
 
 	//public Window window;
 	
+	public static Matrix myMatrix;
+	public static Matrix itMatrix;
+
 	public static void main(String[] args) {
 		System.out.println("Hello World!!!!!!"); //i am not useful tbh
 		
@@ -34,7 +37,8 @@ public class Main {
 	        client.setServer(JOptionPane.showInputDialog("IP to connect to")); //IP to connect to
 	        
 	        
-	        Matrix myMatrix = new Matrix(10,10);
+	        myMatrix = new Matrix(10,10);
+	        myMatrix.putHull();
 	        
 	        
 	        boolean connected = false;
