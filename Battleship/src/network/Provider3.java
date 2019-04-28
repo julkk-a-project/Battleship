@@ -104,20 +104,26 @@ public class Provider3 {
                     
                     
                     //Waits untill message is a cordinate
+                    
+                    
+                    
                     if (isCordinate(message)) {
                     		sendMessage(cordinateHandler(message));
                         }
                     
   
-                    
+                    /*
                     if (message.equals("copy")) {
-                        turnNotOver = false;
-                    }
+                    	System.out.println("äksdee");
+                        //turnNotOver = false;
+                    }*/
                 }
                 catch(Exception classnot){
         			System.err.println("data received in unknown format: \""+message+"\"");
+        			System.out.println(classnot);
                 }
             }while(!message.equals("copy"));
+            System.out.println("HostTurnOver");
             turnNotOver = false;
 
         return turnNotOver;
@@ -175,6 +181,7 @@ public class Provider3 {
         	String[] cords = message.split(",", 2);
         	return true;
     	}catch(Exception e){
+    		System.out.println("isCordinateSaysNo");
     		appendLog(e+"");
     		return false;
     	}

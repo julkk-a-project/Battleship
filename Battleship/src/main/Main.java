@@ -48,23 +48,16 @@ public class Main {
 	        while (!connected) {
 	        	connected = server.connect();
 	        }
-	        /*
-	        connected = false;
-        	while(!connected) {
-        		System.out.println("123");
-		        connected = client.connect();
-        		System.out.println("312");
-        	}
-        	*/
 	        
 	        for (int i = 0; i < 10; i++) {
+	        	System.out.println("HIS TURN");
 	        	hisTurn = true;
 		        while(hisTurn){
 		            hisTurn = server.run();
 		        }
+		        System.out.println("UR TURN");
 		        
-		        if(i == 0) {	
-		        }
+		        
 		        int cordX = Integer.parseInt(JOptionPane.showInputDialog("cord X"));
 		        int cordY = Integer.parseInt(JOptionPane.showInputDialog("cord Y"));
 		        int[] cords = {cordX, cordY};
@@ -81,41 +74,41 @@ public class Main {
 		else {
 			//Joiner
 
-	        //Provider3 server = new Provider3();
 	        Requester3 client = new Requester3(); // an object wi
 	        
+	        
+
+	        //Connects
 	        client.setServer(JOptionPane.showInputDialog("IP to connect to")); //IP to connect to
-	        
-	        boolean hisTurn = false;
-	        
-	        System.out.println("1");
 	        boolean connected = false;
 	        while (!connected) {
 		        connected = client.connect();	        	
 	        }
 	        
+
+	        boolean hisTurn = false;
 	        
 	        
-	        System.out.println("2");
-	        
+	        System.out.println("UR TURN");
 	        for (int i = 0; i < 10; i++) {
 
-		        System.out.println(i+3);
 	        	
 		        int cordX = Integer.parseInt(JOptionPane.showInputDialog("cord X"));
 		        int cordY = Integer.parseInt(JOptionPane.showInputDialog("cord Y"));
 		        int[] cords = {cordX, cordY};
 		        
 		        //Chek if cords point to a water tile on own map to avoid dumb shooting.
+
 		        
 		        client.run(cords);
+		        
+		        
+		        System.out.println("HIS TURN");
 		        hisTurn = true;
-		        if(i == 0) {
-			        client.connect();
-		        }
 		        while(hisTurn){
 		            hisTurn = client.run();
 		        }
+		        System.out.println("UR TURN");
 		        
 	        }
 	        client.disconnect();

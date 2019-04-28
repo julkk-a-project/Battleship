@@ -134,15 +134,17 @@ public static void main(String args[]) {
                         }
                     
   
-                    
+                    /*
                     if (message.equals("copy")) {
                         turnNotOver = false;
-                    }
+                    }*/
                 }
                 catch(Exception classnot){
-                    System.err.println("Data received in unknown format");
+        			System.err.println("data received in unknown format: \""+message+"\"");
+        			System.out.println(classnot);
                 }
             }while(!message.equals("copy"));
+            System.out.println("ClientTurnOver");
             turnNotOver = false;
 
         return turnNotOver;
