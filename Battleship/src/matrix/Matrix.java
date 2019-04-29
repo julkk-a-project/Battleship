@@ -73,8 +73,10 @@ public class Matrix {
 		int total = 0;
 		
 		for (int i = 0; i < x; i++) {
-			for (int j = 0; j < y; i++) {
-				total++;
+			for (int j = 0; j < y; j++) {
+				if(getTile(i,j).getRep() == tile.getRep()) {
+					total++;	
+				}
 			}
 		}
 		return total;
@@ -169,6 +171,9 @@ public class Matrix {
 			}
 		}
 		
+		//places illogical from origin point to prevent you from placing illeagal ships :)
+		ilogicalPlacer(x,y);
+		
 		return true;
 	}
 	
@@ -179,8 +184,37 @@ public class Matrix {
 	
 	/*
 	 * IlogicalPlacer
+	 * use me to place illogical, aka borders for ships, so that ships can not be placed illeagally, and AI won't shoot where no ships can be placed :)
+	 * inparameters are supposed to be any part of a ship, destroyed or alive.
+	 * can be used on actual board and 
 	 */
-	//TODO: ADD ME
+	public void ilogicalPlacer(int x, int y) {
+		AbstractTile target = getTile(x,y);
+		if (target.getRep() == 2 || target.getRep() == 3) { //not sure if this is actually needed. prob good to have.
+			
+			ilogicalPlacerRec(x,y+1, target);
+			ilogicalPlacerRec(x,y-1, target); 
+			ilogicalPlacerRec(x+1,y, target);
+			ilogicalPlacerRec(x-1,y, target);
+			 
+			if(target.getRep() == 2) {
+				setTile(x,y, new Hit());				
+			}
+
+		}
+		
+		
+	}
+	
+	
+	
+	private void ilogicalPlacerRec(int x, int y, AbstractTile parent) {
+		try {
+			
+		}catch(IndexOutOfBoundsException e) {
+			
+		}
+	}
 	
 	
 	
@@ -221,20 +255,19 @@ public class Matrix {
 		int x = Integer.parseInt(xString);
 		int y = Integer.parseInt(yString);
 		
+		
 		AbstractTile target = this.getTile(x, y); //idk if usefull?
 		
 		
 		//Was it a hull?
-		
 				anserw += hitEffectHandler(x,y);
-		
+
 		//Was there a boat that got sunk?
 		
 				//Handle that shit here :S AAMUJA!!!!
 			
 			//temporary:
 				anserw += "0,";
-		
 		
 		
 		//did you just loose?
@@ -244,7 +277,7 @@ public class Matrix {
 				}else {
 					anserw += "0";
 				}
-		
+
 		
 		return anserw;
 	}

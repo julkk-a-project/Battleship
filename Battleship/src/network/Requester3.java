@@ -102,7 +102,7 @@ public static void main(String args[]) {
 
     			message = (String)input.readLine(); // läser in vad servern skickat
     			System.out.println("server>" + message);
-
+ 
     			message = "copy";  
     			sendMessage(message); // skickar bye till metoden sendMessage
 
