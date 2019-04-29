@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -17,18 +18,18 @@ import javafx.stage.Stage;
 public class Tile extends StackPane {
 	
 	
-	
-	/*private static Color[] colorList = {	//TODO: CUSTOMIZE COLOURS
-									new Color(123,123,12,123),
-									new Color(123,123,12,123),
-									new Color(123,123,12,123),
-									new Color(123,123,12,123),
-									new Color(123,123,12,123),
+	/*private static Color[] colorList = {	//TODO: CUSTOMIZE COLOURS (NOT WORKING)
+									new Color(15, 47, 255, 0.5), 	//blue = water
+									new Color(255, 15, 15, 0.5),	//red = hit
+									new Color(238, 250, 20, 0.5),	//miss = yellow
+									new Color(4, 2, 13, 0.5),		//hull = gray
+									new Color(14, 14, 0, 1),		//illogical = black
 									};*/
+	
 
 	public Tile() {
-		Rectangle border = new Rectangle(30,30);
-		border.setFill(null);
+		Rectangle border = new Rectangle(20,20);
+		border.setFill(/*getColor()*/null);
 		border.setStroke(Color.BLACK);
 		
 		Text text = new Text();
@@ -38,7 +39,14 @@ public class Tile extends StackPane {
 		setAlignment(Pos.CENTER);
 		getChildren().addAll(border, text);
 	}
-
+	
+	
+	/*public static Color getColor(int colorIndex) {
+		Color color = colorList [colorIndex];
+		return color;
+	}*/
+	
+	
 	/*public static void main(String[] args) {
 		launch(args);
 
@@ -59,9 +67,6 @@ public class Tile extends StackPane {
 	}*/
 	
 	
-	/*public static Color getColor(int colorIndex) {
-		Color color = colorList [colorIndex];
-		return color;
-	}*/
+	
 
 }
