@@ -5,7 +5,10 @@ import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -20,38 +23,39 @@ public class Window extends Application {
 	Tile tile = new Tile();
 	//Color myColor = Tile.getColor(matrix.getTile(1, 2).getRep());
 	
-	
+	//This launches everything:
 	public static void main(String[] args) {
 		launch(Window.class, args);
 	}
 	
-
+	//This makes everything show:
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		/*primaryStage.setScene(new Scene(Window());
 		primaryStage.show();*/
 		
-		BorderPane border = new BorderPane();
-		HBox hbox = addHBox();
-		border.setLeft(hbox);
-		border.setCenter(createContent());
+		BorderPane border = new BorderPane();		//Adding new borderPane to organize shit
+		HBox hbox = addHBox();						//Adding new HBox for my textarea (dunno if necessary)
+		border.setLeft(hbox);						//Set hbox to the left
+		border.setRight(addFlowPane());				//Adding flowPane to right (will later show ships)
 		
-		
+		border.setCenter(addGridPane());			//Adding gridPane to center	
+
+		//Makes everything visible
 		Scene scene = new Scene(border);
         primaryStage.setScene(scene);
         primaryStage.setTitle("BattleShip");
         primaryStage.show();
-		
 	}
 	
 	
-	private Parent createContent() {
+	//Our GridPane
+	private Parent addGridPane() {
 		GridPane root = new GridPane();
 		root.setPrefSize(600,600);
 		root.setPadding(new Insets(10, 10, 0, 10));
-	
 		
-		
+		//making 10x10
 		for(int i = 0; i < 10; i++) {
 			for(int j = 0; j < 10; j++) {
 				Tile tile = new Tile();
@@ -61,24 +65,15 @@ public class Window extends Application {
 			}
 		}
 		
-		for(int i = 0; i < 10; i++) {
-			for(int j = 0; j < 10; j++) {
-				Tile tile = new Tile();
-				tile.setTranslateX(j * 30);
-				tile.setTranslateY(i * 30);
-				root.getChildren().add(tile);			
-			}
-		}
-		root.setGridLinesVisible(true);
 		return root;		
 	}
 	
 	
 	
 	public HBox addHBox() {
-	    TextArea textArea = new TextArea();
-	    HBox hbox = new HBox(textArea);
-	    hbox.setPadding(new Insets(30, 30, 30, 30));
+	    TextArea log = new TextArea();
+	    HBox hbox = new HBox(log);
+	    hbox.setPadding(new Insets(15, 15, 15, 15));
 	    hbox.setSpacing(10);
 	    hbox.setStyle("-fx-background-color: #f0f8ff;");
 
@@ -90,6 +85,27 @@ public class Window extends Application {
 	    hbox.getChildren().addAll(buttonCurrent, buttonProjected);*/
 
 	    return hbox;
+	}
+	
+	public FlowPane addFlowPane() {
+	    FlowPane flow = new FlowPane();
+	    flow.setPadding(new Insets(15, 15, 15, 15));
+	    flow.setVgap(4);
+	    flow.setHgap(4);
+	    //flow.setPrefWrapLength(170); // preferred width allows for two columns
+	    flow.setStyle("-fx-background-color: #f0f8ff;");
+
+	    //TODO: Put in images later like this:
+	    
+	    /*ImageView pages[] = new ImageView[8];
+	    for (int i=0; i<8; i++) {
+	        pages[i] = new ImageView(
+	            new Image(LayoutSample.class.getResourceAsStream(
+	            "graphics/chart_"+(i+1)+".png")));
+	        flow.getChildren().add(pages[i]);
+	    }*/
+
+	    return flow;
 	}
  
     /*SOME OLD SHIT
