@@ -1,6 +1,7 @@
 package window;
 
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
@@ -9,18 +10,14 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.scene.paint.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import matrix.Matrix;
  
 public class Window extends Application {
 	
@@ -32,7 +29,7 @@ public class Window extends Application {
 	//This launches everything:
 	public static void main(String[] args) {
 		launch(Window.class, args);
-		System.out.println(javafx.scene.text.Font.getFamilies());
+		//System.out.println(javafx.scene.text.Font.getFamilies());			//Gets what fonts available
 		
 	}
 	
@@ -43,11 +40,10 @@ public class Window extends Application {
 		primaryStage.show();*/
 		
 		BorderPane border = new BorderPane();		//Adding new borderPane to organize shit
-		MenuBar menu = new MenuBar();				//Adding new menuBar
-		VBox vbox = addVBox();						//Adding new VBox for my textarea (dunno if necessary)
+		VBox vbox = addVBoxLeft();					//Adding new VBox for my textarea (dunno if necessary)
 		
 		border.setLeft(vbox);						//Adding vBox to the left
-		border.setRight(addFlowPane());				//Adding flowPane to right (will later show ships)
+		border.setRight(addVBoxRight());			//Adding flowPane to right (will later show ships)
 		border.setCenter(addGridPane());			//Adding gridPane to center	
 		border.setTop(addMenuBar());				//Adding menuBar to top
 
@@ -62,36 +58,53 @@ public class Window extends Application {
 	//Our GridPane
 	private Parent addGridPane() {
 		
+		
 		GridPane root = new GridPane();
+		
 		
 		root.setPrefSize(300,600);							//set size of GridPane
 		root.setPadding(new Insets(10, 10, 10, 5));			//set padding around	
 		//root.setStyle("-fx-background-color: #a9a9a9;");	//Color of background
 		root.setAlignment(Pos.TOP_CENTER);					//Position of Grid
 		
-		createBoard(root, 0, 0);
-		createBoard(root, 0, 220);
+		Text text1 = new Text("Opponent");
+		text1.setFont(new Font("Agency FB", 16));
+		text1.setTranslateX(-100);
+		text1.setVisible(true);
+		root.add(text1, 0, 0);
+		
+		createBoard1(root, -100, 20, null);
+		
+		Text text2 = new Text("You");
+		text2.setFont(new Font("Agency FB", 16));
+		text2.setVisible(true);
+		text2.setTranslateY(240);
+		text2.setTranslateX(-100);
+		root.add(text2, 0, 0);
+		
+		createBoard2(root, -100, 260);
+		//TODO: Make tiles clickable
 		
 		return root;		
 	}
 	
 	
 	//Creating an VBox (VBox arranges a series of nodes in a single column)
-	public VBox addVBox() {
+	public VBox addVBoxLeft() {
 		
 		Text text = new Text();
 	    TextArea log = new TextArea();
-	    VBox vbox = new VBox(text,log);
+	    VBox vboxLeft = new VBox(text,log);
 	    
 	    log.setEditable(false);
 	    
 		text.setFont(new Font("Agency FB", 20));
-		text.setText("Log:\n");
+		text.setText("Log: ");
 	    
-	    vbox.setPadding(new Insets(15, 15, 15, 15));
-	    vbox.setPrefSize(200, 600);
-	    vbox.setSpacing(1);
-	    vbox.setStyle("-fx-background-color: #f0f8ff;");
+	    vboxLeft.setPadding(new Insets(15, 15, 15, 15));
+	    vboxLeft.setPrefSize(200, 600);
+	    vboxLeft.setSpacing(1);
+	    vboxLeft.setStyle("-fx-background-color: #f0f8ff;");
 
 	    
 	    //Saved in case I would need a button:
@@ -102,23 +115,25 @@ public class Window extends Application {
 	    buttonProjected.setPrefSize(100, 20);
 	    hbox.getChildren().addAll(buttonCurrent, buttonProjected);*/
 
-	    return vbox;
+	    return vboxLeft;
 	}
 	
 	
 	//Creating FlowPane (In FlowPane the nodes are laid out consecutively and wrap at the boundary set for the pane.)
-	public FlowPane addFlowPane() {
+	public VBox addVBoxRight() {
 		
 
 	    TextArea log = new TextArea();
-	    FlowPane flow = new FlowPane(log);
+	    VBox vBoxRight = new VBox(log);
 	    
-	    flow.setPadding(new Insets(15, 15, 15, 15));
-	    flow.setVgap(4);
-	    flow.setHgap(4);
-	    flow.setPrefWrapLength(170); // preferred width allows for two columns
-	    flow.setStyle("-fx-background-color: #f0f8ff;");
-
+	    log.setEditable(false);
+	    
+	    vBoxRight.setPadding(new Insets(15, 15, 15, 15));
+	    vBoxRight.setPrefSize(200, 600);
+	    vBoxRight.setSpacing(1);
+	    vBoxRight.setStyle("-fx-background-color: #f0f8ff;");
+	    
+	   
 	    
 	    //TODO: Put in images later like this:
 	    /*ImageView pages[] = new ImageView[8];
@@ -129,7 +144,7 @@ public class Window extends Application {
 	        flow.getChildren().add(pages[i]);
 	    }*/
 
-	    return flow;
+	    return vBoxRight;
 	}
 	
 	
@@ -139,32 +154,24 @@ public class Window extends Application {
 		BorderPane pane = new BorderPane();
 		MenuBar menu = new MenuBar();
 		
-		
 		//File
 		Menu file = new Menu("File");				//Creates heading "File"
-		
 		MenuItem itmNew = new MenuItem("New");		//Creates subHeading "New"
 		MenuItem itmSave = new MenuItem("Save");	//Creates subHeading "Save"
 		MenuItem itmExit = new MenuItem("Exit");	//Creates subHeading "Exit"
 		
-		
 		//Settings
 		Menu settings = new Menu("Settings");				//Creates heading "Settings"
-		
 		MenuItem itmSettings = new MenuItem("Settings");	//Creates subHeading "Settings"
 
-		
 		//Help
-		Menu help = new Menu("Help");				//Creates heading "Help"
-		
+		Menu help = new Menu("Help");				//Creates heading "Help"		
 		MenuItem itmHelp = new MenuItem("Help");	//Creates subHeading "Help"
-		
 		
 		//Add items to each menu
 		file.getItems().addAll(itmNew, itmSave, itmExit);
 		settings.getItems().addAll(itmSettings);
-		help.getItems().addAll(itmHelp);
-		
+		help.getItems().addAll(itmHelp);	
 		
 		//Add Menus to MenuBar
 		menu.getMenus().addAll(file,settings,help);
@@ -174,7 +181,8 @@ public class Window extends Application {
 		return pane;
 	}
 	
-	private void createBoard(GridPane root, int xOffSet, int yOffSet) {
+	//TODO: EventHandler: What should happen when you click the mouse on a tile
+	private void createBoard1(GridPane root, int xOffSet, int yOffSet, EventHandler<? super MouseEvent> handler) {
 		
 		for(int i = 0; i < 10; i++) {
 			for(int j = 0; j < 10; j++) {
@@ -182,55 +190,25 @@ public class Window extends Application {
 				
 				tile1.setTranslateX(j * 20 + xOffSet);
 				tile1.setTranslateY(i * 20 + yOffSet);
+				tile1.setOnMouseClicked(handler);
 			
 				root.getChildren().add(tile1);
 			}
 		}
-		
-		
 	}
- 
-    /*SOME OLD SHIT
-     
-    private TableView table = new TableView();
-    public static void main(String[] args) {
-        launch(args);
-    }
- 
-    @Override
-    public void start(Stage stage) {
-        Scene scene = new Scene(new Group());
-        stage.setTitle("BattleShip");
-        stage.setWidth(300);
-        stage.setHeight(300);
- 
-        final Label label = new Label("BattleShip");
-        label.setFont(new Font("Arial", 20));
- 
-        table.setEditable(false);
-        
-        char c = 'A';
-        for(int i = 0; i < 10; i++) {
-        	TableColumn column = new TableColumn(String.valueOf(c));
-        	table.getColumns().addAll(column);
-        	
-        	c++;
-        	 
-        }
-        for(int i = 0; i< 10; i++) {
-            TableRow row = new TableRow(Integer.valueOf(i));
-            
-        	
-        }
-        
-        final VBox vbox = new VBox();
-        vbox.setSpacing(5);
-        vbox.setPadding(new Insets(10, 0, 0, 10));
-        vbox.getChildren().addAll(label, table);
- 
-        ((Group) scene.getRoot()).getChildren().addAll(vbox);
- 
-        stage.setScene(scene);
-        stage.show();
-    }*/
+	
+	
+	private void createBoard2(GridPane root, int xOffSet, int yOffSet) {
+
+		for(int i = 0; i < 10; i++) {
+			for(int j = 0; j < 10; j++) {
+				Tile tile1 = new Tile();
+
+				tile1.setTranslateX(j * 20 + xOffSet);
+				tile1.setTranslateY(i * 20 + yOffSet);
+
+				root.getChildren().add(tile1);
+			}
+		}
+	}
 }

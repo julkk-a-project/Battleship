@@ -29,6 +29,7 @@ public abstract class AbstractTile {
 	public int getRep() {
 		return rep;
 	}
+	
 	public boolean AICanHit() {
 		return AICanHit;
 	}
