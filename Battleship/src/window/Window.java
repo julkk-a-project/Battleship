@@ -14,6 +14,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.paint.*;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import matrix.Matrix;
  
 public class Window extends Application {
@@ -26,6 +28,8 @@ public class Window extends Application {
 	//This launches everything:
 	public static void main(String[] args) {
 		launch(Window.class, args);
+		System.out.println(javafx.scene.text.Font.getFamilies());
+		
 	}
 	
 	//This makes everything show:
@@ -48,7 +52,7 @@ public class Window extends Application {
         primaryStage.show();
 	}
 	
-	
+	//TODO: Problem: How to get 2x GridPane in center
 	//Our GridPane
 	private Parent addGridPane() {
 		GridPane root = new GridPane();
@@ -71,10 +75,15 @@ public class Window extends Application {
 	
 	
 	public HBox addHBox() {
+		Text text = new Text();
+		text.setFont(new Font("Agency FB", 20));
+		
+		text.setText("Log:\n");
 	    TextArea log = new TextArea();
-	    HBox hbox = new HBox(log);
+	    HBox hbox = new HBox(text,log);
 	    hbox.setPadding(new Insets(15, 15, 15, 15));
-	    hbox.setSpacing(10);
+	    hbox.setPrefSize(200, 600);
+	    hbox.setSpacing(1);
 	    hbox.setStyle("-fx-background-color: #f0f8ff;");
 
 	    /*Button buttonCurrent = new Button("Current");
