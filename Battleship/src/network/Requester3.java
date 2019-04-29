@@ -15,6 +15,7 @@ public class Requester3 {
     PrintWriter output;
 	BufferedReader input;
 	BufferedReader konsolInlast;
+	private boolean turnNotOver;
 
 
 	
@@ -40,7 +41,6 @@ public static void main(String args[]) {
 
 	public boolean connect() {
 		 try{
-			 System.out.println("A");
 	            // Skapar en socket via vilken ett försök att koppla till servern sker som ligger på mymachine... och port 2004
 			 
 			 System.out.println(server+","+port);
@@ -54,15 +54,16 @@ public static void main(String args[]) {
 	      	  	konsolInlast = new BufferedReader (new InputStreamReader (System.in));
 
 	            // Skapar en input socket lokalt på klientmaskinen
+
+    			message = (String)input.readLine(); // läser in vad servern skickat
+    			System.out.println("server>" + message); 
 	      	  	return true;
 	        }
 	        catch(UnknownHostException unknownHost){
-				 System.out.println("B");
 	            System.err.println("You are trying to connect to an unknown host!");
 	            return false;
 	        }
 	        catch(IOException ioException){
-	   			 System.out.println("C");
 	            ioException.printStackTrace();
 	            return false;
 	        }
@@ -82,15 +83,20 @@ public static void main(String args[]) {
 	}
 
 	    
+	
+	//SendMessage
     public void run(int[] cords)
     {
+
+    	message = "";
+    	
     	do {
     		try{
     			//message = (String)JOptionPane.showInputDialog("Send info to client");
-    			message = (String)input.readLine(); // läser in vad servern skickat
-    			System.out.println("server>" + message); 
+    			//message = (String)input.readLine(); // läser in vad servern skickat
+    			//System.out.println("server>" + message); 
 
-    			System.out.println("Sending cords "+cords[0]+","+cords[1]);
+    			//System.out.println("Sending cords "+cords[0]+","+cords[1]); //<-- this is dumb
     			message = cords[0]+","+cords[1];
     			sendMessage(message); // skickar meddelandet add till metoden sendMessage 
 
@@ -100,14 +106,56 @@ public static void main(String args[]) {
     			message = "copy";  
     			sendMessage(message); // skickar bye till metoden sendMessage
 
-    			sistaHalsning = input.readLine(); // läser svaret
-    			System.out.println(sistaHalsning);
+    			//sistaHalsning = input.readLine(); // läser svaret
+    			//System.out.println(sistaHalsning);
     		}
     		catch(Exception e){
-    			System.err.println("data received in unknown format");
+    			System.err.println("data received in unknown format: \""+message+"\"");
     		}
     	} while(!message.equals("copy"));
     }
+    
+    
+    
+    //WaitForMessage
+    public boolean run() {
+
+            turnNotOver = true;
+        	message = "";
+            
+            do{
+                try{
+                	//System.out.println("kommit hit");
+                    message = (String)input.readLine();
+                    //add message handling here
+                    System.out.println("Server>" + message); //only shows message
+                    
+                    
+                    //Waits untill message is a cordinate
+                    if (Provider3.isCordinate(message)) {
+                    		sendMessage(Provider3.cordinateHandler(message));
+                        }
+                    
+  
+                    /*
+                    if (message.equals("copy")) {
+                        turnNotOver = false;
+                    }*/
+                }
+                catch(Exception classnot){
+        			//System.err.println("data received in unknown format: \""+message+"\"");
+        			//System.out.println(classnot);
+                }
+            }while(!message.equals("copy"));
+            System.out.println("ClientStopsListening");
+            turnNotOver = false;
+
+        return turnNotOver;
+    }
+    
+    
+    
+    
     void sendMessage(String msg)
     {
         try{

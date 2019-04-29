@@ -2,6 +2,7 @@ package main;
 
 import javax.swing.JOptionPane;
 
+import matrix.Matrix;
 import network.Provider3;
 import network.Requester3;
 
@@ -9,6 +10,9 @@ public class Main {
 
 	//public Window window;
 	
+	public static Matrix myMatrix;
+	public static Matrix itMatrix;
+
 	public static void main(String[] args) {
 		System.out.println("Hello World!!!!!!"); //i am not useful tbh
 		
@@ -19,6 +23,12 @@ public class Main {
 		
 		String host = JOptionPane.showInputDialog("host (y/n)");
 		
+
+		//Creates ur playingfield
+        myMatrix = new Matrix(10,10);
+        myMatrix.putHull();
+		
+		
 		if (host.equals("y")) {
 			//Hoster
 
@@ -26,91 +36,86 @@ public class Main {
 			
 			boolean hisTurn = true;
 	        Provider3 server = new Provider3();
-	        Requester3 client = new Requester3(); // an object wi
+	        //Requester3 client = new Requester3();
 	        
 
-	        //Temporary because i'm lazy and don't know how to do it automatically
-	        client.setServer(JOptionPane.showInputDialog("IP to connect to")); //IP to connect to
+	        
+	        
+	        //We'll see if this is even needed now :)))
+	        	//Temporary because i'm lazy and don't know how to do it automatically
+	        	//server.setServer(JOptionPane.showInputDialog("IP to connect to")); //IP to connect to
+	        
+	        
 	        
 	        
 	        boolean connected = false;
 	        while (!connected) {
 	        	connected = server.connect();
 	        }
-	        connected = false;
-        	while(!connected) {
-		        connected = client.connect();	
-        	}
-	        
-	        
 	        
 	        for (int i = 0; i < 10; i++) {
+	        	System.out.println("HIS TURN");
 	        	hisTurn = true;
 		        while(hisTurn){
 		            hisTurn = server.run();
 		        }
+		        System.out.println("UR TURN");
 		        
-		        if(i == 0) {	
-		        }
+		        
 		        int cordX = Integer.parseInt(JOptionPane.showInputDialog("cord X"));
 		        int cordY = Integer.parseInt(JOptionPane.showInputDialog("cord Y"));
 		        int[] cords = {cordX, cordY};
 		        
 		        //Chek if cords point to a water tile on own map to avoid dumb shooting.
 		        
-		        client.run(cords);
+		        server.run(cords);
 	        }
 	        
 
-	        client.disconnect();
 	        server.disconnect();
 			
 		}
 		else {
 			//Joiner
 
-	        Provider3 server = new Provider3();
 	        Requester3 client = new Requester3(); // an object wi
 	        
+	        
+
+	        //Connects
 	        client.setServer(JOptionPane.showInputDialog("IP to connect to")); //IP to connect to
-	        
-	        boolean hisTurn = false;
-	        
-	        System.out.println("1");
 	        boolean connected = false;
 	        while (!connected) {
 		        connected = client.connect();	        	
 	        }
-	        while (!connected) {
-	        	connected = server.connect();
-	        }
+	        
+
+	        boolean hisTurn = false;
 	        
 	        
-	        
-	        System.out.println("2");
-	        
+	        System.out.println("UR TURN");
 	        for (int i = 0; i < 10; i++) {
 
-		        System.out.println("i+3");
 	        	
 		        int cordX = Integer.parseInt(JOptionPane.showInputDialog("cord X"));
 		        int cordY = Integer.parseInt(JOptionPane.showInputDialog("cord Y"));
 		        int[] cords = {cordX, cordY};
 		        
 		        //Chek if cords point to a water tile on own map to avoid dumb shooting.
+
 		        
 		        client.run(cords);
+		        
+		        
+		        System.out.println("HIS TURN");
 		        hisTurn = true;
-		        if(i == 0) {
-			        server.connect();
-		        }
 		        while(hisTurn){
-		            hisTurn = server.run();
+		            hisTurn = client.run();
 		        }
+		        System.out.println("UR TURN");
 		        
 	        }
 	        client.disconnect();
-	        server.disconnect();
 	        
 	        
 		}
