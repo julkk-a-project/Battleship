@@ -1,15 +1,23 @@
 package window;
 
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.CheckMenuItem;
+import javafx.scene.control.CustomMenuItem;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.SeparatorMenuItem;
 import javafx.scene.control.TextArea;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -155,28 +163,76 @@ public class Window extends Application {
 		MenuBar menu = new MenuBar();
 		
 		//File
-		Menu file = new Menu("File");				//Creates heading "File"
+		Menu file = new Menu("_File");				//Creates heading "File"
 		MenuItem itmNew = new MenuItem("New");		//Creates subHeading "New"
+		MenuItem itmOpen = new MenuItem("Open...");		//Creates subHeading "New"
 		MenuItem itmSave = new MenuItem("Save");	//Creates subHeading "Save"
 		MenuItem itmExit = new MenuItem("Exit");	//Creates subHeading "Exit"
 		
+		
 		//Settings
-		Menu settings = new Menu("Settings");				//Creates heading "Settings"
+		Menu settings = new Menu("_Settings");				//Creates heading "Settings"
 		MenuItem itmSettings = new MenuItem("Settings");	//Creates subHeading "Settings"
+		
+		CheckMenuItem itmSound = new CheckMenuItem("Sound");
+		CheckMenuItem itmWhatever = new CheckMenuItem("Whatever");
+		itmSound.setSelected(true);
+		
 
 		//Help
 		Menu help = new Menu("Help");				//Creates heading "Help"		
 		MenuItem itmHelp = new MenuItem("Help");	//Creates subHeading "Help"
 		
 		//Add items to each menu
-		file.getItems().addAll(itmNew, itmSave, itmExit);
-		settings.getItems().addAll(itmSettings);
+		file.getItems().addAll(itmNew, itmOpen, itmSave, new SeparatorMenuItem(), itmExit);
+		settings.getItems().addAll(itmSound, new SeparatorMenuItem(), itmWhatever);
 		help.getItems().addAll(itmHelp);	
 		
 		//Add Menus to MenuBar
 		menu.getMenus().addAll(file,settings,help);
 		pane.setTop(menu);
 		
+		//Cool stuff
+		file.setMnemonicParsing(true);				//Use Alt+F to open 'File' or Alt+S ti open 'Settings'
+		
+		
+		/* Could have used CONTROL_DOWN for the code that follows, but if someone is using Mac this would cause problem
+		 * so therefore SHORTCUT_DOWN is a better solution. In PC it's CTRL, mac CMND etc...
+		 */
+		
+		itmNew.setAccelerator(new KeyCodeCombination(KeyCode.N, KeyCombination.SHORTCUT_DOWN));			//CTRL+N for new game	
+		itmOpen.setAccelerator(new KeyCodeCombination(KeyCode.O, KeyCombination.SHORTCUT_DOWN));		//CTRL+N for new game	
+		itmSave.setAccelerator(new KeyCodeCombination(KeyCode.S, KeyCombination.SHORTCUT_DOWN));		//CTRL+S for save
+		itmExit.setAccelerator(new KeyCodeCombination(KeyCode.Q, KeyCombination.SHORTCUT_DOWN));		//CTRL+Q for Exit //TODO: Remember to ask if player really want this
+
+		itmSound.setAccelerator(new KeyCodeCombination(KeyCode.M, 
+													   KeyCombination.SHIFT_DOWN, 
+													   KeyCombination.SHORTCUT_DOWN));					//CTRL+SHIFT+M for selecting sound on/off
+		
+		itmHelp.setAccelerator(new KeyCodeCombination(KeyCode.H, KeyCombination.SHORTCUT_DOWN));		//CTRL+H for help
+		
+		
+		//Some action to 'File'-menu
+		NewGame newGame = new NewGame(); //TODO: Wanted to open new window, but can't do that yet
+		itmNew.setOnAction(e -> System.out.println("Creates new game"));
+		
+		
+		//Adding Listeners
+		itmSound.selectedProperty().addListener(new ChangeListener<Boolean>(){
+
+			@Override
+			public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldValue, Boolean newValue) {
+				if(newValue) {
+					if(itmSound.isSelected()) {
+						//Write what happens
+					}else {
+						//write what happens
+					}
+				} else {
+					//Write what happens
+				}
+			}
+		});
 		
 		return pane;
 	}
