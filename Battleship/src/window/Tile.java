@@ -18,13 +18,13 @@ public class Tile extends StackPane {
 	
 	
 	
-	private static Color[] colorList = {	//TODO: CUSTOMIZE COLOURS
+	/*private static Color[] colorList = {	//TODO: CUSTOMIZE COLOURS
 									new Color(123,123,12,123),
 									new Color(123,123,12,123),
 									new Color(123,123,12,123),
 									new Color(123,123,12,123),
 									new Color(123,123,12,123),
-									};
+									};*/
 
 	public Tile() {
 		Rectangle border = new Rectangle(30,30);
@@ -59,9 +59,9 @@ public class Tile extends StackPane {
 	}*/
 	
 	
-	public static Color getColor(int colorIndex) {
+	/*public static Color getColor(int colorIndex) {
 		Color color = colorList [colorIndex];
 		return color;
-	}
+	}*/
 
 }
