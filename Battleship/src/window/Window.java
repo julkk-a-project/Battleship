@@ -69,23 +69,8 @@ public class Window extends Application {
 		//root.setStyle("-fx-background-color: #a9a9a9;");	//Color of background
 		root.setAlignment(Pos.TOP_CENTER);					//Position of Grid
 		
-		
-		//making 10x10
-		for(int i = 0; i < 10; i++) {
-			for(int j = 0; j < 10; j++) {
-				Tile tile1 = new Tile();
-				Tile tile2 = new Tile();
-				
-				tile1.setTranslateX(j * 20);
-				tile1.setTranslateY(i * 20 + 20);
-				
-				tile2.setTranslateX(j * 20);
-				tile2.setTranslateY(i * 20 + 250);
-				
-				root.getChildren().add(tile1);
-				root.getChildren().add(tile2);			
-			}
-		}
+		createBoard(root, 0, 0);
+		createBoard(root, 0, 220);
 		
 		return root;		
 	}
@@ -124,7 +109,9 @@ public class Window extends Application {
 	//Creating FlowPane (In FlowPane the nodes are laid out consecutively and wrap at the boundary set for the pane.)
 	public FlowPane addFlowPane() {
 		
-	    FlowPane flow = new FlowPane();
+
+	    TextArea log = new TextArea();
+	    FlowPane flow = new FlowPane(log);
 	    
 	    flow.setPadding(new Insets(15, 15, 15, 15));
 	    flow.setVgap(4);
@@ -185,6 +172,22 @@ public class Window extends Application {
 		
 		
 		return pane;
+	}
+	
+	private void createBoard(GridPane root, int xOffSet, int yOffSet) {
+		
+		for(int i = 0; i < 10; i++) {
+			for(int j = 0; j < 10; j++) {
+				Tile tile1 = new Tile();
+				
+				tile1.setTranslateX(j * 20 + xOffSet);
+				tile1.setTranslateY(i * 20 + yOffSet);
+			
+				root.getChildren().add(tile1);
+			}
+		}
+		
+		
 	}
  
     /*SOME OLD SHIT
