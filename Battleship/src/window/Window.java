@@ -14,7 +14,6 @@ import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckMenuItem;
@@ -52,6 +51,7 @@ public class Window extends Application {
 	}
 	
 	
+	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		/*primaryStage.setScene(new Scene(Window());
@@ -70,6 +70,7 @@ public class Window extends Application {
         primaryStage.setTitle("BattleShip");
         primaryStage.show();
 	}
+	
 	
 	
 	//Our GridPane
@@ -104,6 +105,7 @@ public class Window extends Application {
 	}
 	
 	
+	
 	//Creating an VBox (VBox arranges a series of nodes in a single column)
 	public VBox addVBoxLeft() {
 		
@@ -130,6 +132,7 @@ public class Window extends Application {
 
 	    return vBoxLeft;
 	}
+	
 	
 	
 	//Creating FlowPane (In FlowPane the nodes are laid out consecutively and wrap at the boundary set for the pane.)
@@ -184,6 +187,41 @@ public class Window extends Application {
 
 	    return vBoxRight;
 	}
+	
+	
+	
+	//TODO: EventHandler: What should happen when you click the mouse on a tile
+	private void createBoard1(GridPane root, int xOffSet, int yOffSet, EventHandler<? super MouseEvent> handler) {
+
+		for(int i = 0; i < 10; i++) {
+			for(int j = 0; j < 10; j++) {
+				Tile tile1 = new Tile();
+
+				tile1.setTranslateX(j * 20 + xOffSet);
+				tile1.setTranslateY(i * 20 + yOffSet);
+				tile1.setOnMouseClicked(handler);
+
+				root.getChildren().add(tile1);
+			}
+		}
+	}
+
+
+	
+	private void createBoard2(GridPane root, int xOffSet, int yOffSet) {
+
+		for(int i = 0; i < 10; i++) {
+			for(int j = 0; j < 10; j++) {
+				Tile tile1 = new Tile();
+
+				tile1.setTranslateX(j * 20 + xOffSet);
+				tile1.setTranslateY(i * 20 + yOffSet);
+
+				root.getChildren().add(tile1);
+			}
+		}
+	}
+
 	
 	
 	//Creating MenuBar
@@ -242,7 +280,7 @@ public class Window extends Application {
 		
 		
 		//////////////////////////////////
-		//Some action to 'File'-menu	//
+		//  Some action to 'File'-menu	//
 		//////////////////////////////////
 		
 		//ActionEvent for click on 'New Game'
@@ -266,6 +304,7 @@ public class Window extends Application {
 		    }*/
 		});
 		
+		
 		//ActionEvent for click on 'QUit'
 		itmQuit.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
@@ -275,27 +314,22 @@ public class Window extends Application {
             	alert.setHeaderText("WARNING!!");
             	alert.setContentText("Are you sure you wanna quit?");
             	
-            	ButtonType buttonTypeOK = new ButtonType("OK");
+            	ButtonType buttonTypeOK = new ButtonType("Quit");
             	ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);
             	alert.getButtonTypes().setAll(buttonTypeOK, buttonTypeCancel);
-
-            	
+          	
             	Optional<ButtonType> result = alert.showAndWait();
 				if (result.get() == buttonTypeOK){
 					Platform.exit();
 				} else {
-					//TODO: How to get this to continue
+					//TODO: How to get this to go back to program
 					alert.showAndWait();
-				}
-
-            	
-            	
-				
+				}	
 			}
 		});
 
 		//////////////////////////////////////
-		//Some action to 'Settings'-menu	//
+		//  Some action to 'Settings'-menu	//
 		//////////////////////////////////////
 		
 		//TODO: Finish these if-else-statements:
@@ -316,38 +350,5 @@ public class Window extends Application {
 		});
 		
 		return pane;
-	}
-	
-	
-	
-	//TODO: EventHandler: What should happen when you click the mouse on a tile
-	private void createBoard1(GridPane root, int xOffSet, int yOffSet, EventHandler<? super MouseEvent> handler) {
-		
-		for(int i = 0; i < 10; i++) {
-			for(int j = 0; j < 10; j++) {
-				Tile tile1 = new Tile();
-				
-				tile1.setTranslateX(j * 20 + xOffSet);
-				tile1.setTranslateY(i * 20 + yOffSet);
-				tile1.setOnMouseClicked(handler);
-			
-				root.getChildren().add(tile1);
-			}
-		}
-	}
-	
-	
-	private void createBoard2(GridPane root, int xOffSet, int yOffSet) {
-
-		for(int i = 0; i < 10; i++) {
-			for(int j = 0; j < 10; j++) {
-				Tile tile1 = new Tile();
-
-				tile1.setTranslateX(j * 20 + xOffSet);
-				tile1.setTranslateY(i * 20 + yOffSet);
-
-				root.getChildren().add(tile1);
-			}
-		}
 	}
 }
