@@ -147,7 +147,7 @@ public class Window extends Application {
 	    Text subHeading2 = new Text("Aircraft Carrier (4 tiles) ");
 	    Text subHeading3 = new Text("Submarine (3 tiles) ");
 	    Text subHeading4 = new Text("Destroyer (3 tiles) ");
-	    Text subHeading5 = new Text("Small ship (2 tiles) ");
+	    Text subHeading5 = new Text("Torpedo Boat (2 tiles) ");
 	    
 	    subHeading1.setFont(new Font("Agency FB", 14));				//Set fint and size for subHeadings
 		subHeading2.setFont(new Font("Agency FB", 14));
@@ -162,13 +162,13 @@ public class Window extends Application {
 	    Image aircrafCarrier = new Image("2AircraftCarrier.jpg", 100, 100, true, false);
 	    Image submarine = new Image("3Sub.jpg", 100, 100, true, false);
 	    Image destroyer = new Image("4Destroyer.jpg", 100, 100, true, false);
-	    Image smallShip = new Image("5SmallShip.jpg", 100, 100, true, false);
+	    Image torpedoBoat = new Image("5TorpedoBoat.jpg", 100, 100, true, false);
 	    
 	    VBox vBoxRight = new VBox(ships, subHeading1, new ImageView(battleship), 		//Putting heading, subHeadings and images into the vBox
 	    								 subHeading2, new ImageView(aircrafCarrier), 
 	    								 subHeading3, new ImageView(submarine), 
 	    								 subHeading4, new ImageView(destroyer), 
-	    								 subHeading5, new ImageView(smallShip));
+	    								 subHeading5, new ImageView(torpedoBoat));
 	    
 		
 	    vBoxRight.setPadding(new Insets(15, 15, 15, 15));				//Padding around the vBox
