@@ -108,9 +108,6 @@ public class Provider3 {
                     
                     
                     //Waits untill message is a cordinate
-                    
-                    
-                    
                     if (isCordinate(message)) {
                     		sendMessage(cordinateHandler(message));
                         }
@@ -182,7 +179,8 @@ public class Provider3 {
      */
     public static boolean isCordinate(String message) {
     	try {
-        	String[] cords = message.split(",", 2);
+        	@SuppressWarnings("unused")
+			String[] cords = message.split(",", 2);
         	return true;
     	}catch(Exception e){
     		System.out.println("isCordinateSaysNo");
@@ -200,12 +198,10 @@ public class Provider3 {
     	//handle message here
     	
     	String[] cords = message.split(",");
+
     	
     	string += main.Main.myMatrix.hitOrMiss(cords[0], cords[1]);
     	
-    	/*//"Hit?,Sunk?,Won?"			<---REPLACED BY ABOVE
-    	string += "1,1,0"; //Example
-    	*/
     	
     	
     	

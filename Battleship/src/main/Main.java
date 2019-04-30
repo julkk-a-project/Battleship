@@ -66,7 +66,7 @@ public class Main {
 		        int cordY = Integer.parseInt(JOptionPane.showInputDialog("cord Y"));
 		        int[] cords = {cordX, cordY};
 		        
-		        //Chek if cords point to a water tile on own map to avoid dumb shooting.
+		        //Check if cords point to a water tile on own map to avoid dumb shooting.
 		        
 		        server.run(cords);
 	        }
