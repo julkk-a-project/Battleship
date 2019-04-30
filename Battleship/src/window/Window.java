@@ -4,17 +4,19 @@ import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckMenuItem;
-import javafx.scene.control.CustomMenuItem;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SeparatorMenuItem;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
@@ -22,7 +24,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -102,17 +103,17 @@ public class Window extends Application {
 		
 		Text text = new Text();
 	    TextArea log = new TextArea();
-	    VBox vboxLeft = new VBox(text,log);
+	    VBox vBoxLeft = new VBox(text,log);
 	    
 	    log.setEditable(false);
 	    
 		text.setFont(new Font("Agency FB", 20));
 		text.setText("Log: ");
 	    
-	    vboxLeft.setPadding(new Insets(15, 15, 15, 15));
-	    vboxLeft.setPrefSize(200, 600);
-	    vboxLeft.setSpacing(1);
-	    vboxLeft.setStyle("-fx-background-color: #f0f8ff;");
+	    vBoxLeft.setPadding(new Insets(15, 15, 15, 15));
+	    vBoxLeft.setPrefSize(200, 600);
+	    vBoxLeft.setSpacing(1);
+	    vBoxLeft.setStyle("-fx-background-color: #f0f8ff;");
 
 	    
 	    //Saved in case I would need a button:
@@ -123,19 +124,36 @@ public class Window extends Application {
 	    buttonProjected.setPrefSize(100, 20);
 	    hbox.getChildren().addAll(buttonCurrent, buttonProjected);*/
 
-	    return vboxLeft;
+	    return vBoxLeft;
 	}
 	
 	
 	//Creating FlowPane (In FlowPane the nodes are laid out consecutively and wrap at the boundary set for the pane.)
 	public VBox addVBoxRight() {
 		
-
-	    TextArea log = new TextArea();
-	    VBox vBoxRight = new VBox(log);
+		Text text = new Text();
+	    Text subHeading = new Text();
+	    Image img1 = new Image("skepp1.jpg", 100, 100, true, false);
+	    Image img2 = new Image("skepp2.jpg", 100, 100, true, false);
+	    Image img3 = new Image("skepp3.jpg", 100, 100, true, false);
+	    Image img4 = new Image("skepp4.jpg", 100, 100, true, false);
+	    Image img5 = new Image("skepp5.jpg", 100, 100, true, false);
 	    
-	    log.setEditable(false);
+	    VBox vBoxRight = new VBox(text, subHeading, 
+	    						  new ImageView(img1),
+	    						  new ImageView(img2), 
+	    						  new ImageView(img3), 
+	    						  new ImageView(img4), 
+	    						  new ImageView(img5));
+	    	    
+	    //log.setEditable(false);
 	    
+		text.setFont(new Font("Agency FB", 20));
+		text.setText("Ships: ");
+		
+		subHeading.setFont(new Font("Agency FB", 14));
+		subHeading.setText("Battleship:");
+		
 	    vBoxRight.setPadding(new Insets(15, 15, 15, 15));
 	    vBoxRight.setPrefSize(200, 600);
 	    vBoxRight.setSpacing(1);
@@ -164,18 +182,17 @@ public class Window extends Application {
 		
 		//File
 		Menu file = new Menu("_File");				//Creates heading "File"
-		MenuItem itmNew = new MenuItem("New");		//Creates subHeading "New"
+		MenuItem itmNew = new MenuItem("New Game");		//Creates subHeading "New"
 		MenuItem itmOpen = new MenuItem("Open...");		//Creates subHeading "New"
 		MenuItem itmSave = new MenuItem("Save");	//Creates subHeading "Save"
 		MenuItem itmExit = new MenuItem("Exit");	//Creates subHeading "Exit"
 		
 		
 		//Settings
-		Menu settings = new Menu("_Settings");				//Creates heading "Settings"
-		MenuItem itmSettings = new MenuItem("Settings");	//Creates subHeading "Settings"
-		
-		CheckMenuItem itmSound = new CheckMenuItem("Sound");
-		CheckMenuItem itmWhatever = new CheckMenuItem("Whatever");
+		Menu settings = new Menu("_Settings");						//Creates heading "Settings"
+		//**Not Used** MenuItem itmSettings = new MenuItem("Settings");	//Creates subHeading "Settings"
+		CheckMenuItem itmSound = new CheckMenuItem("Sound");		//Creates checkMenu "Sound"
+		CheckMenuItem itmWhatever = new CheckMenuItem("Whatever");	//Creates checkMenu "Whatever"
 		itmSound.setSelected(true);
 		
 
@@ -212,12 +229,36 @@ public class Window extends Application {
 		itmHelp.setAccelerator(new KeyCodeCombination(KeyCode.H, KeyCombination.SHORTCUT_DOWN));		//CTRL+H for help
 		
 		
-		//Some action to 'File'-menu
-		NewGame newGame = new NewGame(); //TODO: Wanted to open new window, but can't do that yet
-		itmNew.setOnAction(e -> System.out.println("Creates new game"));
+		//////////////////////////////////
+		//Some action to 'File'-menu	//
+		//////////////////////////////////
 		
+		//ActionEvent for click on 'New Game'
+		NewGame newGame = new NewGame(); 
+		itmNew.setOnAction((event) -> {
+		    //try {
+		        FXMLLoader fxmlLoader = new FXMLLoader();
+		        fxmlLoader.setLocation(getClass().getResource("NewWindow.fxml"));
+		        /* 
+		         * if "fx:controller" is not set in fxml
+		         * fxmlLoader.setController(NewWindowController);
+		         */
+		        Scene scene = new Scene(newGame.load(), 600, 400);
+		        Stage stage = new Stage();
+		        stage.setTitle("New Game");
+		        stage.setScene(scene);
+		        stage.show();
+		   /* } catch (IOException e) {
+		        Logger logger = Logger.getLogger(getClass().getName());
+		        logger.log(Level.SEVERE, "Failed to create new Window.", e);
+		    }*/
+		});
 		
-		//Adding Listeners
+		//////////////////////////////////////
+		//Some action to 'Settings'-menu	//
+		//////////////////////////////////////
+		
+		//TODO: Finish these if-else-statements:
 		itmSound.selectedProperty().addListener(new ChangeListener<Boolean>(){
 
 			@Override
@@ -236,6 +277,8 @@ public class Window extends Application {
 		
 		return pane;
 	}
+	
+	
 	
 	//TODO: EventHandler: What should happen when you click the mouse on a tile
 	private void createBoard1(GridPane root, int xOffSet, int yOffSet, EventHandler<? super MouseEvent> handler) {

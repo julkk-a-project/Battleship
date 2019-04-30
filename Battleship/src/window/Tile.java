@@ -1,6 +1,7 @@
 package window;
 
 
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.input.MouseEvent;
@@ -50,6 +51,12 @@ public class Tile extends StackPane {
 		border.setFill(color);
 		
 		return null;
+	}
+
+
+
+	public void setOnAction(EventHandler<ActionEvent> eventHandler) {
+		border.setOnKeyPressed(getOnKeyPressed());
 	}
 	
 	

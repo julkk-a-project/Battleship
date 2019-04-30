@@ -5,6 +5,7 @@ import javax.swing.JOptionPane;
 import matrix.Matrix;
 import network.Provider3;
 import network.Requester3;
+import window.Window;
 
 public class Main {
 
@@ -17,7 +18,7 @@ public class Main {
 		System.out.println("Hello World!!!!!!"); //i am not useful tbh
 		
 		//Launch game window here :) (aka typ: window = new window();)
-		
+		//Window window = new Window();
 		
 		//tempSystem for dev testing:
 		
