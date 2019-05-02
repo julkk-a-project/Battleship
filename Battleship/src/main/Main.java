@@ -5,6 +5,7 @@ import javax.swing.JOptionPane;
 import matrix.Matrix;
 import network.Provider3;
 import network.Requester3;
+import window.Tile;
 import window.Window;
 
 public class Main {
@@ -13,6 +14,7 @@ public class Main {
 	
 	public static Matrix myMatrix;
 	public static Matrix itMatrix;
+	public static Tile tile;
 
 	public static void main(String[] args) {
 		System.out.println("Hello World!!!!!!"); //i am not useful tbh

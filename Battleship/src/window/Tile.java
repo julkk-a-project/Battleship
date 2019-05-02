@@ -29,6 +29,7 @@ public class Tile extends StackPane {
 		border.setFill(/*getColor()*/Color.GHOSTWHITE);
 		border.setStroke(Color.BLACK);
 		
+		
 		Text text = new Text();
 		text.setFont(Font.font(20));
 		text.setVisible(true);
@@ -46,17 +47,17 @@ public class Tile extends StackPane {
 
 
 
-	public EventHandler<? super MouseEvent> setColor(Color color) {
+	public EventHandler<? super MouseEvent> setColor() {
 		
-		border.setFill(color);
+		border.setFill(Color.AQUA);
 		
-		return null;
+		return (EventHandler<? super MouseEvent>) border;
 	}
 
 
 
 	public void setOnAction(EventHandler<ActionEvent> eventHandler) {
-		border.setOnKeyPressed(getOnKeyPressed());
+		border.setOnMouseClicked(getOnMouseClicked());
 	}
 	
 	

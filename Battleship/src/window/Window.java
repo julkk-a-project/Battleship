@@ -32,6 +32,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -49,6 +50,8 @@ public class Window extends Application {
 		//System.out.println(javafx.scene.text.Font.getFamilies());			//Gets what fonts available
 		
 	}
+
+
 	
 	
 	
@@ -149,7 +152,7 @@ public class Window extends Application {
 	    Text subHeading4 = new Text("Destroyer (3 tiles) ");
 	    Text subHeading5 = new Text("Torpedo Boat (2 tiles) ");
 	    
-	    subHeading1.setFont(new Font("Agency FB", 14));				//Set fint and size for subHeadings
+	    subHeading1.setFont(new Font("Agency FB", 14));				//Set font and size for subHeadings
 		subHeading2.setFont(new Font("Agency FB", 14));
 		subHeading3.setFont(new Font("Agency FB", 14));
 		subHeading4.setFont(new Font("Agency FB", 14));
@@ -200,6 +203,11 @@ public class Window extends Application {
 				tile1.setTranslateX(j * 20 + xOffSet);
 				tile1.setTranslateY(i * 20 + yOffSet);
 				tile1.setOnMouseClicked(handler);
+				
+				//TODO: Problem:
+				tile1.setOnMouseClicked(event -> {
+					main.Main.tile.setColor();
+				});
 
 				root.getChildren().add(tile1);
 			}
