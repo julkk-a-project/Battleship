@@ -158,11 +158,11 @@ public class Window extends Application {
 	    
 	    //Should be an easier way to add lots of piccs, but this works
 		
-	    Image battleship = new Image("Battleship.gif", 110, 110, true, false);			//Create image (inputStream, requestedWidth, requestedHeight, preserveRatio, smooth)
+	    Image battleship = new Image("Battleship.gif", 115, 115, true, true);			//Create image (inputStream, requestedWidth, requestedHeight, preserveRatio, smooth)
 	    Image aircrafCarrier = new Image("AircraftCarrier.gif", 100, 100, true, false);
-	    Image submarine = new Image("Submarine.gif", 90, 90, true, false);
-	    Image destroyer = new Image("Destroyer.gif", 90, 90, true, false);
-	    Image torpedoBoat = new Image("TorpedoBoat.gif", 80, 80, true, false);
+	    Image submarine = new Image("Submarine.gif", 85, 85, true, false);
+	    Image destroyer = new Image("Destroyer.gif", 85, 85, true, false);
+	    Image torpedoBoat = new Image("TorpedoBoat.gif", 70, 70, true, false);
 	    
 	    VBox vBoxRight = new VBox(ships, subHeading1, new ImageView(battleship), 		//Putting heading, subHeadings and images into the vBox
 	    								 subHeading2, new ImageView(aircrafCarrier), 
