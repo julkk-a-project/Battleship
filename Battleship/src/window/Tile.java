@@ -15,7 +15,7 @@ import javafx.util.Duration;
 
 public class Tile extends StackPane {
 	public boolean isOpen;
-	private Text text = new Text("A");
+	private Text text = new Text();
 	
 	private static Color[] colorList = {	//CUSTOMIZED COLORS
 									new Color(0, 0, 1, 1.0), 		//blue = water
@@ -75,7 +75,7 @@ public class Tile extends StackPane {
 	}
 	
 	public void close() {
-		FadeTransition ft = new FadeTransition(Duration.seconds(0.6),text);
+		FadeTransition ft = new FadeTransition(Duration.seconds(0.6));
 		ft.setToValue(0);
 		ft.play();
 	}
