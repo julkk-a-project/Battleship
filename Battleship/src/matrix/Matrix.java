@@ -3,6 +3,7 @@ package matrix;
 import tiles.AbstractTile;
 import tiles.Hit;
 import tiles.Hull;
+import tiles.Ilogical;
 import tiles.Miss;
 import tiles.Water;
 
@@ -210,6 +211,27 @@ public class Matrix {
 	
 	private void ilogicalPlacerRec(int x, int y, AbstractTile parent) {
 		try {
+			AbstractTile target = getTile(x,y);
+			
+			if(target.getRep() == 2) {
+
+				if (target != parent) {
+					ilogicalPlacerRec(x,y+1, target);
+				}
+				if (target != parent) {
+					ilogicalPlacerRec(x,y-1, target);
+				}
+				if (target != parent) {
+					ilogicalPlacerRec(x+1,y, target);			
+				}
+				if (target != parent) {
+					ilogicalPlacerRec(x-1,y, target);			
+				}	
+			}
+			else if (target.getRep() == 0) {
+				setTile(x,y,new Ilogical());
+			}
+			
 			
 		}catch(IndexOutOfBoundsException e) {
 			
