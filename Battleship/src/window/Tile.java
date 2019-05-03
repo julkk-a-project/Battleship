@@ -17,7 +17,7 @@ public class Tile extends StackPane {
 	public boolean isOpen;
 	private Text text = new Text("A");
 	
-	private static Color[] colorList = {	//TODO: CUSTOMIZE COLOURS (NOT WORKING)
+	private static Color[] colorList = {	//CUSTOMIZED COLORS
 									new Color(0, 0, 1, 1.0), 		//blue = water
 									new Color(1, 0, 0, 1.0),		//red = hit
 									new Color(1, 1, 0, 1.0),		//miss = yellow
@@ -26,7 +26,7 @@ public class Tile extends StackPane {
 									};
 	private Rectangle border;
 
-	private Object color;
+	private static Color color;
 
 	public Tile() {
 		border = new Rectangle(20,20);
@@ -47,14 +47,14 @@ public class Tile extends StackPane {
 	
 	
 	public static Color getColor(int colorIndex) {
-		Color color = colorList [colorIndex];
+		color = colorList [colorIndex];
 		return color;
 	}
 
 
 
-	public Rectangle setColor() {
-		border.setFill(Color.AQUA);
+	public Rectangle setColor(Color color) {
+		border.setFill(color);
 		
 		return border;
 	}
