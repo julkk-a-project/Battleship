@@ -4,7 +4,7 @@ package tiles;
 
 
 	/*
-	 *  overlook:			rep		AICanHit	use
+	 *  overview:			rep		AICanHit	use
 	 *  	Water 		= 	0		true		empty tile
 	 * 		Illogical	= 	1		false		for AI logic
 	 * 		Hull 		=	2		false		ship part

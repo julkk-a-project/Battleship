@@ -17,6 +17,22 @@ public class Tile extends StackPane {
 	public boolean isOpen;
 	private Text text = new Text();
 	
+	
+	
+	
+	
+
+	/*
+	 *  overview:			rep		AICanHit	use
+	 *  	Water 		= 	0		true		empty tile
+	 * 		Illogical	= 	1		false		for AI logic
+	 * 		Hull 		=	2		false		ship part
+	 * 		Hit 		=	3		false		broken ship part
+	 * 		Miss 		=	4		false		a shot that landed in water
+	 */
+	
+	//Make sure colors are saved in the order they are in the table above
+	
 	private static Color[] colorList = {	//CUSTOMIZED COLORS
 									new Color(0, 0, 1, 1.0), 		//blue = water
 									new Color(1, 0, 0, 1.0),		//red = hit
