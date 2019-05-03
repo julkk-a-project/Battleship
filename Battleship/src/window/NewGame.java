@@ -45,7 +45,6 @@ public class NewGame extends Application{
 	
 	
 	public NewGame() {
-		
 		border.setCenter(load());	
 	}
 

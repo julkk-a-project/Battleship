@@ -54,8 +54,7 @@ public class Tile extends StackPane {
 
 
 	public Rectangle setColor(Color color) {
-		border.setFill(color);
-		
+		border.setFill(color);	
 		return border;
 	}
 
