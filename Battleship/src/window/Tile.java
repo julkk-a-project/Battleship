@@ -68,7 +68,7 @@ public class Tile extends StackPane {
 	
 	
 	public void open() {
-		FadeTransition ft = new FadeTransition(Duration.seconds(0.6),text);
+		FadeTransition ft = new FadeTransition(Duration.seconds(0.6),setColor(color));
 		ft.setToValue(1);
 		ft.play();
 		

@@ -83,7 +83,7 @@ public class Window extends Application {
 		
 		root.setPrefSize(300,600);							//set size of GridPane
 		root.setPadding(new Insets(10, 10, 10, 5));			//set padding around	
-		//root.setStyle("-fx-background-color: #a9a9a9;");	//Color of background
+		root.setStyle("-fx-background-color: #a9a9a9;");	//Color of background
 		root.setAlignment(Pos.TOP_CENTER);					//Position of Grid
 		
 		Text text1 = new Text("Opponent");					//add new text
