@@ -1,6 +1,7 @@
 package window;
 
 
+import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -10,19 +11,22 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 
 public class Tile extends StackPane {
-	
+	public boolean isOpen;
+	private Text text = new Text("A");
 	
 	private static Color[] colorList = {	//TODO: CUSTOMIZE COLOURS (NOT WORKING)
-									new Color(0, 0, 1, 0.5), 	//blue = water
-									new Color(1, 0, 0, 0.5),	//red = hit
-									new Color(1, 1, 0, 0.5),	//miss = yellow
-									new Color(0, 1, 1, 0.5),		//hull = gray
-									new Color(1, 0, 1, 1),		//illogical = black
+									new Color(0, 0, 1, 1.0), 		//blue = water
+									new Color(1, 0, 0, 1.0),		//red = hit
+									new Color(1, 1, 0, 1.0),		//miss = yellow
+									new Color(1, 1, 1, 0.7),		//hull = gray
+									new Color(1, 1, 1, 1.0),		//illogical = black
 									};
 	private Rectangle border;
-	
+
+	private Object color;
 
 	public Tile() {
 		border = new Rectangle(20,20);
@@ -30,12 +34,14 @@ public class Tile extends StackPane {
 		border.setStroke(Color.BLACK);
 		
 		
-		Text text = new Text();
-		text.setFont(Font.font(20));
+		
+		text.setFont(Font.font(14));
 		text.setVisible(true);
 		
 		setAlignment(Pos.CENTER);
 		getChildren().addAll(border, text);
+		setOnMouseClicked(event -> open());
+		close();
 	}
 	
 	
@@ -47,19 +53,32 @@ public class Tile extends StackPane {
 
 
 
-	public EventHandler<? super MouseEvent> setColor() {
-		
+	public Rectangle setColor() {
 		border.setFill(Color.AQUA);
 		
-		return (EventHandler<? super MouseEvent>) border;
+		return border;
 	}
 
 
 
 	public void setOnAction(EventHandler<ActionEvent> eventHandler) {
-		border.setOnMouseClicked(getOnMouseClicked());
+		border.setOnMouseClicked(event -> open());
 	}
 	
+	
+	
+	public void open() {
+		FadeTransition ft = new FadeTransition(Duration.seconds(0.6),text);
+		ft.setToValue(1);
+		ft.play();
+		
+	}
+	
+	public void close() {
+		FadeTransition ft = new FadeTransition(Duration.seconds(0.6),text);
+		ft.setToValue(0);
+		ft.play();
+	}
 	
 	/*public static void main(String[] args) {
 		launch(args);

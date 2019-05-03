@@ -97,7 +97,7 @@ public class Window extends Application {
 		text2.setTranslateY(240);							//position Y-axis
 		text2.setVisible(true);								//set visible
 		
-		createBoard1(root, -100, 20, null);					//Creates board1
+		createBoard1(root, -100, 20);						//Creates board1
 		createBoard2(root, -100, 260);						//Creates board2
 		
 		//add to GridPane
@@ -194,7 +194,7 @@ public class Window extends Application {
 	
 	
 	//TODO: EventHandler: What should happen when you click the mouse on a tile
-	private void createBoard1(GridPane root, int xOffSet, int yOffSet, EventHandler<? super MouseEvent> handler) {
+	private void createBoard1(GridPane root, int xOffSet, int yOffSet) {
 
 		for(int i = 0; i < 10; i++) {
 			for(int j = 0; j < 10; j++) {
@@ -202,12 +202,12 @@ public class Window extends Application {
 
 				tile1.setTranslateX(j * 20 + xOffSet);
 				tile1.setTranslateY(i * 20 + yOffSet);
-				tile1.setOnMouseClicked(handler);
+				
 				
 				//TODO: Problem:
-				tile1.setOnMouseClicked(event -> {
-					main.Main.tile.setColor();
-				});
+				/*tile1.setOnMouseClicked(event -> {
+					main.Main.tile.open();
+				});*/
 
 				root.getChildren().add(tile1);
 			}
