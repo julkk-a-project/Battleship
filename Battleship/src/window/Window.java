@@ -410,7 +410,7 @@ public class Window extends Application {
 	
 	
 	public static void appendLog(String string) {
-		log.appendText(string);
+		log.appendText(string+"\n");
 	}
 		
 	
