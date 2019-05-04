@@ -3,7 +3,7 @@ package tiles;
 public class Hull extends AbstractTile {
 
 	public Hull() {
-		rep = 3;
+		rep = 2;
 	}
 
 
