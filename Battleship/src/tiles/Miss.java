@@ -3,6 +3,7 @@ package tiles;
 public class Miss extends AbstractTile {
 
 	public Miss() {
+		rep = 4;
 		// TODO Auto-generated constructor stub
 	}
 

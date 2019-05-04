@@ -3,6 +3,7 @@ package tiles;
 public class Hit extends AbstractTile {
 
 	public Hit() {
+		rep = 3;
 		// TODO Auto-generated constructor stub
 	}
 
