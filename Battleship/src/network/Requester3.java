@@ -44,8 +44,10 @@ public static void main(String args[]) {
 	            // Skapar en socket via vilken ett försök att koppla till servern sker som ligger på mymachine... och port 2004
 			 
 			 System.out.println(server+","+port);
+			 appendLog(server+","+port);
 	            requestSocket = new Socket(server, port); // ändra detta till någon av dina maskiner
 	            System.out.println("Connected to "+ server +" on port "+ port +" on " + requestSocket.getLocalPort());
+	            appendLog("Connected to "+ server +" on port "+ port +" on " + requestSocket.getLocalPort());
 	            // Skapar sockets för input och outputströmmarna 
 	            
 	            // märk!! en bufferedReader för inström, en Printwriter för utström och en bufferedreader för inläsning
@@ -57,6 +59,7 @@ public static void main(String args[]) {
 
     			message = (String)input.readLine(); // läser in vad servern skickat
     			System.out.println("server>" + message); 
+    			appendLog("server>" + message);
 	      	  	return true;
 	        }
 	        catch(UnknownHostException unknownHost){
@@ -102,6 +105,7 @@ public static void main(String args[]) {
 
     			message = (String)input.readLine(); // läser in vad servern skickat
     			System.out.println("server>" + message);
+    			appendLog("server>" + message);
  
     			message = "copy";  
     			sendMessage(message); // skickar bye till metoden sendMessage
@@ -129,6 +133,7 @@ public static void main(String args[]) {
                     message = (String)input.readLine();
                     //add message handling here
                     System.out.println("Server>" + message); //only shows message
+                    appendLog("Server>" + message);
                     
                     
                     //Waits untill message is a cordinate
@@ -148,6 +153,7 @@ public static void main(String args[]) {
                 }
             }while(!message.equals("copy"));
             System.out.println("ClientStopsListening");
+            appendLog("ClientStopsListening");
             turnNotOver = false;
 
         return turnNotOver;
@@ -162,6 +168,7 @@ public static void main(String args[]) {
         	output.println(msg); // skriver på utkanalen meddelandet
         	System.out.flush();
             System.out.println("client>" + msg); // skriver ut vad klienten skickat
+            appendLog("client>" + msg);
         }
         catch(Exception ioException){
             ioException.printStackTrace();
@@ -205,8 +212,9 @@ public static void main(String args[]) {
     /*
      * use me to send stuff to log
      */
-    public void appendLog(String string) {
+    public static void appendLog(String string) {
     	//add stuff that makes this add stuff to log
+    	window.Window.appendLog(string);
     }
     
     /*

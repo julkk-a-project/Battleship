@@ -26,12 +26,15 @@ public class Provider3 {
                 providerSocket = new ServerSocket(port, 10);
                 //2. Wait for connection
                 System.out.println("Waiting for connection");
+                appendLog("Waiting for connection");
                 connection = providerSocket.accept();
                 System.out.println("Connection received from " + connection.getInetAddress().getHostName() + " and accepted on " + connection.getLocalSocketAddress() + " blahaa: " + connection.getOutputStream());
+                appendLog("Connection received from " + connection.getInetAddress().getHostName() + " and accepted on " + connection.getLocalSocketAddress() + " blahaa: " + connection.getOutputStream());
                 //3. get Input and Output streams
                 input = new BufferedReader (new InputStreamReader (connection.getInputStream()));
                 output = new PrintWriter (new BufferedWriter ( new OutputStreamWriter(connection.getOutputStream())), true);
                 sendMessage("Connection successful");
+
                 //4. The two parts communicate via the input and output streams
                 return true;
             }
@@ -45,6 +48,7 @@ public class Provider3 {
     public void disconnect() {
 
     	System.out.println("connection closing");
+    	appendLog("connection closing");
     	//4: Closing connection
     	try{
     		input.close();
@@ -78,6 +82,7 @@ public class Provider3 {
 
     			message = (String)input.readLine(); // läser in vad servern skickat
     			System.out.println("client>" + message);
+    			appendLog("client>" + message);
 
     			message = "copy";  
     			sendMessage(message); // skickar bye till metoden sendMessage
@@ -87,6 +92,7 @@ public class Provider3 {
     		}
     		catch(Exception e){
     			System.err.println("data received in unknown format: \""+message+"\"");
+    			appendLog("data received in unknown format: \""+message+"\"");
     		}
     	} while(!message.equals("copy"));
     }
@@ -105,7 +111,7 @@ public class Provider3 {
                     message = (String)input.readLine();
                     //add message handling here
                     System.out.println("client>" + message); //only shows message
-                    
+                    appendLog("client>" + message);
                     
                     //Waits untill message is a cordinate
                     if (isCordinate(message)) {
@@ -125,6 +131,8 @@ public class Provider3 {
                 }
             }while(!message.equals("copy"));
             System.out.println("HostStopsListening");
+            appendLog("HostStopsListening");
+            
             turnNotOver = false;
 
         return turnNotOver;
@@ -137,6 +145,7 @@ public class Provider3 {
             output.println(msg);
             output.flush();
             System.out.println("server>" + msg);
+            appendLog("server>" + msg);
         }
         catch(Exception ioException){
             ioException.printStackTrace();
@@ -172,6 +181,7 @@ public class Provider3 {
      */
     public static void appendLog(String string) {
     	//add stuff that makes this add stuff to log
+    	window.Window.appendLog(string);
     }
     
     /*

@@ -15,17 +15,13 @@ public class Main {
 	public static Matrix myMatrix;
 	public static Matrix itMatrix;
 	public static Tile tile;
+	//public static NewGame newGame;
 
 	public static void main(String[] args) {
 		System.out.println("Hello World!!!!!!"); //i am not useful tbh
 		
-		//Launch game window here :) (aka typ: window = new window();)
 		
-		//Window window = new Window();
-		
-		
-		
-		
+
 		
 		
 		
@@ -39,13 +35,25 @@ public class Main {
         myMatrix = new Matrix(10,10);
         
         //customize your ship layout here
-        myMatrix.putHull();
+        myMatrix.putHull(3);
         
         
         //creates empty "projection" of enemy field
         itMatrix = new Matrix(10,10);
+
+        
+		//Launch game window here :) (aka typ: window = new window();)
 		
+        new Thread() {
+
+        	public void run() {
+                window.Window.launch(Window.class, args);
+        	}
+        }.start();
+        
 		
+		JOptionPane.showMessageDialog(null, "wait a few sec plz");
+        
 		if (host.equals("y")) {
 			host();
 		}
@@ -62,9 +70,9 @@ public class Main {
 	}
 	
 	public static void host() {
-		//Hoster
+		//Host
 
-		//current model of thougth says that this should be run when waiting for a resposne from the other player
+		//current model of thought says that this should be run when waiting for a response from the other player
 		
 		boolean hisTurn = true;
         Provider3 server = new Provider3();
@@ -87,12 +95,15 @@ public class Main {
         
         for (int i = 0; i < 10; i++) {
         	System.out.println("HIS TURN");
+        	window.Window.appendLog("HIS TURN");
         	hisTurn = true;
 	        while(hisTurn){
 	            hisTurn = server.run();
 	        }
-	        System.out.println("UR TURN");
+	        window.Window.draw();
 	        
+	        System.out.println("UR TURN");
+	        window.Window.appendLog("UR TURN");
 	        
 	        int cordX = Integer.parseInt(JOptionPane.showInputDialog("cord X"));
 	        int cordY = Integer.parseInt(JOptionPane.showInputDialog("cord Y"));
@@ -101,6 +112,7 @@ public class Main {
 	        //Check if cords point to a water tile on own map to avoid dumb shooting.
 	        
 	        server.run(cords);
+	        window.Window.draw();
         }
         
 
@@ -129,6 +141,10 @@ public class Main {
         
         
         System.out.println("UR TURN");
+        window.Window.appendLog("UR TURN");
+        
+        window.Window.draw();
+        
         for (int i = 0; i < 10; i++) {
 
         	
@@ -136,18 +152,25 @@ public class Main {
 	        int cordY = Integer.parseInt(JOptionPane.showInputDialog("cord Y"));
 	        int[] cords = {cordX, cordY};
 	        
-	        //Chek if cords point to a water tile on own map to avoid dumb shooting.
+	        //Check if cords point to a water tile on own map to avoid dumb shooting.
 
 	        
 	        client.run(cords);
 	        
 	        
 	        System.out.println("HIS TURN");
+	        window.Window.appendLog("HIS TURN");
+	        
 	        hisTurn = true;
+	        
 	        while(hisTurn){
 	            hisTurn = client.run();
 	        }
+	        
+	        window.Window.draw();
+	        
 	        System.out.println("UR TURN");
+	        window.Window.appendLog("UR TURN");
 	        
         }
         client.disconnect();

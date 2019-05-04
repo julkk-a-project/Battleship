@@ -5,23 +5,21 @@ import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
+import matrix.Matrix;
 
 public class Tile extends StackPane {
 	public boolean isOpen;
 	private Text text = new Text();
+	private int[] cords;
+	private int x;
+	private int y;
 	
-	
-	
-	
-	
-
 	/*
 	 *  overview:			rep		AICanHit	use
 	 *  	Water 		= 	0		true		empty tile
@@ -34,22 +32,26 @@ public class Tile extends StackPane {
 	//Make sure colors are saved in the order they are in the table above
 	
 	private static Color[] colorList = {	//CUSTOMIZED COLORS
-									new Color(0, 0, 1, 1.0), 		//blue = water
-									new Color(1, 0, 0, 1.0),		//red = hit
-									new Color(1, 1, 0, 1.0),		//miss = yellow
-									new Color(1, 1, 1, 0.7),		//hull = gray
-									new Color(1, 1, 1, 1.0),		//illogical = black
+									new Color(0, 0, 0.8, 1.0), 		//[0] water = blue
+									new Color(1, 1, 1, 1.0),		//[1] illogical = black
+									new Color(0.75, 0.75, 0.75, 1.0),//[2] hull = gray
+									new Color(0.8, 0, 0, 1.0),		//[3] hit = red
+									new Color(1, 1, 0, 1.0),		//[4] miss = yellow
+									
 									};
 	private Rectangle border;
-
+	
 	private static Color color;
 
-	public Tile() {
+	public Tile(int x, int y) {
+		cords = new int[2];
+		cords[0] = x;
+		cords[1] = y;
+		this.x = x;
+		this.y = y;
 		border = new Rectangle(20,20);
 		border.setFill(/*getColor()*/Color.GHOSTWHITE);
 		border.setStroke(Color.BLACK);
-		
-		
 		
 		text.setFont(Font.font(14));
 		text.setVisible(true);
@@ -74,6 +76,11 @@ public class Tile extends StackPane {
 		return border;
 	}
 
+	public Rectangle setColorRep(int rep) {
+		border.setFill(getColor(rep));	
+		return border;
+	}
+
 
 
 	public void setOnAction(EventHandler<ActionEvent> eventHandler) {
@@ -82,39 +89,27 @@ public class Tile extends StackPane {
 	
 	
 	
-	public void open() {
-		FadeTransition ft = new FadeTransition(Duration.seconds(0.6),setColor(color));
-		ft.setToValue(1);
-		ft.play();
+	public int[] open() {
+		//FadeTransition ft = new FadeTransition(Duration.seconds(0.6),setColorRep(window.Window.myMatrix.getTile(cords[0], cords[1]).getRep()));
+		//ft.setToValue(1);
+		//ft.play();
 		
+		return cords;
 	}
+	
+	
 	
 	public void close() {
 		FadeTransition ft = new FadeTransition(Duration.seconds(0.6));
 		ft.setToValue(0);
 		ft.play();
 	}
-	
-	/*public static void main(String[] args) {
-		launch(args);
 
-	}
 
-	@Override
-	public void start(Stage primaryStage) throws Exception {
-		primaryStage.setScene(new Scene(createContent()));
-		primaryStage.show();
+
+	public void draw(Matrix matrix) {
+		setColorRep(matrix.getTile(x, y).getRep());
+		
 		
 	}
-	private Parent createContent() {
-		Pane root = new Pane();
-		root.setPrefSize(1000,650);
-		
-		return root;
-		
-	}*/
-	
-	
-	
-
 }

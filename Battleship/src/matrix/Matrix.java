@@ -84,12 +84,12 @@ public class Matrix {
 	}
 	
 	/*
-	 * temporary autofill for testing porpouses
+	 * temporary autoFill for testing purposes
 	 */
-	public void putHull() {
+	public void putHull(int modula) {
 		for(int i = 0; i < x; i++) {
 			for(int j = 0; j < y; j++) {
-				if(((i+j) % 3) == 0)
+				if(((i+j) % modula) == 0)
 				matrix[i][j] = new Hull();
 			}
 		}

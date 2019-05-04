@@ -1,7 +1,7 @@
 package window;
 
 import java.util.Optional;
-
+import javax.swing.JOptionPane;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
@@ -28,17 +28,25 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import matrix.Matrix;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
  
 public class Window extends Application {
+	public String plyrName;
+
+	private static TextArea log;
+
+	public static Matrix myMatrix;
+	public static Matrix itMatrix;
 	
+	public static Tile[][] myTiles;
+	public static Tile[][] itTiles;
+
 	
 	//private Matrix matrix = new Matrix(10,10);
 	//Tile tile = new Tile();
@@ -46,13 +54,33 @@ public class Window extends Application {
 	
 	//This launches everything:
 	public static void main(String[] args) {
+		
+		//TEMPORARY
+		myMatrix = new Matrix(10,10);
+		myMatrix.putHull(2);
+		
+		itMatrix = new Matrix(10,10);
+		itMatrix.putHull(3);
+		
+		
+		
 		launch(Window.class, args);
 		//System.out.println(javafx.scene.text.Font.getFamilies());			//Gets what fonts available
 		
+		
+		
+		//TEMP SHTI
+		String host = JOptionPane.showInputDialog("host (y/n)");
+		
+
+		if (host.equals("y")) {
+			main.Main.host();
+		}
+		else {
+			main.Main.join();
+		}
+		
 	}
-
-
-	
 	
 	
 	@Override
@@ -72,6 +100,12 @@ public class Window extends Application {
         primaryStage.setScene(scene);
         primaryStage.setTitle("BattleShip");
         primaryStage.show();
+        
+
+		//EVERYTHing BELOW IS TEMPORARY
+		draw();
+		
+
 	}
 	
 	
@@ -83,7 +117,7 @@ public class Window extends Application {
 		
 		root.setPrefSize(300,600);							//set size of GridPane
 		root.setPadding(new Insets(10, 10, 10, 5));			//set padding around	
-		root.setStyle("-fx-background-color: #a9a9a9;");	//Color of background
+		//root.setStyle("-fx-background-color: #a9a9a9;");	//Color of background
 		root.setAlignment(Pos.TOP_CENTER);					//Position of Grid
 		
 		Text text1 = new Text("Opponent");					//add new text
@@ -91,7 +125,7 @@ public class Window extends Application {
 		text1.setTranslateX(-100);							//position X-axis
 		text1.setVisible(true);								//set visible
 		
-		Text text2 = new Text("You");						//add new text
+		Text text2 = new Text(plyrName);						//add new text
 		text2.setFont(new Font("Agency FB", 16));			//set font and size
 		text2.setTranslateX(-100);							//position X-axis
 		text2.setTranslateY(240);							//position Y-axis
@@ -102,7 +136,9 @@ public class Window extends Application {
 		
 		//add to GridPane
 		root.add(text1, 0, 0);								
-		root.add(text2, 0, 0);								
+		root.add(text2, 0, 0);		
+		
+		
 		
 		return root;		
 	}
@@ -115,7 +151,7 @@ public class Window extends Application {
 		Text text = new Text("Log: ");
 		text.setFont(new Font("Agency FB", 20));				//set font and size of text
 		
-		TextArea log = new TextArea();
+		log = new TextArea();
 		log.setEditable(false);									//Log not editable
 	    
 		VBox vBoxLeft = new VBox(text,log);						//Putting text and log into the VBox
@@ -146,8 +182,8 @@ public class Window extends Application {
 		
 		//Should be an easier way to add lots of subHeadings, but this works
 		
-		Text subHeading1 = new Text("Battleship (5 tiles) ");		//Create subHeadings for ships
-	    Text subHeading2 = new Text("Aircraft Carrier (4 tiles) ");
+		Text subHeading1 = new Text("Aircraft Carrier (5 tiles) ");		//Create subHeadings for ships
+	    Text subHeading2 = new Text("Battleship (4 tiles) ");
 	    Text subHeading3 = new Text("Submarine (3 tiles) ");
 	    Text subHeading4 = new Text("Destroyer (3 tiles) ");
 	    Text subHeading5 = new Text("Torpedo Boat (2 tiles) ");
@@ -161,14 +197,14 @@ public class Window extends Application {
 	    
 	    //Should be an easier way to add lots of piccs, but this works
 		
-	    Image battleship = new Image("Battleship.gif", 115, 115, true, true);			//Create image (inputStream, requestedWidth, requestedHeight, preserveRatio, smooth)
-	    Image aircrafCarrier = new Image("AircraftCarrier.gif", 100, 100, true, false);
+	    Image aircraftCarrier = new Image("AircraftCarrier.gif", 115, 115, true, true);			//Create image (inputStream, requestedWidth, requestedHeight, preserveRatio, smooth)
+	    Image battleship = new Image("Battleship.gif", 100, 100, true, false);
 	    Image submarine = new Image("Submarine.gif", 85, 85, true, false);
 	    Image destroyer = new Image("Destroyer.gif", 85, 85, true, false);
 	    Image torpedoBoat = new Image("TorpedoBoat.gif", 70, 70, true, false);
 	    
-	    VBox vBoxRight = new VBox(ships, subHeading1, new ImageView(battleship), 		//Putting heading, subHeadings and images into the vBox
-	    								 subHeading2, new ImageView(aircrafCarrier), 
+	    VBox vBoxRight = new VBox(ships, subHeading1, new ImageView(aircraftCarrier), 		//Putting heading, subHeadings and images into the vBox
+	    								 subHeading2, new ImageView(battleship), 
 	    								 subHeading3, new ImageView(submarine), 
 	    								 subHeading4, new ImageView(destroyer), 
 	    								 subHeading5, new ImageView(torpedoBoat));
@@ -196,12 +232,14 @@ public class Window extends Application {
 	//TODO: EventHandler: What should happen when you click the mouse on a tile
 	private void createBoard1(GridPane root, int xOffSet, int yOffSet) {
 
+		itTiles = new Tile[10][10];
+		
 		for(int i = 0; i < 10; i++) {
 			for(int j = 0; j < 10; j++) {
-				Tile tile1 = new Tile();
+				itTiles[i][j] = new Tile(i, j);
 
-				tile1.setTranslateX(j * 20 + xOffSet);
-				tile1.setTranslateY(i * 20 + yOffSet);
+				itTiles[i][j].setTranslateX(j * 20 + xOffSet);
+				itTiles[i][j].setTranslateY(i * 20 + yOffSet);
 				
 				
 				//TODO: Problem:
@@ -209,7 +247,7 @@ public class Window extends Application {
 					main.Main.tile.open();
 				});*/
 
-				root.getChildren().add(tile1);
+				root.getChildren().add(itTiles[i][j]);
 			}
 		}
 	}
@@ -217,15 +255,16 @@ public class Window extends Application {
 
 	
 	private void createBoard2(GridPane root, int xOffSet, int yOffSet) {
-
+		myTiles = new Tile[10][10];
+		
 		for(int i = 0; i < 10; i++) {
 			for(int j = 0; j < 10; j++) {
-				Tile tile1 = new Tile();
+				myTiles[i][j] = new Tile(i, j);
 
-				tile1.setTranslateX(j * 20 + xOffSet);
-				tile1.setTranslateY(i * 20 + yOffSet);
+				myTiles[i][j].setTranslateX(j * 20 + xOffSet);
+				myTiles[i][j].setTranslateY(i * 20 + yOffSet);
 
-				root.getChildren().add(tile1);
+				root.getChildren().add(myTiles[i][j]);
 			}
 		}
 	}
@@ -359,4 +398,20 @@ public class Window extends Application {
 		
 		return pane;
 	}
+	
+	public static void draw() {
+		for(int i = 0; i < 10; i++) {
+			for(int j = 0; j < 10; j++) {
+				myTiles[i][j].draw(main.Main.myMatrix);
+				itTiles[i][j].draw(main.Main.itMatrix);
+			}
+		}
+	}	
+	
+	
+	public static void appendLog(String string) {
+		log.appendText(string);
+	}
+		
+	
 }

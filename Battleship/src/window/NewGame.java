@@ -9,8 +9,6 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
@@ -21,10 +19,18 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import matrix.Matrix;
 
 public class NewGame extends Application{
 	
 	BorderPane border = new BorderPane();	
+	
+
+	public NewGame() {
+		border.setCenter(load());	
+	}
+	
+	
 	
 	public static void main(String[] args) {
 		launch(NewGame.class, args);
@@ -44,9 +50,6 @@ public class NewGame extends Application{
 	
 	
 	
-	public NewGame() {
-		border.setCenter(load());	
-	}
 
 	
 	
@@ -58,8 +61,8 @@ public class NewGame extends Application{
 		Text text = new Text("Create New Game: ");			//Create text
 		text.setFont(new Font("Agency FB", 20));			//set font and size		
 		
-		Text textSubheading = new Text("Player Name: ");	//Create text
-		textSubheading.setFont(new Font("Agency FB", 14));	//set font and size
+		Text plyrName = new Text("Player Name: ");			//Create text
+		plyrName.setFont(new Font("Agency FB", 14));		//set font and size
 		
 		Text textSubheading2 = new Text("Choose opponent: ");//Create text
 		textSubheading2.setFont(new Font("Agency FB", 14));	//set font and size
@@ -104,25 +107,10 @@ public class NewGame extends Application{
 		// Some Action for Buttons //
 		/////////////////////////////
 		
-		//'New Game'-button
-	    buttonNewGame.setOnAction(new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent event) {
-            	Alert alert = new Alert(AlertType.INFORMATION);
-            	alert.setTitle("BattleShip");
-            	alert.setHeaderText("Game Window");
-            	alert.setContentText("This will be the game window eventually");
-            	alert.showAndWait();
-            }
-        });
-
-	    //'Cancel'-button
-	    buttonCancel.setOnAction(e -> {
-	    	Stage stage = (Stage) buttonCancel.getScene().getWindow();
-		    stage.close();
-	        System.out.println("Cancel clicked.");
-	    });
-	    
-	    //'RadioButton'-buttons
+		//'Name'-field
+		//plyrName.setUserData(Object value);	//maybeShould use this to get the userData? Not sure.
+		
+		//'RadioButton'-buttons
 	    group.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
 	        public void changed(ObservableValue<? extends Toggle> ov,
 	            Toggle old_toggle, Toggle new_toggle) {
@@ -138,13 +126,31 @@ public class NewGame extends Application{
 	            }
 	    });
 	    
+		
+		//'New Game'-button
+	    buttonNewGame.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+            	main.Main.myMatrix = new Matrix(10,10);
+            	main.Main.myMatrix.putHull(3);
+            }
+        });
+
+	    //'Cancel'-button
+	    buttonCancel.setOnAction(e -> {
+	    	Stage stage = (Stage) buttonCancel.getScene().getWindow();
+		    stage.close();
+	        System.out.println("Cancel clicked.");
+	    });
+	    
+	    
+	    
 	    
 	    //////////////////////////////////
 	    //	Adding stuff too GridPane	//
 	    //////////////////////////////////
 	    
 	    root.add(text, 0, 0);
-	    root.add(textSubheading, 0, 1);
+	    root.add(plyrName, 0, 1);
 	    root.add(name, 1, 1);
 	    root.add(textSubheading2, 0, 3);
 	    root.add(rb1, 1, 2);
