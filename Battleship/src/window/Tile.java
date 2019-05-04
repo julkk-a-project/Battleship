@@ -32,11 +32,11 @@ public class Tile extends StackPane {
 	//Make sure colors are saved in the order they are in the table above
 	
 	private static Color[] colorList = {	//CUSTOMIZED COLORS
-									new Color(0, 0, 0.8, 1.0), 		//[0] water = blue
-									new Color(1, 1, 1, 1.0),		//[1] illogical = black
-									new Color(0.75, 0.75, 0.75, 1.0),//[2] hull = gray
-									new Color(0.8, 0, 0, 1.0),		//[3] hit = red
-									new Color(1, 1, 0, 1.0),		//[4] miss = yellow
+									new Color(0, 0, 1, 1.0), 			//[0] water = blue
+									new Color(1, 1, 1, 1.0),			//[1] illogical = black
+									new Color(0.75, 0.75, 0.75, 1.0),	//[2] hull = gray
+									new Color(1, 0, 0, 1.0),			//[3] hit = red
+									new Color(1, 1, 0, 1.0),			//[4] miss = yellow
 									
 									};
 	private Rectangle border;
