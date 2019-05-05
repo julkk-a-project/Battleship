@@ -103,6 +103,8 @@ public class Window extends Application {
         
 
 		//EVERYTHing BELOW IS TEMPORARY
+		main.Main.windowOpened = true;
+		System.out.println("pastBoolChange");
 		draw();
 		
 
