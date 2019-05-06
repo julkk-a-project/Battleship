@@ -93,14 +93,22 @@ public class Tile extends StackPane {
 	public void open() {
 
 		System.out.println("openCalled");
+		
+		//When working correctly, color should change, and after shot is processed, color should...
+		//change to rep that tile has changed to.
+		
+		FadeTransition ft = new FadeTransition(Duration.seconds(0.6),setColorRep(5));
+		ft.setToValue(1);
+		ft.play();
+		
+		
 		if (main.Main.itMatrix.isLeagalCord(x,y) && main.Main.canCord()) {
 			main.Main.cords = cords;
 			main.Main.waker();
 			System.out.println("cordsChanged");
+		} else {
+			window.Window.draw();
 		}
-		FadeTransition ft = new FadeTransition(Duration.seconds(0.6),setColorRep(5));
-		ft.setToValue(1);
-		ft.play();
 		
 	}
 	

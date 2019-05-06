@@ -23,6 +23,13 @@ public class Main {
 	private static boolean giveCords;
 	
 	
+	private static boolean lost = false;
+	private static boolean won = false;
+	
+	
+	
+	
+	
 	
 	public static void main(String[] args) {
 		System.out.println("Hello World!!!!!!"); //i am not useful tbh
@@ -47,6 +54,9 @@ public class Main {
         new Thread() {
         	
         	public void run() {
+        		
+        		won = false;
+        		lost = false;
         		waiter();
 				
 				//host or join
@@ -208,6 +218,20 @@ public class Main {
 	}
 	public static boolean canCord() {
     	return giveCords;
+	}
+	public static void loose() {
+		System.out.println("DEVHELP: LOST CALLED");
+		lost = true;
+	}
+	public static boolean hasLost() {
+		return lost;
+	}
+	public static void win() {
+		System.out.println("DEVHELP: WIN CALLED");
+		won = true;
+	}
+	public static boolean hasWon() {
+		return won;
 	}
 	
 

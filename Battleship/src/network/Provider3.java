@@ -82,6 +82,7 @@ public class Provider3 {
 
     			message = (String)input.readLine(); // läser in vad servern skickat
     			System.out.println("client>" + message);
+    			network.Requester3.hitReader(message, cords[0], cords[1]);
     			appendLog("client>" + message);
 
     			message = "copy";  
@@ -121,7 +122,6 @@ public class Provider3 {
   
                     /*
                     if (message.equals("copy")) {
-                    	System.out.println("äksdee");
                         //turnNotOver = false;
                     }*/
                 }
@@ -197,6 +197,13 @@ public class Provider3 {
     		appendLog(e+"");
     		return false;
     	}
+    }
+
+    /*
+     * i am used to see if game is lost
+     */
+    public boolean isLost(String message) {
+    	return false;
     }
     
     /*

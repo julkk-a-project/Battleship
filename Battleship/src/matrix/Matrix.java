@@ -261,7 +261,7 @@ public class Matrix {
 	/*
 	 * replaces tile on cordinate x,y to 3rd parameter (AbstractTile). make sure to make it a new object.
 	 */
-	private void setTile(int x, int y, AbstractTile replacement) {
+	public void setTile(int x, int y, AbstractTile replacement) {
 		matrix[x][y] = replacement;	
 	}
 
@@ -312,6 +312,7 @@ public class Matrix {
 		
 				if (countTiles(new Hull()) <= 0) {
 					anserw += "1";
+					main.Main.loose();
 				}else {
 					anserw += "0";
 				}
