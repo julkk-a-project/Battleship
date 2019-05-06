@@ -8,28 +8,20 @@ public class Waiter {
 	
 	public synchronized void waiter() {
 		wait = true;
-		//synchronized(o1) {
 		while (wait) {
 			try {
-				System.out.println("waiting");
 				wait();
 				wait = false;
-				System.out.println("waited");
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}	
 		}
-		//}
 		
 		
 	}
-	public synchronized void waker() {
-		//synchronized(o2) {
-			System.out.println("asd");
+	public synchronized void waker() {		
 			notifyAll();
-			System.out.println("asd2");
-
 	}
 
 }

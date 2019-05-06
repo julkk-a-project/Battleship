@@ -18,6 +18,7 @@ public class Main {
 	public static int[] cords;
 
 	public static boolean windowOpened = false;
+	private static WaiterRunner waiterRunner;
 	
 	
 	
@@ -25,7 +26,9 @@ public class Main {
 		System.out.println("Hello World!!!!!!"); //i am not useful tbh
 
         Waiter waiter = new Waiter();
-        WaiterRunner waiterRunner = new WaiterRunner(waiter);
+        waiterRunner = new WaiterRunner(waiter);
+        
+        
 		//tempSystem for dev testing:	
 		String host = JOptionPane.showInputDialog("host (y/n)");
 
@@ -38,14 +41,13 @@ public class Main {
         //creates empty "projection" of enemy field
         itMatrix = new Matrix(10,10);
         
-		//Launch game window here :) (aka typ: window = new window();)		
-       System.out.println("b4 new thread");
+        
         new Thread() {
         	
         	public void run() {
         		try {
 					
-        			waiterRunner.run();
+        			waiter();
 					
 					//host or join
 					if (host.equals("y")) {
@@ -63,17 +65,8 @@ public class Main {
         }.start();
 
         
-        //window.Window.launch(Window.class, args);
-        
-        
-        
-        System.out.println("after new thread");
-        
-        waiterRunner.runWaker();
-        System.out.println("after waker");
-        
         //start javaFX thread that notifs all to make code above happen (after wait)
-/*        new Thread() {
+        new Thread() {
 
 
         	public void run() {
@@ -81,33 +74,7 @@ public class Main {
                 
         	}
         }.start();
-*/        
-        /*
         
-        
-        int waitTime = 0;
-        while (!windowOpened) {
-        	waitTime++;
-
-            try {
-    			Thread.sleep(100);
-    		} catch (InterruptedException e) {
-    			e.printStackTrace();
-    		}        	
-        }
-		
-    	System.out.println("wait time: "+waitTime*100+" timeUnits");
-        */
-		//JOptionPane.showMessageDialog(null, "wait a few sec plz");
-        /*
-		if (host.equals("y")) {
-			host();
-		}
-		else {
-			join();
-		}
-		*/
-		//end of temp system
 	}
 	
 	
@@ -224,7 +191,13 @@ public class Main {
         
 	}
 	
+	public static void waiter() {
+		waiterRunner.run();
+	}
 	
+	public static void waker() {
+		waiterRunner.runWaker();
+	}
 	
 	
 
