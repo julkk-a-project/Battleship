@@ -23,7 +23,9 @@ public class Main {
 	
 	public static void main(String[] args) {
 		System.out.println("Hello World!!!!!!"); //i am not useful tbh
-		
+
+        Waiter waiter = new Waiter();
+        WaiterRunner waiterRunner = new WaiterRunner(waiter);
 		//tempSystem for dev testing:	
 		String host = JOptionPane.showInputDialog("host (y/n)");
 
@@ -37,14 +39,13 @@ public class Main {
         itMatrix = new Matrix(10,10);
         
 		//Launch game window here :) (aka typ: window = new window();)		
-       
+       System.out.println("b4 new thread");
         new Thread() {
         	
         	public void run() {
         		try {
-					wait(); //wait for window to load
-
 					
+        			waiterRunner.run();
 					
 					//host or join
 					if (host.equals("y")) {
@@ -60,17 +61,27 @@ public class Main {
 				}
         	}
         }.start();
+
         
+        //window.Window.launch(Window.class, args);
+        
+        
+        
+        System.out.println("after new thread");
+        
+        waiterRunner.runWaker();
+        System.out.println("after waker");
         
         //start javaFX thread that notifs all to make code above happen (after wait)
-        new Thread() {
+/*        new Thread() {
+
 
         	public void run() {
                 window.Window.launch(Window.class, args);
                 
         	}
         }.start();
-        
+*/        
         /*
         
         
@@ -212,6 +223,8 @@ public class Main {
         
         
 	}
+	
+	
 	
 	
 

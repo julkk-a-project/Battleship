@@ -109,7 +109,7 @@ public class Window extends Application {
 		main.Main.windowOpened = true;
 		System.out.println("pastBoolChange");
 		draw();
-		//notifyAll();
+        waiterRunner.runWaker();
 		
 
 	}
