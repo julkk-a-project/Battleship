@@ -15,8 +15,12 @@ public class Main {
 	public static Matrix myMatrix;
 	public static Matrix itMatrix;
 	public static Tile tile;
-	//public static NewGame newGame;
+	
 
+	public static boolean windowOpened = false;
+	
+	
+	
 	public static void main(String[] args) {
 		System.out.println("Hello World!!!!!!"); //i am not useful tbh
 		
@@ -51,8 +55,29 @@ public class Main {
         	}
         }.start();
         
+        
+        
+        
+        int waitTime = 0;
+        while (!windowOpened) {
+        	waitTime++;
+        
+
+            try {
+    			Thread.sleep(100);
+    		} catch (InterruptedException e) {
+    			// TODO Auto-generated catch block
+    			e.printStackTrace();
+    		}
+        	
+        	
+        }
 		
-		JOptionPane.showMessageDialog(null, "wait a few sec plz");
+    	System.out.println("wait time: "+waitTime*100+" timeUnits");
+        
+        
+        
+		//JOptionPane.showMessageDialog(null, "wait a few sec plz");
         
 		if (host.equals("y")) {
 			host();
