@@ -92,9 +92,11 @@ public class Tile extends StackPane {
 	
 	public void open() {
 
+		System.out.println("openCalled");
 		if (main.Main.itMatrix.isLeagalCord(x,y) && !main.Main.hisTurn) {
 			main.Main.cords = cords;
 			main.Main.waker();
+			System.out.println("cordsChanged");
 		}
 		FadeTransition ft = new FadeTransition(Duration.seconds(0.6),setColorRep(5));
 		ft.setToValue(1);
