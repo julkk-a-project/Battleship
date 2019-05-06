@@ -82,7 +82,7 @@ public class Provider3 {
 
     			message = (String)input.readLine(); // läser in vad servern skickat
     			System.out.println("client>" + message);
-    			network.Requester3.hitReader(message, cords[0], cords[1]);
+    			main.Main.itMatrix.hitReader(message, cords[0], cords[1]);
     			appendLog("client>" + message);
 
     			message = "copy";  

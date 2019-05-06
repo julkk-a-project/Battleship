@@ -108,7 +108,7 @@ public static void main(String args[]) {
 
     			message = (String)input.readLine(); // läser in vad servern skickat
     			System.out.println("server>" + message);
-    			hitReader(message, cords[0], cords[1]);
+    			main.Main.itMatrix.hitReader(message, cords[0], cords[1]);
     			appendLog("server>" + message);
  
     			message = "copy";  
@@ -223,31 +223,6 @@ public static void main(String args[]) {
     	window.Window.appendLog(string);
     }
     
-    protected static void hitReader(String message, int x, int y) {
-
-    	//handle message here
-    	
-    	String[] response = message.split(",");
-    					//HIT?,SHIPSUNK?,WON?
-    	
-    	
-    	if(response[0] == "1") {
-    		main.Main.itMatrix.setTile(x, y, new Hit());
-    	}
-    	else {
-    		main.Main.itMatrix.setTile(x, y, new Miss());
-    	}
-    	
-    	if(response[1] == "1") {
-    		//TODO: HANDLE SHIPSUNK FACTUM (place illogical)
-    	}
-    	
-    	if(response[2] == "1") {
-    		main.Main.win();
-    	}
-    	
-    	
-	}
     
     
     

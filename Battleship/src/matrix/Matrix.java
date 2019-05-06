@@ -322,4 +322,42 @@ public class Matrix {
 	}
 	
 	
+
+    public void hitReader(String message, int x, int y) {
+
+    	//handle message here
+    	
+    	String[] response = message.split(",");
+    					//HIT?,SHIPSUNK?,WON?
+
+		//parse (can be boolean if optimizing)
+		int hit = Integer.parseInt(response[0]);
+		int shipSunk = Integer.parseInt(response[1]);
+		int won = Integer.parseInt(response[2]);
+    	
+    	
+    	
+    	System.out.println(message);
+    	System.out.println(response[0]);
+    	if(hit == 1) {
+    		System.out.println("hit");
+    		setTile(x, y, new Hit());
+    	}
+    	else {
+    		System.out.println("miss");
+    		setTile(x, y, new Miss());
+    	}
+    	
+    	if(shipSunk == 1) {
+    		//TODO: HANDLE SHIPSUNK FACTUM (place illogical)
+    	}
+    	
+    	if(won == 1) {
+    		main.Main.win();
+    	}
+    	
+    	
+	}
+	
+	
 }
