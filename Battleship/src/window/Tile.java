@@ -93,7 +93,7 @@ public class Tile extends StackPane {
 	public void open() {
 
 		System.out.println("openCalled");
-		if (main.Main.itMatrix.isLeagalCord(x,y) && !main.Main.hisTurn) {
+		if (main.Main.itMatrix.isLeagalCord(x,y) && main.Main.canCord()) {
 			main.Main.cords = cords;
 			main.Main.waker();
 			System.out.println("cordsChanged");

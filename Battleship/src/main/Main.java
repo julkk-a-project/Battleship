@@ -19,7 +19,8 @@ public class Main {
 
 	public static boolean windowOpened = false;
 	private static WaiterRunner waiterRunner;
-	public static boolean hisTurn;
+	private static boolean hisTurn;
+	private static boolean giveCords;
 	
 	
 	
@@ -113,7 +114,7 @@ public class Main {
 	        cords[0] = cordX;
 	        cords[1] = cordY;
 	        */
-	        
+        	giveCords = true;
 	        waiter();
 	        
 	        
@@ -121,6 +122,8 @@ public class Main {
 	        
 	        server.run(cords);
 	        draw();
+        	giveCords = false;
+	        
         }
         
 
@@ -163,7 +166,7 @@ public class Main {
 	        cords[0] = cordX;
 	        cords[1] = cordY;
 	        */
-
+        	giveCords = true;
 	        waiter();
 	        
 	        //Check if cords point to a water tile on own map to avoid dumb shooting.
@@ -171,7 +174,8 @@ public class Main {
 	        
 	        client.run(cords);
 	        draw();
-	        
+        	giveCords = false;
+        	
 	        System.out.println("HIS TURN");
 	        window.Window.appendLog("HIS TURN");
 	        
@@ -201,6 +205,9 @@ public class Main {
 	
 	public static void waker() {
 		waiterRunner.runWaker();
+	}
+	public static boolean canCord() {
+    	return giveCords;
 	}
 	
 
