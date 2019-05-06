@@ -46,21 +46,14 @@ public class Main {
         new Thread() {
         	
         	public void run() {
-        		try {
-					
-        			waiter();
-					
-					//host or join
-					if (host.equals("y")) {
-						host();
-					}
-					else {
-						join();
-					}
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-					System.out.println("RESTART plox");
+        		waiter();
+				
+				//host or join
+				if (host.equals("y")) {
+					host();
+				}
+				else {
+					Main.join(JOptionPane.showInputDialog("IP to connect to"));
 				}
         	}
         }.start();
@@ -137,7 +130,7 @@ public class Main {
 	
 	
 	
-	public static void join() {
+	public static void join(String ip) {
 
 		//Joiner
 
@@ -146,7 +139,7 @@ public class Main {
         
 
         //Connects
-        client.setServer(JOptionPane.showInputDialog("IP to connect to")); //IP to connect to
+        client.setServer(ip); //IP to connect to
         boolean connected = false;
         while (!connected) {
 	        connected = client.connect();	        	
