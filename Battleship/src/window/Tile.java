@@ -37,6 +37,7 @@ public class Tile extends StackPane {
 									new Color(0.75, 0.75, 0.75, 1.0),	//[2] hull = gray
 									new Color(1, 0, 0, 1.0),			//[3] hit = red
 									new Color(1, 1, 0, 1.0),			//[4] miss = yellow
+									new Color(0.96078431, 0.96078431, 0.86274510, 1.0)							//[5] default = beige
 									
 									};
 	private Rectangle border;
@@ -90,9 +91,9 @@ public class Tile extends StackPane {
 	
 	
 	public int[] open() {
-		//FadeTransition ft = new FadeTransition(Duration.seconds(0.6),setColorRep(window.Window.myMatrix.getTile(cords[0], cords[1]).getRep()));
-		//ft.setToValue(1);
-		//ft.play();
+		FadeTransition ft = new FadeTransition(Duration.seconds(0.6),setColorRep(5));
+		ft.setToValue(1);
+		ft.play();
 		
 		return cords;
 	}

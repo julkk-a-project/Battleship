@@ -15,7 +15,7 @@ public class Main {
 	public static Matrix myMatrix;
 	public static Matrix itMatrix;
 	public static Tile tile;
-	
+	public static int[] cords;
 
 	public static boolean windowOpened = false;
 	
@@ -24,75 +24,81 @@ public class Main {
 	public static void main(String[] args) {
 		System.out.println("Hello World!!!!!!"); //i am not useful tbh
 		
-		
-
-		
-		
-		
-		
-		//tempSystem for dev testing:
-		
+		//tempSystem for dev testing:	
 		String host = JOptionPane.showInputDialog("host (y/n)");
-		
 
-		//Creates ur playingfield
+		//Creates ur playingField
         myMatrix = new Matrix(10,10);
         
         //customize your ship layout here
         myMatrix.putHull(3);
         
-        
         //creates empty "projection" of enemy field
         itMatrix = new Matrix(10,10);
-
         
-		//Launch game window here :) (aka typ: window = new window();)
-		
+		//Launch game window here :) (aka typ: window = new window();)		
+       
         new Thread() {
-
+        	
         	public void run() {
-                window.Window.launch(Window.class, args);
+        		try {
+					wait(); //wait for window to load
+
+					
+					
+					//host or join
+					if (host.equals("y")) {
+						host();
+					}
+					else {
+						join();
+					}
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					System.out.println("RESTART plox");
+				}
         	}
         }.start();
         
         
+        //start javaFX thread that notifs all to make code above happen (after wait)
+        new Thread() {
+
+        	public void run() {
+                window.Window.launch(Window.class, args);
+                
+        	}
+        }.start();
+        
+        /*
         
         
         int waitTime = 0;
         while (!windowOpened) {
         	waitTime++;
-        
 
             try {
     			Thread.sleep(100);
     		} catch (InterruptedException e) {
-    			// TODO Auto-generated catch block
     			e.printStackTrace();
-    		}
-        	
-        	
+    		}        	
         }
 		
     	System.out.println("wait time: "+waitTime*100+" timeUnits");
-        
-        
-        
+        */
 		//JOptionPane.showMessageDialog(null, "wait a few sec plz");
-        
+        /*
 		if (host.equals("y")) {
 			host();
 		}
 		else {
 			join();
 		}
-		
+		*/
 		//end of temp system
-		
-		
-		
-		
-
 	}
+	
 	
 	public static void host() {
 		//Host
@@ -132,7 +138,8 @@ public class Main {
 	        
 	        int cordX = Integer.parseInt(JOptionPane.showInputDialog("cord X"));
 	        int cordY = Integer.parseInt(JOptionPane.showInputDialog("cord Y"));
-	        int[] cords = {cordX, cordY};
+	        cords[0] = cordX;
+	        cords[1] = cordY;
 	        
 	        //Check if cords point to a water tile on own map to avoid dumb shooting.
 	        
@@ -144,6 +151,7 @@ public class Main {
         server.disconnect();
 		
 	}
+	
 	
 	
 	public static void join() {
@@ -175,7 +183,9 @@ public class Main {
         	
 	        int cordX = Integer.parseInt(JOptionPane.showInputDialog("cord X"));
 	        int cordY = Integer.parseInt(JOptionPane.showInputDialog("cord Y"));
-	        int[] cords = {cordX, cordY};
+
+	        cords[0] = cordX;
+	        cords[1] = cordY;
 	        
 	        //Check if cords point to a water tile on own map to avoid dumb shooting.
 

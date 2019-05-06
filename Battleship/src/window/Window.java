@@ -71,7 +71,7 @@ public class Window extends Application {
 		//System.out.println(javafx.scene.text.Font.getFamilies());			//Gets what fonts available
 		
 		
-		
+		/*
 		//TEMP SHTI
 		String host = JOptionPane.showInputDialog("host (y/n)");
 		
@@ -82,7 +82,7 @@ public class Window extends Application {
 		else {
 			main.Main.join();
 		}
-		
+		*/
 	}
 	
 	
@@ -109,6 +109,7 @@ public class Window extends Application {
 		main.Main.windowOpened = true;
 		System.out.println("pastBoolChange");
 		draw();
+		//notifyAll();
 		
 
 	}
@@ -121,7 +122,7 @@ public class Window extends Application {
 		GridPane root = new GridPane();
 		
 		root.setPrefSize(300,600);							//set size of GridPane
-		root.setPadding(new Insets(10, 10, 10, 5));			//set padding around	
+		//root.setPadding(new Insets(10, 10, 10, 5));			//set padding around	
 		//root.setStyle("-fx-background-color: #a9a9a9;");	//Color of background
 		root.setAlignment(Pos.TOP_CENTER);					//Position of Grid
 		
@@ -160,7 +161,7 @@ public class Window extends Application {
 		log.setEditable(false);									//Log not editable
 	    
 		VBox vBoxLeft = new VBox(text,log);						//Putting text and log into the VBox
-	    vBoxLeft.setPadding(new Insets(15, 15, 15, 15));		//Padding around the vBox
+	    //vBoxLeft.setPadding(new Insets(15, 15, 15, 15));		//Padding around the vBox
 	    vBoxLeft.setPrefSize(200, 600);							//Preferred size
 	    vBoxLeft.setSpacing(1);									//Adding space between stuff
 	    vBoxLeft.setStyle("-fx-background-color: #f0f8ff;");	//Set background color
