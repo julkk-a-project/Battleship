@@ -29,6 +29,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -46,6 +47,8 @@ public class Window extends Application {
 	
 	public static Tile[][] myTiles;
 	public static Tile[][] itTiles;
+	
+	public static String[] subHeading = {"Aircraft Carrier", "Battleship", "Destroyer", "Submarine", "Torpedo Boat"};
 
 	
 	//private Matrix matrix = new Matrix(10,10);
@@ -173,8 +176,28 @@ public class Window extends Application {
 	}
 	
 	
-	
+	/*
 	//Creating FlowPane (In FlowPane the nodes are laid out consecutively and wrap at the boundary set for the pane.)
+	public FlowPane addFlowPane() {
+		FlowPane flow = new FlowPane();
+		flow.setPadding(new Insets(15, 15, 15, 15));
+		flow.setVgap(4);
+		flow.setHgap(4);
+		//flow.setPrefWrapLength(170); // preferred width allows for two columns
+		flow.setStyle("-fx-background-color: DAE6F3;");
+
+		ImageView pages[] = new ImageView[5];
+		for (int i=0; i<5; i++) {
+			//i = subHeading[i];
+			pages[i] = new ImageView(
+					new Image(Window.class.getResourceAsStream(
+							"Boat"+(i+1)+".gif")));
+			flow.getChildren().add(pages[i]);
+		}
+
+		return flow;
+	}*/
+	
 	public VBox addVBoxRight() {
 		
 		Text ships = new Text("Ships: ");							//Set heading for ships
@@ -195,7 +218,7 @@ public class Window extends Application {
 		subHeading5.setFont(new Font("Agency FB", 14));
 		
 	    
-	    //Should be an easier way to add lots of piccs, but this works
+	    //Should be an easier way to add lots of pics, but this works
 		
 	    Image aircraftCarrier = new Image("AircraftCarrier.gif", 115, 115, true, true);			//Create image (inputStream, requestedWidth, requestedHeight, preserveRatio, smooth)
 	    Image battleship = new Image("Battleship.gif", 100, 100, true, false);
@@ -215,15 +238,6 @@ public class Window extends Application {
 	    vBoxRight.setSpacing(5);										//Adding space between stuff
 	    vBoxRight.setStyle("-fx-background-color: #f0f8ff;");			//Set background color
 	    
-	    //TODO: Put in images later like this:
-	    /*ImageView pages[] = new ImageView[8];
-	    for (int i=0; i<8; i++) {
-	        pages[i] = new ImageView(
-	            new Image(LayoutSample.class.getResourceAsStream(
-	            "graphics/chart_"+(i+1)+".png")));
-	        flow.getChildren().add(pages[i]);
-	    }*/
-
 	    return vBoxRight;
 	}
 	
@@ -240,12 +254,6 @@ public class Window extends Application {
 
 				itTiles[i][j].setTranslateX(j * 20 + xOffSet);
 				itTiles[i][j].setTranslateY(i * 20 + yOffSet);
-				
-				
-				//TODO: Problem:
-				/*tile1.setOnMouseClicked(event -> {
-					main.Main.tile.open();
-				});*/
 
 				root.getChildren().add(itTiles[i][j]);
 			}
@@ -317,7 +325,7 @@ public class Window extends Application {
 		itmNew.setAccelerator(new KeyCodeCombination(KeyCode.N, KeyCombination.SHORTCUT_DOWN));			//CTRL+N for new game	
 		itmOpen.setAccelerator(new KeyCodeCombination(KeyCode.O, KeyCombination.SHORTCUT_DOWN));		//CTRL+O for open	
 		itmSave.setAccelerator(new KeyCodeCombination(KeyCode.S, KeyCombination.SHORTCUT_DOWN));		//CTRL+S for save
-		itmQuit.setAccelerator(new KeyCodeCombination(KeyCode.Q, KeyCombination.SHORTCUT_DOWN));		//CTRL+Q for Exit //TODO: Remember to ask if player really want this
+		itmQuit.setAccelerator(new KeyCodeCombination(KeyCode.Q, KeyCombination.SHORTCUT_DOWN));		//CTRL+Q for Exit
 
 		itmSound.setAccelerator(new KeyCodeCombination(KeyCode.M, 
 													   KeyCombination.SHIFT_DOWN, 
