@@ -105,10 +105,8 @@ public class Window extends Application {
         primaryStage.show();
         
 
-		//EVERYTHing BELOW IS TEMPORARY
-		draw();
-        main.Main.waker();
-		
+		draw(); //makes sure tiles get updated.
+        main.Main.waker(); //makes sure other thread starts running again
 
 	}
 	

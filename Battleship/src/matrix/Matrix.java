@@ -241,6 +241,22 @@ public class Matrix {
 	
 	
 	
+	/*
+	 * Cheks if you can leagally shoot at a specific tile
+	 */
+	public boolean isLeagalCord(int x, int y) {
+		if((this.x < x && x > -1) && (this.y < x && y > -1)) {
+			//getTile(x,y).getRep() //Add tile checker?
+			return true;			
+		}
+		else {
+			return false;
+		}
+		
+	}
+	
+	
+	
 	
 	/*
 	 * replaces tile on cordinate x,y to 3rd parameter (AbstractTile). make sure to make it a new object.

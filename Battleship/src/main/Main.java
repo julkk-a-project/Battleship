@@ -19,6 +19,7 @@ public class Main {
 
 	public static boolean windowOpened = false;
 	private static WaiterRunner waiterRunner;
+	public static boolean hisTurn;
 	
 	
 	
@@ -83,7 +84,7 @@ public class Main {
 
 		//current model of thought says that this should be run when waiting for a response from the other player
 		
-		boolean hisTurn = true;
+		hisTurn = true;
         Provider3 server = new Provider3();
         //Requester3 client = new Requester3();
         
@@ -109,20 +110,24 @@ public class Main {
 	        while(hisTurn){
 	            hisTurn = server.run();
 	        }
-	        window.Window.draw();
+	        draw();
 	        
 	        System.out.println("UR TURN");
 	        window.Window.appendLog("UR TURN");
-	        
+	        /*
 	        int cordX = Integer.parseInt(JOptionPane.showInputDialog("cord X"));
 	        int cordY = Integer.parseInt(JOptionPane.showInputDialog("cord Y"));
 	        cords[0] = cordX;
 	        cords[1] = cordY;
+	        */
+	        
+	        waiter();
+	        
 	        
 	        //Check if cords point to a water tile on own map to avoid dumb shooting.
 	        
 	        server.run(cords);
-	        window.Window.draw();
+	        draw();
         }
         
 
@@ -148,28 +153,31 @@ public class Main {
         }
         
 
-        boolean hisTurn = false;
+        hisTurn = false;
         
         
         System.out.println("UR TURN");
         window.Window.appendLog("UR TURN");
         
-        window.Window.draw();
+        draw();
         
         for (int i = 0; i < 10; i++) {
 
-        	
+        	/*
 	        int cordX = Integer.parseInt(JOptionPane.showInputDialog("cord X"));
 	        int cordY = Integer.parseInt(JOptionPane.showInputDialog("cord Y"));
 
 	        cords[0] = cordX;
 	        cords[1] = cordY;
+	        */
+
+	        waiter();
 	        
 	        //Check if cords point to a water tile on own map to avoid dumb shooting.
 
 	        
 	        client.run(cords);
-	        
+	        draw();
 	        
 	        System.out.println("HIS TURN");
 	        window.Window.appendLog("HIS TURN");
@@ -179,8 +187,7 @@ public class Main {
 	        while(hisTurn){
 	            hisTurn = client.run();
 	        }
-	        
-	        window.Window.draw();
+	        draw();
 	        
 	        System.out.println("UR TURN");
 	        window.Window.appendLog("UR TURN");
@@ -191,6 +198,10 @@ public class Main {
         
 	}
 	
+	private static void draw() {
+        window.Window.draw();
+	}
+
 	public static void waiter() {
 		waiterRunner.run();
 	}
@@ -198,7 +209,6 @@ public class Main {
 	public static void waker() {
 		waiterRunner.runWaker();
 	}
-	
 	
 
 }
