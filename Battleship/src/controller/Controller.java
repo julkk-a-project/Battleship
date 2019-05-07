@@ -173,7 +173,7 @@ public class Controller {
         window.Window.draw();
 	}
 
-	public void waiter() {
+	public static void waiter() {
 		waiterRunner.run();
 	}
 	

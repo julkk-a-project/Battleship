@@ -18,8 +18,11 @@ import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.SeparatorMenuItem;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.Toggle;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -36,7 +39,8 @@ import javafx.scene.text.Text;
 public class Window extends Application {
 	
 	BorderPane border = new BorderPane();		//Adding new borderPane to organize shit
-	
+	RadioButton horizontal, vertical;
+	private ToggleGroup group;
 
 	public static Text text2;
 	public static Tile[][] myTiles;
@@ -179,12 +183,15 @@ public class Window extends Application {
 	    Text subHeading3 = new Text("Submarine (3 tiles) ");
 	    Text subHeading4 = new Text("Destroyer (3 tiles) ");
 	    Text subHeading5 = new Text("Torpedo Boat (2 tiles) ");
+	    Text subHeading6 = new Text("Choose direction: ");
 	    
 	    subHeading1.setFont(new Font("Agency FB", 14));				//Set font and size for subHeadings
 		subHeading2.setFont(new Font("Agency FB", 14));
 		subHeading3.setFont(new Font("Agency FB", 14));
 		subHeading4.setFont(new Font("Agency FB", 14));
 		subHeading5.setFont(new Font("Agency FB", 14));
+		subHeading6.setFont(new Font("Agency FB", 14));
+		subHeading6.setTranslateY(20);
 		
 	    
 	    //Should be an easier way to add lots of pics, but this works
@@ -195,13 +202,27 @@ public class Window extends Application {
 	    Image destroyer = new Image("Destroyer.gif", 85, 85, true, false);
 	    Image torpedoBoat = new Image("TorpedoBoat.gif", 70, 70, true, false);
 	    
+	    group = new ToggleGroup();
+	    horizontal = new RadioButton("Horizontal");
+		horizontal.setToggleGroup(group);			//Set to toggle group
+		horizontal.setSelected(true);				//Set autoSelected
+		horizontal.setTranslateX(0);				//Position of RadioButton X-axis
+		horizontal.setTranslateY(20);				//Position of RadioButton Y-axis
+		
+		vertical = new RadioButton("Vertical");
+		vertical.setToggleGroup(group);			//Set to toggle group
+		vertical.setTranslateX(0);				//Position of RadioButton X-axis
+		vertical.setTranslateY(20);				//Position of RadioButton Y-axis
+		
 	    VBox vBoxRight = new VBox(ships, subHeading1, new ImageView(aircraftCarrier), 		//Putting heading, subHeadings and images into the vBox
 	    								 subHeading2, new ImageView(battleship), 
 	    								 subHeading3, new ImageView(submarine), 
 	    								 subHeading4, new ImageView(destroyer), 
-	    								 subHeading5, new ImageView(torpedoBoat));
+	    								 subHeading5, new ImageView(torpedoBoat),
+	    								 subHeading6, horizontal, vertical);
 	    
-		
+	    
+	    
 	    vBoxRight.setPadding(new Insets(15, 15, 15, 15));				//Padding around the vBox
 	    vBoxRight.setPrefSize(200, 600);								//Preferred size
 	    vBoxRight.setSpacing(5);										//Adding space between stuff
@@ -353,6 +374,23 @@ public class Window extends Application {
 				}	
 			}
 		});
+		
+		group.selectedToggleProperty().addListener(new ChangeListener<Toggle>()
+	    {
+	    @Override
+	    public void changed(ObservableValue<? extends Toggle> ov, Toggle oldToggle, Toggle newToggle)
+	        {
+	    	 if (newToggle.isSelected()) {
+	    		 handleRadioButtons();
+	    	 }
+                
+             else {
+            	 handleRadioButtons();
+             }
+                 
+                
+	        }
+	    });
 
 		//////////////////////////////////////
 		//  Some action to 'Settings'-menu	//
@@ -395,6 +433,15 @@ public class Window extends Application {
 	public void stop() throws Exception{
 		controller.Controller.disconnectAny();
 		System.exit(0);
+	}
+	
+	public void handleRadioButtons() {
+		if(horizontal.isSelected()) {
+			main.Main.vertical = false;
+		}
+		else {
+			main.Main.vertical = true;
+		}
 	}
 		
 	

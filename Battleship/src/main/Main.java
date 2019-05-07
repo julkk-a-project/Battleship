@@ -16,6 +16,10 @@ public class Main {
 	
 	private static boolean lost = false;
 	private static boolean won = false;
+	public static boolean vertical;
+	
+	
+	
 	
 	
 	public static void main(String[] args) {
@@ -33,20 +37,28 @@ public class Main {
         		won = false;
         		lost = false;
         		System.out.println("before waiter");
-        		controller.waiter();
+        		
         		System.out.println("after waiter");
 				
 				//host or join
-        		if (gameMode == "0"){
-        			System.out.println("INSERT AI GAME MODE HERE AHAHAHA ÄKSDEE");
+        		while(true) {
+        			controller.waiter();
+        			
+        			if (gameMode == "0"){
+            			System.out.println("INSERT AI GAME MODE HERE AHAHAHA ÄKSDEE");
+            		}
+            		else if (gameMode == "1") {
+    					controller.host();
+    				}
+            		else if(gameMode == "2") {
+            			
+            		}
+    				else {
+    					//check if IP inPutted
+    					controller.join(gameMode);
+    				}
         		}
-        		else if (gameMode == "1") {
-					controller.host();
-				}
-				else {
-					//check if IP inPutted
-					controller.join(gameMode);
-				}
+        		
         	}
         }.start();
 

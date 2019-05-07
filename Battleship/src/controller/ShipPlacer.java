@@ -2,7 +2,28 @@ package controller;
 
 public class ShipPlacer {
 	public static void shipPlacer() {
+		//public boolean placeShip(int x, int y, int length, boolean vertical) 
+		int[]ships = {5,4,3,3,2};
+		controller.Controller.waker();
+		for(int i = 0; i<ships.length; i++) {
+			individualShipPlacer(ships[i]);
+		}
+	}
+	
+	private static void individualShipPlacer(int length){
 		
+		while(main.Main.gameMode == "2") {
+			
+			//TODO: Get inparameters for "place ship" via gui when "open" is called on tile.
+			//open would then wake the system.
+			//MAKE SURE IT CAN ONLY HAPPEN WHEN IN GAMEMODE 2
+			controller.Controller.waiter();
+			if(main.Main.myMatrix.placeShip(x, y, length, vertical)) {
+				return;
+				//controller.Controller.waker();
+			}	
+		}
 	}
 
 }
+
