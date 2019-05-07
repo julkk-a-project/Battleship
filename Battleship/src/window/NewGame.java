@@ -19,7 +19,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import matrix.Matrix;
 
 public class NewGame extends Application{
 	
@@ -131,7 +130,7 @@ public class NewGame extends Application{
             	/*main.Main.myMatrix = new Matrix(10,10);
             	main.Main.myMatrix.putHull(3);*/
             	new Window();
-            	System.out.println("You pushed 'Start Game'. This is after myMatrix");
+            	System.out.println("You pushed 'Start Game'. This is after new Window()");
             }
         });
 

@@ -32,98 +32,39 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import matrix.Matrix;
-import tiles.Water;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
  
 public class Window extends Application {
+	
+	BorderPane border = new BorderPane();		//Adding new borderPane to organize shit
+	
 	public String plyrName;
+	public static Matrix myMatrix;
+	public static Matrix itMatrix;
+	public static Tile[][] myTiles;
+	public static Tile[][] itTiles;
+	public static String[] subHeading = {"Aircraft Carrier", "Battleship", "Destroyer", "Submarine", "Torpedo Boat"};
 
 	private static TextArea log;
 
-	public static Matrix myMatrix;
-	public static Matrix itMatrix;
-	
-	public static Tile[][] myTiles;
-	public static Tile[][] itTiles;
-	
-	public static String[] subHeading = {"Aircraft Carrier", "Battleship", "Destroyer", "Submarine", "Torpedo Boat"};
 
 	
-	//private Matrix matrix = new Matrix(10,10);
-	//Tile tile = new Tile();
-	//Color myColor = Tile.getColor(matrix.getTile(1, 2).getRep());
-	
-	/*public Window() {
-		launch(Window.class);
-	}*/
-	
-	//This launches everything:
-	public static void main(String[] args) {
-		
-		/*//TEMPORARY
-		myMatrix = new Matrix(10,10);
-		myMatrix.putHull(2);
-		
-		itMatrix = new Matrix(10,10);
-		itMatrix.putHull(3);*/
-		
-		
-		
-		launch(Window.class, args);
-		//System.out.println(javafx.scene.text.Font.getFamilies());			//Gets what fonts available
-		
-		
-		/*
-		//TEMP SHTI
-		String host = JOptionPane.showInputDialog("host (y/n)");
-		
-
-		if (host.equals("y")) {
-			main.Main.host();
-		}
-		else {
-			main.Main.join();
-		}
-		*/
-	}
-	
-	
-	@Override
-	public void start(Stage primaryStage) throws Exception {
-		/*primaryStage.setScene(new Scene(Window());
-		primaryStage.show();*/
-		
-		BorderPane border = new BorderPane();		//Adding new borderPane to organize shit
-		
+	public Window() {
+		border.setCenter(addGridPane());
 		border.setLeft(addVBoxLeft());				//Adding vBox to the left
 		border.setRight(addVBoxRight());			//Adding vBox to right 
-		border.setCenter(addGridPane());			//Adding gridPane to center	
 		border.setTop(addMenuBar());				//Adding menuBar to top
-
-		//Makes everything visible
-		Scene scene = new Scene(border);
-        primaryStage.setScene(scene);
-        primaryStage.setTitle("BattleShip");
-        primaryStage.show();
-        
-
-		draw(); //makes sure tiles get updated.
-        
-		//TODO: 
-		controller.Controller.waker(); //makes sure other thread starts running again
-
 	}
 	
 	
 	
-	//Our GridPane
-	private Parent addGridPane() {
-		
+	//Our gridPane
+	public Parent addGridPane() {
 		GridPane root = new GridPane();
 		
 		root.setPrefSize(300,600);							//set size of GridPane
-		//root.setPadding(new Insets(10, 10, 10, 5));			//set padding around	
+		root.setPadding(new Insets(10, 10, 10, 5));			//set padding around	
 		//root.setStyle("-fx-background-color: #a9a9a9;");	//Color of background
 		root.setAlignment(Pos.TOP_CENTER);					//Position of Grid
 		
@@ -145,9 +86,41 @@ public class Window extends Application {
 		root.add(text1, 0, 0);								
 		root.add(text2, 0, 0);		
 		
+		return root;
+	}
+
+	
+	
+	//Constructor should replace this:
+	public static void main(String[] args) {
 		
+		/*//TEMPORARY
+		myMatrix = new Matrix(10,10);
+		myMatrix.putHull(2);
 		
-		return root;		
+		itMatrix = new Matrix(10,10);
+		itMatrix.putHull(3);*/
+		
+		launch(Window.class, args);
+		//System.out.println(javafx.scene.text.Font.getFamilies());			//Gets what fonts available
+	}
+	
+	
+	
+	@Override
+	public void start(Stage primaryStage) throws Exception {
+
+		//Makes everything visible
+		Scene scene = new Scene(border);
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("BattleShip");
+        primaryStage.show();
+        
+		draw(); //makes sure tiles get updated.
+        
+		//TODO: 
+		controller.Controller.waker(); //makes sure other thread starts running again
+
 	}
 	
 	
@@ -162,7 +135,7 @@ public class Window extends Application {
 		log.setEditable(false);									//Log not editable
 	    
 		VBox vBoxLeft = new VBox(text,log);						//Putting text and log into the VBox
-	    //vBoxLeft.setPadding(new Insets(15, 15, 15, 15));		//Padding around the vBox
+	    vBoxLeft.setPadding(new Insets(15, 15, 15, 15));		//Padding around the vBox
 	    vBoxLeft.setPrefSize(200, 600);							//Preferred size
 	    vBoxLeft.setSpacing(1);									//Adding space between stuff
 	    vBoxLeft.setStyle("-fx-background-color: #f0f8ff;");	//Set background color
@@ -209,7 +182,7 @@ public class Window extends Application {
 		
 		//Should be an easier way to add lots of subHeadings, but this works
 		
-		Text subHeading1 = new Text("Aircraft Carrier (5 tiles) ");		//Create subHeadings for ships
+		Text subHeading1 = new Text("Aircraft Carrier (5 tiles) ");	//Create subHeadings for ships
 	    Text subHeading2 = new Text("Battleship (4 tiles) ");
 	    Text subHeading3 = new Text("Submarine (3 tiles) ");
 	    Text subHeading4 = new Text("Destroyer (3 tiles) ");
@@ -224,7 +197,7 @@ public class Window extends Application {
 	    
 	    //Should be an easier way to add lots of pics, but this works
 		
-	    Image aircraftCarrier = new Image("AircraftCarrier.gif", 115, 115, true, true);			//Create image (inputStream, requestedWidth, requestedHeight, preserveRatio, smooth)
+	    Image aircraftCarrier = new Image("AircraftCarrier.gif", 115, 115, true, true);		//Create image (inputStream, requestedWidth, requestedHeight, preserveRatio, smooth)
 	    Image battleship = new Image("Battleship.gif", 100, 100, true, false);
 	    Image submarine = new Image("Submarine.gif", 85, 85, true, false);
 	    Image destroyer = new Image("Destroyer.gif", 85, 85, true, false);
@@ -247,7 +220,6 @@ public class Window extends Application {
 	
 	
 	
-	//TODO: EventHandler: What should happen when you click the mouse on a tile
 	private void createBoard1(GridPane root, int xOffSet, int yOffSet) {
 
 		itTiles = new Tile[10][10];

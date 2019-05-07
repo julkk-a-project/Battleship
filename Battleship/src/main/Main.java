@@ -4,8 +4,6 @@ import javax.swing.JOptionPane;
 
 import controller.Controller;
 import matrix.Matrix;
-import network.Provider3;
-import network.Requester3;
 import window.Tile;
 import window.Window;
 

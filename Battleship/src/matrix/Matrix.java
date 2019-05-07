@@ -48,6 +48,17 @@ public class Matrix {
 		return matrix[x][y];
 	}
 	
+	
+	
+	/*
+	 * replaces tile on cordinate x,y to 3rd parameter (AbstractTile). make sure to make it a new object.
+	 */
+	public void setTile(int x, int y, AbstractTile replacement) {
+		matrix[x][y] = replacement;	
+	}
+	
+	
+	
 	/*
 	 * get a matrix with only integer defining tile rep as an integer matrix
 	 */
@@ -257,15 +268,6 @@ public class Matrix {
 		
 	}
 	
-	
-	
-	
-	/*
-	 * replaces tile on cordinate x,y to 3rd parameter (AbstractTile). make sure to make it a new object.
-	 */
-	public void setTile(int x, int y, AbstractTile replacement) {
-		matrix[x][y] = replacement;	
-	}
 
 	/*
 	 * HitEffectHandler
@@ -283,8 +285,6 @@ public class Matrix {
 	
 	
 
-
-
 	/*
 	 * Handle hits on main board
 	 */
@@ -296,7 +296,7 @@ public class Matrix {
 		int y = Integer.parseInt(yString);
 		
 		
-		AbstractTile target = this.getTile(x, y); //idk if usefull?
+		//AbstractTile target = this.getTile(x, y); //idk if usefull?
 		
 		
 		//Was it a hull?
