@@ -40,8 +40,8 @@ public class Window extends Application {
 	BorderPane border = new BorderPane();		//Adding new borderPane to organize shit
 	
 	public String plyrName;
-	public static Matrix myMatrix;
-	public static Matrix itMatrix;
+	//public static Matrix myMatrix;
+	//public static Matrix itMatrix;
 	public static Tile[][] myTiles;
 	public static Tile[][] itTiles;
 	public static String[] subHeading = {"Aircraft Carrier", "Battleship", "Destroyer", "Submarine", "Torpedo Boat"};
@@ -387,8 +387,8 @@ public class Window extends Application {
 	public static void draw() {
 		for(int i = 0; i < 10; i++) {
 			for(int j = 0; j < 10; j++) {
-				myTiles[i][j].draw(myMatrix);
-				itTiles[i][j].draw(itMatrix);
+				myTiles[i][j].draw(main.Main.myMatrix);
+				itTiles[i][j].draw(main.Main.itMatrix);
 			}
 		}
 	}	

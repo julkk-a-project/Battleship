@@ -110,7 +110,8 @@ public class Controller {
   
         System.out.println("UR TURN");
         window.Window.appendLog("UR TURN");
-        
+
+    	System.out.println("givecords changes...1");
         draw();
         
         for (int i = 0; i < 10; i++) {
@@ -121,7 +122,9 @@ public class Controller {
 	        cords[0] = cordX;
 	        cords[1] = cordY;
 	        */
+        	System.out.println("givecords changes...2");
         	giveCords = true;
+        	System.out.println("givecords changed!");
 	        waiter();
 	        
 	        //Check if cords point to a water tile on own map to avoid dumb shooting.
