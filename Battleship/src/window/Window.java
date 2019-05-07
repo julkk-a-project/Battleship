@@ -227,7 +227,7 @@ public class Window extends Application {
 		for(int i = 0; i < 10; i++) {
 			for(int j = 0; j < 10; j++) {
 				itTiles[i][j] = new Tile(i, j);
-				itTiles[i][j].setTileType(itMatrix.getTile(i, j));
+				itTiles[i][j].setTileType(main.Main.itMatrix.getTile(i, j));
 
 				itTiles[i][j].setTranslateX(j * 20 + xOffSet);
 				itTiles[i][j].setTranslateY(i * 20 + yOffSet);
@@ -245,7 +245,7 @@ public class Window extends Application {
 		for(int i = 0; i < 10; i++) {
 			for(int j = 0; j < 10; j++) {
 				myTiles[i][j] = new Tile(i, j);
-				myTiles[i][j].setTileType(myMatrix.getTile(i, j));
+				myTiles[i][j].setTileType(main.Main.myMatrix.getTile(i, j));
 
 				myTiles[i][j].setTranslateX(j * 20 + xOffSet);
 				myTiles[i][j].setTranslateY(i * 20 + yOffSet);

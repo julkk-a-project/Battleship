@@ -52,8 +52,10 @@ public class NewGame extends Application{
 	public Parent load() {
 		
 		GridPane root = new GridPane();
-		final ToggleGroup group = new ToggleGroup();
+		final ToggleGroup group1 = new ToggleGroup();
+		final ToggleGroup group2 = new ToggleGroup();
 	    
+		
 		Text text = new Text("Create New Game: ");			//Create text
 		text.setFont(new Font("Agency FB", 20));			//set font and size		
 		
@@ -63,9 +65,12 @@ public class NewGame extends Application{
 		Text textSubheading2 = new Text("Choose opponent: ");//Create text
 		textSubheading2.setFont(new Font("Agency FB", 14));	//set font and size
 		
+		Text textSubheading3 = new Text("Host/Join: ");//Create text
+		textSubheading3.setFont(new Font("Agency FB", 14));	//set font and size
+		
 		TextField name = new TextField();					//Create textField
 		name.setFont(new Font("Agency FB", 12));			//set font and size
-		name.autosize();									//autosize textfield
+		name.autosize();									//autoSize textField
 		
 		root.setPrefSize(360,290);							//set size of GridPane
 		root.setPadding(new Insets(10, 10, 10, 5));			//set padding around	
@@ -88,15 +93,26 @@ public class NewGame extends Application{
 	    buttonCancel.setCancelButton(true);					//Set button to be a 'Cancel-button'
 
 	    RadioButton rb1 = new RadioButton("Computer");
-	    rb1.setToggleGroup(group);							//Set to toggle group
+	    rb1.setToggleGroup(group1);							//Set to toggle group
 	    rb1.setSelected(true);								//Set autoSelected
 	    rb1.setTranslateX(0);								//Position of RadioButton X-axis
 		rb1.setTranslateY(10);								//Position of RadioButton Y-axis
 	    
 	    RadioButton rb2 = new RadioButton("Player 2");
-	    rb2.setToggleGroup(group);							//Set to toggle group
+	    rb2.setToggleGroup(group1);							//Set to toggle group
 	    rb2.setTranslateX(0);								//Position of RadioButton X-axis
 		rb2.setTranslateY(15);								//Position of RadioButton Y-axis
+		
+		RadioButton rb3 = new RadioButton("Host");
+		rb3.setToggleGroup(group2);							//Set to toggle group
+		rb3.setSelected(true);								//Set autoSelected
+		rb3.setTranslateX(0);								//Position of RadioButton X-axis
+		rb3.setTranslateY(25);								//Position of RadioButton Y-axis
+		
+		RadioButton rb4 = new RadioButton("Join");
+		rb4.setToggleGroup(group2);							//Set to toggle group
+	    rb4.setTranslateX(0);								//Position of RadioButton X-axis
+		rb4.setTranslateY(30);								//Position of RadioButton Y-axis
 	    
 		
 		/////////////////////////////
@@ -107,10 +123,25 @@ public class NewGame extends Application{
 		//plyrName.setUserData(Object value);	//maybeShould use this to get the userData? Not sure.
 		
 		//'RadioButton'-buttons
-	    group.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
+	    group1.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
 	        public void changed(ObservableValue<? extends Toggle> ov,
 	            Toggle old_toggle, Toggle new_toggle) {
-	               /* if (group.getSelectedToggle() != null) {
+	               /* if (group1.getSelectedToggle() != null) {
+	                    final Image image = new Image(
+	                        getClass().getResourceAsStream(
+	                            group.getSelectedToggle().getUserData().toString() + 
+	                                ".jpg"
+	                        )
+	                    );
+	                    icon.setImage(image);
+	                }     */           
+	            }
+	    });
+	    
+	    group2.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
+	        public void changed(ObservableValue<? extends Toggle> ov,
+	            Toggle old_toggle, Toggle new_toggle) {
+	               /* if (group2.getSelectedToggle() != null) {
 	                    final Image image = new Image(
 	                        getClass().getResourceAsStream(
 	                            group.getSelectedToggle().getUserData().toString() + 
@@ -154,8 +185,11 @@ public class NewGame extends Application{
 	    root.add(textSubheading2, 0, 3);
 	    root.add(rb1, 1, 2);
 	    root.add(rb2, 1, 3);
-	    root.add(buttonNewGame, 1, 4);
-	    root.add(buttonCancel, 2, 4);
+	    root.add(textSubheading3, 0, 5);
+	    root.add(rb3, 1, 4);
+	    root.add(rb4, 1, 5);
+	    root.add(buttonNewGame, 1, 6);
+	    root.add(buttonCancel, 2, 6);
 	    
 		return root;
 	}

@@ -107,6 +107,7 @@ public class Tile extends StackPane {
 			controller.Controller.waker();
 			System.out.println("cordsChanged");
 		} else {
+			System.out.println("cordsNotChanged");
 			window.Window.draw();
 		}
 		

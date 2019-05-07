@@ -25,8 +25,13 @@ public class Main {
 	
 	public static void main(String[] args) {
 		Controller controller = new Controller();
+
+		//initilaizes default water matrixes, to avoid search in empty matrix.
+        myMatrix = new Matrix(10,10,controller);
+        itMatrix = new Matrix(10,10,controller);
         
-            
+        
+        
 		//tempSystem for dev testing:	
 		String host = JOptionPane.showInputDialog("host (y/n)");
 
