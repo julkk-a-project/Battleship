@@ -9,21 +9,15 @@ import window.Window;
 
 public class Main {
 
-	//public Window window;
 	public static Matrix myMatrix;
 	public static Matrix itMatrix;
 	public static Tile tile;
 	public static boolean windowOpened = false;
-	
-	
-	/*private static boolean hisTurn;
-	private static boolean giveCords;*/
-	private static boolean lost = false;
-	private static boolean won = false;
-	
 	public static Controller controller;
 	public static String gameMode; //ALSO USED FOR IP
-	//public static String ip;
+	
+	private static boolean lost = false;
+	private static boolean won = false;
 	
 	
 	public static void main(String[] args) {
@@ -36,7 +30,7 @@ public class Main {
         
         
 		//tempSystem for dev testing:	
-		String host = JOptionPane.showInputDialog("host (y/n)");
+		//String host = JOptionPane.showInputDialog("host (y/n)");
 
         new Thread() {
         	
