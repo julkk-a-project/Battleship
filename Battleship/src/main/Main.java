@@ -21,10 +21,13 @@ public class Main {
 	private static boolean lost = false;
 	private static boolean won = false;
 	
+	public static Controller controller;
+	public static String gameMode; //ALSO USED FOR IP
+	//public static String ip;
 	
 	
 	public static void main(String[] args) {
-		Controller controller = new Controller();
+		controller = new Controller();
 
 		//initilaizes default water matrixes, to avoid search in empty matrix.
         myMatrix = new Matrix(10,10,controller);
@@ -37,17 +40,25 @@ public class Main {
 
         new Thread() {
         	
-        	public void run() {        		
+        	public void run() {
+        		
+        		
         		won = false;
         		lost = false;
+        		System.out.println("before waiter");
         		controller.waiter();
+        		System.out.println("after waiter");
 				
 				//host or join
-				if (host.equals("y")) {
+        		if (gameMode == "0"){
+        			System.out.println("INSERT AI GAME MODE HERE AHAHAHA ÄKSDEE");
+        		}
+        		else if (gameMode == "1") {
 					controller.host();
 				}
 				else {
-					controller.join(JOptionPane.showInputDialog("IP to connect to"));
+					//chek if IP inputted
+					controller.join(gameMode);
 				}
         	}
         }.start();
@@ -59,13 +70,6 @@ public class Main {
                 window.Window.launch(Window.class, args);                
         	}
         }.start();
-	}
-
-
-
-	public void myMethod() {
-		// TODO Auto-generated method stub
-		
 	}
 	
 	/* 

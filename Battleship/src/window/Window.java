@@ -50,12 +50,9 @@ public class Window extends Application {
 
 
 	
-	public Window() {
-		border.setCenter(addGridPane());
-		border.setLeft(addVBoxLeft());				//Adding vBox to the left
-		border.setRight(addVBoxRight());			//Adding vBox to right 
-		border.setTop(addMenuBar());				//Adding menuBar to top
-	}
+	/*public Window() {
+		
+	}*/
 	
 	
 	
@@ -92,7 +89,7 @@ public class Window extends Application {
 	
 	
 	//Constructor should replace this:
-	public static void main(String[] args) {
+	//public static void main(String[] args) {
 		
 		/*//TEMPORARY
 		myMatrix = new Matrix(10,10);
@@ -101,15 +98,19 @@ public class Window extends Application {
 		itMatrix = new Matrix(10,10);
 		itMatrix.putHull(3);*/
 		
-		launch(Window.class, args);
+	//	launch(Window.class, args);
 		//System.out.println(javafx.scene.text.Font.getFamilies());			//Gets what fonts available
-	}
+	//}
 	
 	
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-
+		border.setCenter(addGridPane());
+		border.setLeft(addVBoxLeft());				//Adding vBox to the left
+		border.setRight(addVBoxRight());			//Adding vBox to right 
+		border.setTop(addMenuBar());				//Adding menuBar to top
+		
 		//Makes everything visible
 		Scene scene = new Scene(border);
         primaryStage.setScene(scene);
@@ -227,7 +228,6 @@ public class Window extends Application {
 		for(int i = 0; i < 10; i++) {
 			for(int j = 0; j < 10; j++) {
 				itTiles[i][j] = new Tile(i, j);
-				itTiles[i][j].setTileType(main.Main.itMatrix.getTile(i, j));
 
 				itTiles[i][j].setTranslateX(j * 20 + xOffSet);
 				itTiles[i][j].setTranslateY(i * 20 + yOffSet);
@@ -245,7 +245,6 @@ public class Window extends Application {
 		for(int i = 0; i < 10; i++) {
 			for(int j = 0; j < 10; j++) {
 				myTiles[i][j] = new Tile(i, j);
-				myTiles[i][j].setTileType(main.Main.myMatrix.getTile(i, j));
 
 				myTiles[i][j].setTranslateX(j * 20 + xOffSet);
 				myTiles[i][j].setTranslateY(i * 20 + yOffSet);

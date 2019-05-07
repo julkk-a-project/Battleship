@@ -15,7 +15,6 @@ import matrix.Matrix;
 import tiles.AbstractTile;
 
 public class Tile extends StackPane {
-	private AbstractTile abstractTile;
 	public boolean isOpen;
 	private Text text = new Text();
 	private int[] cords;
@@ -130,7 +129,4 @@ public class Tile extends StackPane {
 		
 	}
 	
-	public void setTileType(AbstractTile abs) {
-		abstractTile = abs;
-	}
 }

@@ -1,18 +1,14 @@
 package window;
 
+import controller.Controller;
 import javafx.application.Application;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -20,13 +16,20 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class NewGame extends Application{
+public class NewGame extends Application {
 	
-	BorderPane border = new BorderPane();	
+	BorderPane border = new BorderPane();
+	GridPane root = new GridPane();
+	ToggleGroup group = new ToggleGroup();
 	
-
+	RadioButton computer, host, join;
+	Button startGame, cancel;
+	Text text, plyrName, textSubheading2, ip;
+	TextField name, ipAddress;
+	
+	
 	public NewGame() {
-		border.setCenter(load());	
+		//border.setCenter();	
 	}
 	
 	
@@ -51,62 +54,64 @@ public class NewGame extends Application{
 	
 	public Parent load() {
 		
-		GridPane root = new GridPane();
-		final ToggleGroup group1 = new ToggleGroup();
-		final ToggleGroup group2 = new ToggleGroup();
-	    
-		
-		Text text = new Text("Create New Game: ");			//Create text
+		text = new Text("Create New Game: ");				//Create text
 		text.setFont(new Font("Agency FB", 20));			//set font and size		
 		
-		Text plyrName = new Text("Player Name: ");			//Create text
+		plyrName = new Text("Player Name: ");				//Create text
 		plyrName.setFont(new Font("Agency FB", 14));		//set font and size
 		
-		Text textSubheading2 = new Text("Choose opponent: ");//Create text
+		textSubheading2 = new Text("Choose opponent: ");	//Create text
 		textSubheading2.setFont(new Font("Agency FB", 14));	//set font and size
 		
-		Text textSubheading3 = new Text("Host/Join: ");//Create text
-		textSubheading3.setFont(new Font("Agency FB", 14));	//set font and size
+		ip = new Text("IP address: ");						//Create text
+		ip.setFont(new Font("Agency FB", 14));				//set font and size
+		ip.setTranslateY(45);								//Position of RadioButton Y-axis
 		
-		TextField name = new TextField();					//Create textField
+		name = new TextField();								//Create textField
 		name.setFont(new Font("Agency FB", 12));			//set font and size
 		name.autosize();									//autoSize textField
 		
+		ipAddress = new TextField();						//Create textField
+		//ipAddress.setVisible(false);						//TODO: actionlistener for togglegroup to know when join is selected and then IPaddress is shown.
+		ipAddress.setFont(new Font("Agency FB", 12));		//set font and size
+		ipAddress.setTranslateY(45);						//Position of RadioButton Y-axis
+		ipAddress.autosize();								//autoSize textField
+		
 		root.setPrefSize(360,290);							//set size of GridPane
 		root.setPadding(new Insets(10, 10, 10, 5));			//set padding around	
-		root.setAlignment(Pos.TOP_LEFT);					//Position of Grid
+		//root.setAlignment(Pos.TOP_LEFT);					//Position of Grid
 		
 		
 		/////////////
 		// Buttons //
 		/////////////
 		
-		Button buttonNewGame = new Button("Start Game");
-		buttonNewGame.setPrefSize(90, 20);					//set size of Button
-		buttonNewGame.setTranslateX(0);						//Position of Button X-axis
-		buttonNewGame.setTranslateY(100);					//Position of Button Y-axis
+		startGame = new Button("Start Game");
+		startGame.setPrefSize(90, 20);			//set size of Button
+		startGame.setTranslateX(0);				//Position of Button X-axis
+		startGame.setTranslateY(100);			//Position of Button Y-axis
 		
-		Button buttonCancel = new Button("Cancel");
-	    buttonCancel.setPrefSize(90, 20);					//set size of Button
-	    buttonCancel.setTranslateX(10);						//Position of Button X-axis
-	    buttonCancel.setTranslateY(100);					//Position of Button Y-axis
-	    buttonCancel.setCancelButton(true);					//Set button to be a 'Cancel-button'
+		cancel = new Button("Cancel");
+	    cancel.setPrefSize(90, 20);				//set size of Button
+	    cancel.setTranslateX(10);				//Position of Button X-axis
+	    cancel.setTranslateY(100);				//Position of Button Y-axis
+	    cancel.setCancelButton(true);			//Set button to be a 'Cancel-button'
 
-	    RadioButton rb1 = new RadioButton("Computer");
-	    rb1.setToggleGroup(group1);							//Set to toggle group
-	    rb1.setSelected(true);								//Set autoSelected
-	    rb1.setTranslateX(0);								//Position of RadioButton X-axis
-		rb1.setTranslateY(20);								//Position of RadioButton Y-axis
+	    computer = new RadioButton("Computer");
+	    computer.setToggleGroup(group);			//Set to toggle group
+	    computer.setSelected(true);				//Set autoSelected
+	    computer.setTranslateX(0);				//Position of RadioButton X-axis
+	    computer.setTranslateY(20);				//Position of RadioButton Y-axis
 	    
-	    RadioButton rb2 = new RadioButton("Host");
-	    rb2.setToggleGroup(group1);							//Set to toggle group
-	    rb2.setTranslateX(0);								//Position of RadioButton X-axis
-		rb2.setTranslateY(25);								//Position of RadioButton Y-axis
+	    host = new RadioButton("Host");
+	    host.setToggleGroup(group);				//Set to toggle group
+	    host.setTranslateX(0);					//Position of RadioButton X-axis
+	    host.setTranslateY(25);					//Position of RadioButton Y-axis
 		
-		RadioButton rb3 = new RadioButton("Join");
-		rb3.setToggleGroup(group1);							//Set to toggle group
-		rb3.setTranslateX(0);								//Position of RadioButton X-axis
-		rb3.setTranslateY(30);								//Position of RadioButton Y-axis
+		join = new RadioButton("Join");
+		join.setToggleGroup(group);				//Set to toggle group
+		join.setTranslateX(0);					//Position of RadioButton X-axis
+		join.setTranslateY(30);					//Position of RadioButton Y-axis
 		
 		
 		
@@ -117,40 +122,26 @@ public class NewGame extends Application{
 		//'Name'-field
 		//plyrName.setUserData(Object value);	//maybeShould use this to get the userData? Not sure.
 		
-		//'RadioButton'-buttons
-	    group1.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
-	        public void changed(ObservableValue<? extends Toggle> ov,
-	            Toggle old_toggle, Toggle new_toggle) {
-	               /* if (group1.getSelectedToggle() != null) {
-	                    final Image image = new Image(
-	                        getClass().getResourceAsStream(
-	                            group.getSelectedToggle().getUserData().toString() + 
-	                                ".jpg"
-	                        )
-	                    );
-	                    icon.setImage(image);
-	                }     */           
-	            }
-	    });
-	    
-	    
+		
 		
 		//'New Game'-button
-	    buttonNewGame.setOnAction(new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent event) {
-            	//new Window();
-            	System.out.println("You pushed 'Start Game'. This is after new Window()");
-            	//main.Main.gameMode = GET.RADIALBUTTONID
-            	controller.Controller.waker();
-            }
-        });
+	    startGame.setOnAction(e-> handleButtonAction(e));
+            	//System.out.println("You pushed 'Start Game'");
+            	
+            	//main.Main.gameMode = 
+            	//System.out.println(selectedRadioButton);
+            	
 
+	    
 	    //'Cancel'-button
-	    buttonCancel.setOnAction(e -> {
-	    	Stage stage = (Stage) buttonCancel.getScene().getWindow();
+	    cancel.setOnAction(e -> {
+	    	Stage stage = (Stage) cancel.getScene().getWindow();
 		    stage.close();
-	        System.out.println("Cancel clicked.");
 	    });
+	    
+	    //'IP'-field
+	    //plyrName.setUserData(Object value);	//maybeShould use this to get the userData? Not sure.
+	  		
 	    
 	    
 	    
@@ -163,12 +154,46 @@ public class NewGame extends Application{
 	    root.add(plyrName, 0, 1);
 	    root.add(name, 1, 1);
 	    root.add(textSubheading2, 0, 3);
-	    root.add(rb1, 1, 2);
-	    root.add(rb2, 1, 3);
-	    root.add(rb3, 1, 4);
-	    root.add(buttonNewGame, 1, 6);
-	    root.add(buttonCancel, 2, 6);
+	    root.add(computer, 1, 2);
+	    root.add(host, 1, 3);
+	    root.add(join, 1, 4);
+	    root.add(ip, 0, 6);
+	    root.add(ipAddress, 1, 6);
+	    root.add(startGame, 1, 7);
+	    root.add(cancel, 2, 7);
 	    
 		return root;
 	}
+
+	//For handling RadioButton-choices
+	private  String handleButtonAction(ActionEvent e) {
+		String value;
+		if(computer.isSelected()) {
+			value = "0";
+			main.Main.gameMode = value;
+			System.out.println("Computer is selected " + value);
+		} else if (host.isSelected()) {
+			value = "1";
+			main.Main.gameMode = value;
+			System.out.println("Host is selected " + value);
+		} else {
+			value = getIp();
+			main.Main.gameMode = value;
+			System.out.println("Join is selected " + value);
+		}
+		
+		main.Main.controller.initializeGame();
+		
+		Controller.waker();
+
+    	Stage stage = (Stage) cancel.getScene().getWindow();
+	    stage.close();
+		
+		return value;
+	}
+
+
+	private String getIp() {
+		return ipAddress.getText();
+	}	
 }
