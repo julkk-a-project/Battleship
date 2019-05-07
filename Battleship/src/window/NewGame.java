@@ -96,24 +96,19 @@ public class NewGame extends Application{
 	    rb1.setToggleGroup(group1);							//Set to toggle group
 	    rb1.setSelected(true);								//Set autoSelected
 	    rb1.setTranslateX(0);								//Position of RadioButton X-axis
-		rb1.setTranslateY(10);								//Position of RadioButton Y-axis
+		rb1.setTranslateY(20);								//Position of RadioButton Y-axis
 	    
-	    RadioButton rb2 = new RadioButton("Player 2");
+	    RadioButton rb2 = new RadioButton("Host");
 	    rb2.setToggleGroup(group1);							//Set to toggle group
 	    rb2.setTranslateX(0);								//Position of RadioButton X-axis
-		rb2.setTranslateY(15);								//Position of RadioButton Y-axis
+		rb2.setTranslateY(25);								//Position of RadioButton Y-axis
 		
-		RadioButton rb3 = new RadioButton("Host");
-		rb3.setToggleGroup(group2);							//Set to toggle group
-		rb3.setSelected(true);								//Set autoSelected
+		RadioButton rb3 = new RadioButton("Join");
+		rb3.setToggleGroup(group1);							//Set to toggle group
 		rb3.setTranslateX(0);								//Position of RadioButton X-axis
-		rb3.setTranslateY(25);								//Position of RadioButton Y-axis
+		rb3.setTranslateY(30);								//Position of RadioButton Y-axis
 		
-		RadioButton rb4 = new RadioButton("Join");
-		rb4.setToggleGroup(group2);							//Set to toggle group
-	    rb4.setTranslateX(0);								//Position of RadioButton X-axis
-		rb4.setTranslateY(30);								//Position of RadioButton Y-axis
-	    
+		
 		
 		/////////////////////////////
 		// Some Action for Buttons //
@@ -138,30 +133,15 @@ public class NewGame extends Application{
 	            }
 	    });
 	    
-	    group2.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
-	        public void changed(ObservableValue<? extends Toggle> ov,
-	            Toggle old_toggle, Toggle new_toggle) {
-	               /* if (group2.getSelectedToggle() != null) {
-	                    final Image image = new Image(
-	                        getClass().getResourceAsStream(
-	                            group.getSelectedToggle().getUserData().toString() + 
-	                                ".jpg"
-	                        )
-	                    );
-	                    icon.setImage(image);
-	                }     */           
-	            }
-	    });
 	    
 		
 		//'New Game'-button
 	    buttonNewGame.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
-            	System.out.println("You pushed 'Start Game'");
-            	/*main.Main.myMatrix = new Matrix(10,10);
-            	main.Main.myMatrix.putHull(3);*/
-            	new Window();
+            	//new Window();
             	System.out.println("You pushed 'Start Game'. This is after new Window()");
+            	//main.Main.gameMode = GET.RADIALBUTTONID
+            	controller.Controller.waker();
             }
         });
 
@@ -185,9 +165,7 @@ public class NewGame extends Application{
 	    root.add(textSubheading2, 0, 3);
 	    root.add(rb1, 1, 2);
 	    root.add(rb2, 1, 3);
-	    root.add(textSubheading3, 0, 5);
 	    root.add(rb3, 1, 4);
-	    root.add(rb4, 1, 5);
 	    root.add(buttonNewGame, 1, 6);
 	    root.add(buttonCancel, 2, 6);
 	    

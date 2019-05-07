@@ -340,7 +340,7 @@ public class Matrix {
     	
     	
     	System.out.println(message);
-    	System.out.println(response[0]);
+    	//System.out.println(response[0]);
     	if(hit == 1) {
     		System.out.println("hit");
     		setTile(x, y, new Hit());

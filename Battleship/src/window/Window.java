@@ -116,10 +116,10 @@ public class Window extends Application {
         primaryStage.setTitle("BattleShip");
         primaryStage.show();
         
-		draw(); //makes sure tiles get updated.
+		//draw(); //makes sure tiles get updated.
         
 		//TODO: 
-		controller.Controller.waker(); //makes sure other thread starts running again
+		//controller.Controller.waker(); //makes sure other thread starts running again
 
 	}
 	
@@ -388,8 +388,8 @@ public class Window extends Application {
 	public static void draw() {
 		for(int i = 0; i < 10; i++) {
 			for(int j = 0; j < 10; j++) {
-				myTiles[i][j].draw();
-				itTiles[i][j].draw();
+				myTiles[i][j].draw(myMatrix);
+				itTiles[i][j].draw(itMatrix);
 			}
 		}
 	}	

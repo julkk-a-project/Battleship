@@ -60,6 +60,13 @@ public class Main {
         	}
         }.start();
 	}
+
+
+
+	public void myMethod() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	/* 
 	 /////////////////////////////////////
