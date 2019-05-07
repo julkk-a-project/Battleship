@@ -12,8 +12,10 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 import matrix.Matrix;
+import tiles.AbstractTile;
 
 public class Tile extends StackPane {
+	private AbstractTile abstractTile;
 	public boolean isOpen;
 	private Text text = new Text();
 	private int[] cords;
@@ -102,9 +104,9 @@ public class Tile extends StackPane {
 		ft.play();
 		
 		
-		if (main.Main.itMatrix.isLeagalCord(x,y) && main.Main.canCord()) {
-			main.Main.cords = cords;
-			main.Main.waker();
+		if (main.Main.itMatrix.isLeagalCord(x,y) && controller.Controller.canCord()) {
+			controller.Controller.cords = cords;
+			controller.Controller.waker();
 			System.out.println("cordsChanged");
 		} else {
 			window.Window.draw();
@@ -122,9 +124,13 @@ public class Tile extends StackPane {
 
 
 
-	public void draw(Matrix matrix) {
-		setColorRep(matrix.getTile(x, y).getRep());
+	public void draw() {
+		setColorRep(abstractTile.getRep());
 		
 		
+	}
+	
+	public void setTileType(AbstractTile abs) {
+		abstractTile = abs;
 	}
 }

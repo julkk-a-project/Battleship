@@ -15,7 +15,7 @@ public class Provider3 {
 	String [] ok = new String [50];    
 	int i = 0;
 	private boolean turnNotOver;
-	private String sistaHalsning;
+	//private String sistaHalsning;
     
     public Provider3(){}
     

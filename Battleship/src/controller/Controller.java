@@ -1,70 +1,52 @@
-package main;
+package controller;
 
-import javax.swing.JOptionPane;
-
-import controller.Controller;
+import main.Waiter;
+import main.WaiterRunner;
 import matrix.Matrix;
 import network.Provider3;
 import network.Requester3;
-import window.Tile;
-import window.Window;
 
-public class Main {
-
-	//public Window window;
-	public static Matrix myMatrix;
-	public static Matrix itMatrix;
-	public static Tile tile;
-	public static boolean windowOpened = false;
+public class Controller {
+	public static int[] cords;
 	
-	
-	/*private static boolean hisTurn;
-	private static boolean giveCords;*/
+	private static boolean hisTurn;
+	private static boolean giveCords;
 	private static boolean lost = false;
 	private static boolean won = false;
+	public static WaiterRunner waiterRunner;
 	
 	
-	
-	public static void main(String[] args) {
-		Controller controller = new Controller();
-        
-            
-		//tempSystem for dev testing:	
-		String host = JOptionPane.showInputDialog("host (y/n)");
 
-        new Thread() {
-        	
-        	public void run() {        		
-        		won = false;
-        		lost = false;
-        		controller.waiter();
-				
-				//host or join
-				if (host.equals("y")) {
-					controller.host();
-				}
-				else {
-					controller.join(JOptionPane.showInputDialog("IP to connect to"));
-				}
-        	}
-        }.start();
-
-        //start javaFX thread that notifs all to make code above happen (after wait)
-        new Thread() {
-
-        	public void run() {
-                window.Window.launch(Window.class, args);                
-        	}
-        }.start();
+	public Controller() {
+		Waiter waiter = new Waiter();
+        waiterRunner = new WaiterRunner(waiter);
+		
 	}
 	
-	/* 
-	 /////////////////////////////////////
-	 //	Everything moved to controller:	//
-	 /////////////////////////////////////	 
+	public void initializeGame() {
+		//Here should we initialize everything linked to window
+		
+		//Reset everything to water
+		//Place ships
+		//Creates ur playingField
+        main.Main.myMatrix = new Matrix(10,10,this);
+        
+        
+        //creates empty "projection" of enemy field
+        main.Main.itMatrix = new Matrix(10,10,this);
+        placeShips();
+        
+	}
+	
+	public void placeShips() {
+		//Place ships here
+		//customize your ship layout here
+        main.Main.myMatrix.putHull(3);
+        
+	}
 	
 	
-	public static void host() {
+	public void host() {
 		//Host
 		//current model of thought says that this should be run when waiting for a response from the other player
 		
@@ -92,12 +74,12 @@ public class Main {
 	        
 	        System.out.println("UR TURN");
 	        window.Window.appendLog("UR TURN");
-	        
-	        //int cordX = Integer.parseInt(JOptionPane.showInputDialog("cord X"));
-	        //int cordY = Integer.parseInt(JOptionPane.showInputDialog("cord Y"));
-	        //cords[0] = cordX;
-	        //cords[1] = cordY;
-	        
+	        /*
+	        int cordX = Integer.parseInt(JOptionPane.showInputDialog("cord X"));
+	        int cordY = Integer.parseInt(JOptionPane.showInputDialog("cord Y"));
+	        cords[0] = cordX;
+	        cords[1] = cordY;
+	        */
         	giveCords = true;
 	        waiter();    
 	        
@@ -112,7 +94,7 @@ public class Main {
 	
 	
 	
-	public static void join(String ip) {
+	public void join(String ip) {
 
 		//Joiner
         Requester3 client = new Requester3(); // an object wi
@@ -132,13 +114,13 @@ public class Main {
         draw();
         
         for (int i = 0; i < 10; i++) {
-        	
-	        //int cordX = Integer.parseInt(JOptionPane.showInputDialog("cord X"));
-	        //int cordY = Integer.parseInt(JOptionPane.showInputDialog("cord Y"));
+        	/*
+	        int cordX = Integer.parseInt(JOptionPane.showInputDialog("cord X"));
+	        int cordY = Integer.parseInt(JOptionPane.showInputDialog("cord Y"));
 
-	        //cords[0] = cordX;
-	        //cords[1] = cordY;
-	        
+	        cords[0] = cordX;
+	        cords[1] = cordY;
+	        */
         	giveCords = true;
 	        waiter();
 	        
@@ -164,13 +146,11 @@ public class Main {
         client.disconnect();
 	}
 	
-	
-	
-	private static void draw() {
+	private void draw() {
         window.Window.draw();
 	}
 
-	public static void waiter() {
+	public void waiter() {
 		waiterRunner.run();
 	}
 	
@@ -180,20 +160,20 @@ public class Main {
 	public static boolean canCord() {
     	return giveCords;
 	}
-	public static void loose() {
+	public void loose() {
 		System.out.println("DEVHELP: LOST CALLED");
 		lost = true;
 	}
-	public static boolean hasLost() {
+	public boolean hasLost() {
 		return lost;
 	}
-	public static void win() {
+	public void win() {
 		System.out.println("DEVHELP: WIN CALLED");
 		won = true;
 	}
-	public static boolean hasWon() {
+	public boolean hasWon() {
 		return won;
 	}
-*/	
+
 
 }

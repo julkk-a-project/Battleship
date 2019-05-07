@@ -31,7 +31,7 @@ public class NewGame extends Application{
 	}
 	
 	
-	
+	//For testing only
 	public static void main(String[] args) {
 		launch(NewGame.class, args);
 	}
@@ -48,9 +48,6 @@ public class NewGame extends Application{
         primaryStage.show();	
 	}
 	
-	
-	
-
 	
 	
 	public Parent load() {
@@ -130,8 +127,11 @@ public class NewGame extends Application{
 		//'New Game'-button
 	    buttonNewGame.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
-            	main.Main.myMatrix = new Matrix(10,10);
-            	main.Main.myMatrix.putHull(3);
+            	System.out.println("You pushed 'Start Game'");
+            	/*main.Main.myMatrix = new Matrix(10,10);
+            	main.Main.myMatrix.putHull(3);*/
+            	new Window();
+            	System.out.println("You pushed 'Start Game'. This is after myMatrix");
             }
         });
 

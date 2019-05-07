@@ -4,7 +4,7 @@ public class WaiterRunner implements Runnable {
 
 	private Waiter waiter;
 	
-	WaiterRunner(Waiter waiter){
+	public WaiterRunner(Waiter waiter){
 		this.waiter = waiter;
 	}
 	

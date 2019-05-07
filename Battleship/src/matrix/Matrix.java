@@ -1,5 +1,6 @@
 package matrix;
 
+import controller.Controller;
 import tiles.AbstractTile;
 import tiles.Hit;
 import tiles.Hull;
@@ -20,7 +21,7 @@ import tiles.Water;
 
 public class Matrix {
 	
-	
+	private Controller controller;
 	private AbstractTile[][] matrix;
 	private int x;
 	private int y;
@@ -28,7 +29,8 @@ public class Matrix {
 	/*
 	 * create a matrix with x*y tiles of tile type "Water"
 	 */
-	public Matrix(int x, int y){
+	public Matrix(int x, int y, Controller controller){
+		this.controller = controller;
 		this.x = x;
 		this.y = y;
 		matrix = new AbstractTile[x][y];
@@ -312,7 +314,7 @@ public class Matrix {
 		
 				if (countTiles(new Hull()) <= 0) {
 					anserw += "1";
-					main.Main.loose();
+					controller.loose();
 				}else {
 					anserw += "0";
 				}
@@ -353,7 +355,7 @@ public class Matrix {
     	}
     	
     	if(won == 1) {
-    		main.Main.win();
+    		controller.win();
     	}
     	
     	

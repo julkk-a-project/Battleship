@@ -7,8 +7,6 @@ import java.net.*;
 
 import javax.swing.JOptionPane;
 
-import tiles.Hit;
-import tiles.Miss;
 
 public class Requester3 {
     Socket requestSocket; 	// skapar en referens till requestSocket av typen Socket i klassen java.net

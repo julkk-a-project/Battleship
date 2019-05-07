@@ -1,7 +1,6 @@
 package window;
 
 import java.util.Optional;
-import javax.swing.JOptionPane;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
@@ -29,11 +28,11 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import matrix.Matrix;
+import tiles.Water;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
  
@@ -55,15 +54,19 @@ public class Window extends Application {
 	//Tile tile = new Tile();
 	//Color myColor = Tile.getColor(matrix.getTile(1, 2).getRep());
 	
+	/*public Window() {
+		launch(Window.class);
+	}*/
+	
 	//This launches everything:
 	public static void main(String[] args) {
 		
-		//TEMPORARY
+		/*//TEMPORARY
 		myMatrix = new Matrix(10,10);
 		myMatrix.putHull(2);
 		
 		itMatrix = new Matrix(10,10);
-		itMatrix.putHull(3);
+		itMatrix.putHull(3);*/
 		
 		
 		
@@ -106,7 +109,9 @@ public class Window extends Application {
         
 
 		draw(); //makes sure tiles get updated.
-        main.Main.waker(); //makes sure other thread starts running again
+        
+		//TODO: 
+		controller.Controller.waker(); //makes sure other thread starts running again
 
 	}
 	
@@ -250,6 +255,7 @@ public class Window extends Application {
 		for(int i = 0; i < 10; i++) {
 			for(int j = 0; j < 10; j++) {
 				itTiles[i][j] = new Tile(i, j);
+				itTiles[i][j].setTileType(itMatrix.getTile(i, j));
 
 				itTiles[i][j].setTranslateX(j * 20 + xOffSet);
 				itTiles[i][j].setTranslateY(i * 20 + yOffSet);
@@ -267,6 +273,7 @@ public class Window extends Application {
 		for(int i = 0; i < 10; i++) {
 			for(int j = 0; j < 10; j++) {
 				myTiles[i][j] = new Tile(i, j);
+				myTiles[i][j].setTileType(myMatrix.getTile(i, j));
 
 				myTiles[i][j].setTranslateX(j * 20 + xOffSet);
 				myTiles[i][j].setTranslateY(i * 20 + yOffSet);
@@ -409,8 +416,8 @@ public class Window extends Application {
 	public static void draw() {
 		for(int i = 0; i < 10; i++) {
 			for(int j = 0; j < 10; j++) {
-				myTiles[i][j].draw(main.Main.myMatrix);
-				itTiles[i][j].draw(main.Main.itMatrix);
+				myTiles[i][j].draw();
+				itTiles[i][j].draw();
 			}
 		}
 	}	
