@@ -14,6 +14,10 @@ public class Controller {
 	private static boolean lost = false;
 	private static boolean won = false;
 	public static WaiterRunner waiterRunner;
+
+	private static Provider3 server;
+
+	private static Requester3 client;
 	
 	
 
@@ -51,7 +55,7 @@ public class Controller {
 		//current model of thought says that this should be run when waiting for a response from the other player
 		
 		hisTurn = true;
-        Provider3 server = new Provider3();
+        server = new Provider3();
         //Requester3 client = new Requester3();
 
         //We'll see if this is even needed now :)))
@@ -97,7 +101,7 @@ public class Controller {
 	public void join(String ip) {
 
 		//Joiner
-        Requester3 client = new Requester3(); // an object wi
+        client = new Requester3(); // an object wi
 
         //Connects
         client.setServer(ip); //IP to connect to
@@ -147,6 +151,22 @@ public class Controller {
 	        
         }
         client.disconnect();
+	}
+	
+
+	public static void disconnectAny() {
+		try {
+			server.disconnect();
+		}catch(Exception e) {
+			
+		}
+		
+		try {
+			client.disconnect();
+			
+		}catch(Exception e) {
+			
+		}
 	}
 	
 	private void draw() {

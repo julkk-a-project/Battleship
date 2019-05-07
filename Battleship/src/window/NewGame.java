@@ -18,19 +18,14 @@ import javafx.stage.Stage;
 
 public class NewGame extends Application {
 	
-	BorderPane border = new BorderPane();
-	GridPane root = new GridPane();
-	ToggleGroup group = new ToggleGroup();
-	
 	RadioButton computer, host, join;
-	Button startGame, cancel;
-	Text text, plyrName, textSubheading2, ip;
 	TextField name, ipAddress;
+	Button startGame, cancel;
 	
-	
-	public NewGame() {
-		//border.setCenter();	
-	}
+	/*public NewGame() {
+		//border.setCenter(load());	
+		
+	}*/
 	
 	
 	//For testing only
@@ -42,7 +37,8 @@ public class NewGame extends Application {
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		
+		BorderPane border = new BorderPane();
+		border.setCenter(load());
 		//Sets everything visible
 	    Scene scene = new Scene(border);
         primaryStage.setScene(scene);
@@ -54,16 +50,16 @@ public class NewGame extends Application {
 	
 	public Parent load() {
 		
-		text = new Text("Create New Game: ");				//Create text
+		Text text = new Text("Create New Game: ");				//Create text
 		text.setFont(new Font("Agency FB", 20));			//set font and size		
 		
-		plyrName = new Text("Player Name: ");				//Create text
+		Text plyrName = new Text("Player Name: ");				//Create text
 		plyrName.setFont(new Font("Agency FB", 14));		//set font and size
 		
-		textSubheading2 = new Text("Choose opponent: ");	//Create text
+		Text textSubheading2 = new Text("Choose opponent: ");	//Create text
 		textSubheading2.setFont(new Font("Agency FB", 14));	//set font and size
 		
-		ip = new Text("IP address: ");						//Create text
+		Text ip = new Text("IP address: ");						//Create text
 		ip.setFont(new Font("Agency FB", 14));				//set font and size
 		ip.setTranslateY(45);								//Position of RadioButton Y-axis
 		
@@ -77,6 +73,7 @@ public class NewGame extends Application {
 		ipAddress.setTranslateY(45);						//Position of RadioButton Y-axis
 		ipAddress.autosize();								//autoSize textField
 		
+		GridPane root = new GridPane();
 		root.setPrefSize(360,290);							//set size of GridPane
 		root.setPadding(new Insets(10, 10, 10, 5));			//set padding around	
 		//root.setAlignment(Pos.TOP_LEFT);					//Position of Grid
@@ -97,6 +94,7 @@ public class NewGame extends Application {
 	    cancel.setTranslateY(100);				//Position of Button Y-axis
 	    cancel.setCancelButton(true);			//Set button to be a 'Cancel-button'
 
+	    ToggleGroup group = new ToggleGroup();
 	    computer = new RadioButton("Computer");
 	    computer.setToggleGroup(group);			//Set to toggle group
 	    computer.setSelected(true);				//Set autoSelected
@@ -108,7 +106,7 @@ public class NewGame extends Application {
 	    host.setTranslateX(0);					//Position of RadioButton X-axis
 	    host.setTranslateY(25);					//Position of RadioButton Y-axis
 		
-		join = new RadioButton("Join");
+	    join = new RadioButton("Join");
 		join.setToggleGroup(group);				//Set to toggle group
 		join.setTranslateX(0);					//Position of RadioButton X-axis
 		join.setTranslateY(30);					//Position of RadioButton Y-axis
@@ -147,7 +145,7 @@ public class NewGame extends Application {
 	    
 	    
 	    //////////////////////////////////
-	    //	Adding stuff too GridPane	//
+	    //	Adding stuff to GridPane	//
 	    //////////////////////////////////
 	    
 	    root.add(text, 0, 0);
@@ -181,6 +179,8 @@ public class NewGame extends Application {
 			main.Main.gameMode = value;
 			System.out.println("Join is selected " + value);
 		}
+		
+		window.Window.text2.setText(name.getText());
 		
 		main.Main.controller.initializeGame();
 		

@@ -39,9 +39,8 @@ public class Window extends Application {
 	
 	BorderPane border = new BorderPane();		//Adding new borderPane to organize shit
 	
-	public String plyrName;
-	//public static Matrix myMatrix;
-	//public static Matrix itMatrix;
+
+	public static Text text2;
 	public static Tile[][] myTiles;
 	public static Tile[][] itTiles;
 	public static String[] subHeading = {"Aircraft Carrier", "Battleship", "Destroyer", "Submarine", "Torpedo Boat"};
@@ -70,7 +69,7 @@ public class Window extends Application {
 		text1.setTranslateX(-100);							//position X-axis
 		text1.setVisible(true);								//set visible
 		
-		Text text2 = new Text(plyrName);						//add new text
+		text2 = new Text("plyrName");						//add new text
 		text2.setFont(new Font("Agency FB", 16));			//set font and size
 		text2.setTranslateX(-100);							//position X-axis
 		text2.setTranslateY(240);							//position Y-axis
@@ -337,6 +336,8 @@ public class Window extends Application {
 		});
 		
 		
+		
+		
 		//ActionEvent for click on 'QUit'
 		itmQuit.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
@@ -352,7 +353,8 @@ public class Window extends Application {
           	
             	Optional<ButtonType> result = alert.showAndWait();
 				if (result.get() == buttonTypeOK){
-					Platform.exit();
+					controller.Controller.disconnectAny();
+					System.exit(0);
 				} else {
 					//TODO: How to get this to go back to program
 					alert.showAndWait();
@@ -396,6 +398,11 @@ public class Window extends Application {
 	
 	public static void appendLog(String string) {
 		log.appendText(string+"\n");
+	}
+	
+	public void stop() throws Exception{
+		controller.Controller.disconnectAny();
+		System.exit(0);
 	}
 		
 	
