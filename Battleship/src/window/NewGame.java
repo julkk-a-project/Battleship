@@ -50,16 +50,16 @@ public class NewGame extends Application {
 	
 	public Parent load() {
 		
-		Text text = new Text("Create New Game: ");				//Create text
+		Text text = new Text("Create New Game: ");			//Create text
 		text.setFont(new Font("Agency FB", 20));			//set font and size		
 		
-		Text plyrName = new Text("Player Name: ");				//Create text
+		Text plyrName = new Text("Player Name: ");			//Create text
 		plyrName.setFont(new Font("Agency FB", 14));		//set font and size
 		
-		Text textSubheading2 = new Text("Choose opponent: ");	//Create text
+		Text textSubheading2 = new Text("Choose opponent: ");//Create text
 		textSubheading2.setFont(new Font("Agency FB", 14));	//set font and size
 		
-		Text ip = new Text("IP address: ");						//Create text
+		Text ip = new Text("IP address: ");					//Create text
 		ip.setFont(new Font("Agency FB", 14));				//set font and size
 		ip.setTranslateY(45);								//Position of RadioButton Y-axis
 		
@@ -74,7 +74,7 @@ public class NewGame extends Application {
 		ipAddress.autosize();								//autoSize textField
 		
 		GridPane root = new GridPane();
-		root.setPrefSize(360,290);							//set size of GridPane
+		root.setPrefSize(360,310);							//set size of GridPane
 		root.setPadding(new Insets(10, 10, 10, 5));			//set padding around	
 		//root.setAlignment(Pos.TOP_LEFT);					//Position of Grid
 		
@@ -83,17 +83,25 @@ public class NewGame extends Application {
 		// Buttons //
 		/////////////
 		
+		//Ordinary buttons
 		startGame = new Button("Start Game");
 		startGame.setPrefSize(90, 20);			//set size of Button
 		startGame.setTranslateX(0);				//Position of Button X-axis
-		startGame.setTranslateY(100);			//Position of Button Y-axis
+		startGame.setTranslateY(110);			//Position of Button Y-axis
 		
 		cancel = new Button("Cancel");
 	    cancel.setPrefSize(90, 20);				//set size of Button
 	    cancel.setTranslateX(10);				//Position of Button X-axis
-	    cancel.setTranslateY(100);				//Position of Button Y-axis
+	    cancel.setTranslateY(110);				//Position of Button Y-axis
 	    cancel.setCancelButton(true);			//Set button to be a 'Cancel-button'
-
+	    
+	    Button rePlaceShips = new Button("Re-place ships");
+	    rePlaceShips.setPrefSize(100, 20);				//set size of Button
+	    rePlaceShips.setTranslateX(0);				//Position of Button X-axis
+	    rePlaceShips.setTranslateY(100);				//Position of Button Y-axis
+	    
+	    
+	    //RadioButtons
 	    ToggleGroup group = new ToggleGroup();
 	    computer = new RadioButton("Computer");
 	    computer.setToggleGroup(group);			//Set to toggle group
@@ -120,7 +128,10 @@ public class NewGame extends Application {
 		//'Name'-field
 		//plyrName.setUserData(Object value);	//maybeShould use this to get the userData? Not sure.
 		
-		
+		//'Cancel'-button
+	    rePlaceShips.setOnAction(e -> {
+	    	controller.ShipPlacer.shipPlacer();
+	    });
 		
 		//'New Game'-button
 	    startGame.setOnAction(e-> handleButtonAction(e));
@@ -157,8 +168,9 @@ public class NewGame extends Application {
 	    root.add(join, 1, 4);
 	    root.add(ip, 0, 6);
 	    root.add(ipAddress, 1, 6);
-	    root.add(startGame, 1, 7);
-	    root.add(cancel, 2, 7);
+	    root.add(rePlaceShips, 1, 7);
+	    root.add(startGame, 1, 8);
+	    root.add(cancel, 2, 8);
 	    
 		return root;
 	}

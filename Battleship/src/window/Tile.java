@@ -12,7 +12,6 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 import matrix.Matrix;
-import tiles.AbstractTile;
 
 public class Tile extends StackPane {
 	public boolean isOpen;

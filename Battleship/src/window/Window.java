@@ -2,7 +2,6 @@ package window;
 
 import java.util.Optional;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -31,7 +30,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import matrix.Matrix;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
  
@@ -115,12 +113,6 @@ public class Window extends Application {
         primaryStage.setScene(scene);
         primaryStage.setTitle("BattleShip");
         primaryStage.show();
-        
-		//draw(); //makes sure tiles get updated.
-        
-		//TODO: 
-		//controller.Controller.waker(); //makes sure other thread starts running again
-
 	}
 	
 	
@@ -338,7 +330,7 @@ public class Window extends Application {
 		
 		
 		
-		//ActionEvent for click on 'QUit'
+		//ActionEvent for click on 'Quit'
 		itmQuit.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				
@@ -356,7 +348,7 @@ public class Window extends Application {
 					controller.Controller.disconnectAny();
 					System.exit(0);
 				} else {
-					//TODO: How to get this to go back to program
+					//TODO: How to get this to go back to program in 1 click
 					alert.showAndWait();
 				}	
 			}
