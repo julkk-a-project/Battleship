@@ -37,12 +37,14 @@ public class Main {
         		won = false;
         		lost = false;
         		System.out.println("before waiter");
-        		
+        		Controller.waiter();
         		System.out.println("after waiter");
 				
 				//host or join
         		while(true) {
-        			controller.waiter();
+            		System.out.println("before waiter");
+        			Controller.waiter();
+            		System.out.println("after waiter");
         			
         			if (gameMode == "0"){
             			System.out.println("INSERT AI GAME MODE HERE AHAHAHA ÄKSDEE");
@@ -51,7 +53,7 @@ public class Main {
     					controller.host();
     				}
             		else if(gameMode == "2") {
-            			
+            			System.out.println("Entered shipBuilding Mode");
             		}
     				else {
     					//check if IP inPutted

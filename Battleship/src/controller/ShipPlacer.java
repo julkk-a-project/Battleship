@@ -1,6 +1,14 @@
 package controller;
 
+
+//TODO: This should propably be used as an object created in main...
+
 public class ShipPlacer {
+	
+
+	private static int x;
+	private static int y;
+	
 	public static void shipPlacer() {
 		//public boolean placeShip(int x, int y, int length, boolean vertical) 
 		int[]ships = {5,4,3,3,2};
@@ -14,15 +22,24 @@ public class ShipPlacer {
 		
 		while(main.Main.gameMode == "2") {
 			
+			
+			
+			
 			//TODO: Get inparameters for "place ship" via gui when "open" is called on tile.
 			//open would then wake the system.
 			//MAKE SURE IT CAN ONLY HAPPEN WHEN IN GAMEMODE 2
 			controller.Controller.waiter();
-			if(main.Main.myMatrix.placeShip(x, y, length, vertical)) {
+			if(main.Main.myMatrix.placeShip(x, y, length, main.Main.vertical)) {
 				return;
 				//controller.Controller.waker();
 			}	
 		}
+	}
+
+	
+	public static void setCords(int x, int y){
+		ShipPlacer.x = x;
+		ShipPlacer.y = y;
 	}
 
 }

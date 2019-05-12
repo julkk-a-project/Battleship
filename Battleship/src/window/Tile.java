@@ -1,6 +1,7 @@
 package window;
 
 
+import controller.ShipPlacer;
 import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -105,7 +106,12 @@ public class Tile extends StackPane {
 			controller.Controller.cords = cords;
 			controller.Controller.waker();
 			System.out.println("cordsChanged");
-		} else {
+		}
+		else if (main.Main.gameMode == "2") {
+			ShipPlacer.setCords(x,y);
+		}
+		
+		else {
 			System.out.println("cordsNotChanged");
 			window.Window.draw();
 		}
