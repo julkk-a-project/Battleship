@@ -29,7 +29,8 @@ public class ShipPlacer {
 			//open would then wake the system.
 			//MAKE SURE IT CAN ONLY HAPPEN WHEN IN GAMEMODE 2
 			controller.Controller.waiter();
-			if(main.Main.myMatrix.placeShip(x, y, length, main.Main.vertical)) {
+			if(main.Main.myMatrix.placeShip(x, y, length, !main.Main.vertical)) {
+				window.Window.draw();
 				return;
 				//controller.Controller.waker();
 			}	

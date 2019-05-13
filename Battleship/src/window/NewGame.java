@@ -1,5 +1,7 @@
 package window;
 
+import javax.swing.JOptionPane;
+
 import controller.Controller;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -130,14 +132,15 @@ public class NewGame extends Application {
 		
 		//'Cancel'-button
 	    rePlaceShips.setOnAction(e -> {
-	    	controller.ShipPlacer.shipPlacer();
+	    	main.Main.controller.initializeGame();
+	    	main.Main.gameMode = "2";
+	    	controller.Controller.waker();
+	    	Stage stage = (Stage) rePlaceShips.getScene().getWindow();
+	    	stage.close();
 	    });
 		
 		//'New Game'-button
-	    startGame.setOnAction(e-> handleButtonAction(e));
-            	//System.out.println("You pushed 'Start Game'");
-            	
-            	//main.Main.gameMode = 
+	    startGame.setOnAction(e-> handleButtonAction(e)); 
             	//System.out.println(selectedRadioButton);
             	
 
@@ -176,7 +179,7 @@ public class NewGame extends Application {
 	}
 
 	//For handling RadioButton-choices
-	private  String handleButtonAction(ActionEvent e) {
+	private String handleButtonAction(ActionEvent e) {
 		String value;
 		if(computer.isSelected()) {
 			value = "0";
@@ -188,6 +191,12 @@ public class NewGame extends Application {
 			System.out.println("Host is selected " + value);
 		} else {
 			value = getIp();
+			System.out.println("\""+value+"\"");
+			if (value.length() < 6) {
+				System.out.println("null ip");
+				JOptionPane.showMessageDialog(null, "Please enter IP!");
+				return value;
+			}
 			main.Main.gameMode = value;
 			System.out.println("Join is selected " + value);
 		}
@@ -206,6 +215,7 @@ public class NewGame extends Application {
 
 
 	private String getIp() {
+		
 		return ipAddress.getText();
 	}	
 }

@@ -109,6 +109,7 @@ public class Tile extends StackPane {
 		}
 		else if (main.Main.gameMode == "2") {
 			ShipPlacer.setCords(x,y);
+			controller.Controller.waker();
 		}
 		
 		else {

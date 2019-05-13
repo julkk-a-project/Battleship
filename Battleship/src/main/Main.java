@@ -1,6 +1,7 @@
 package main;
 
 import controller.Controller;
+import controller.ShipPlacer;
 import matrix.Matrix;
 import window.Tile;
 import window.Window;
@@ -36,9 +37,11 @@ public class Main {
         		
         		won = false;
         		lost = false;
+        		/*
         		System.out.println("before waiter");
         		Controller.waiter();
         		System.out.println("after waiter");
+        		*/
 				
 				//host or join
         		while(true) {
@@ -54,6 +57,7 @@ public class Main {
     				}
             		else if(gameMode == "2") {
             			System.out.println("Entered shipBuilding Mode");
+            			ShipPlacer.shipPlacer();
             		}
     				else {
     					//check if IP inPutted

@@ -38,13 +38,14 @@ public class Controller {
         
         //creates empty "projection" of enemy field
         main.Main.itMatrix = new Matrix(10,10,this);
-        placeShips();
+        //placeShips();
         
 	}
 	
 	public void placeShips() {
 		//Place ships here
 		//customize your ship layout here
+		ShipPlacer.shipPlacer();
         main.Main.myMatrix.putHull(3);
         
 	}

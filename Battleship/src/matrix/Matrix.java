@@ -212,7 +212,7 @@ public class Matrix {
 			ilogicalPlacerRec(x-1,y, target);
 			 
 			if(target.getRep() == 2) {
-				setTile(x,y, new Hit());				
+				//setTile(x,y, new Hit()); //IDK WHY tHsi IS HERE :S				
 			}
 
 		}
@@ -226,27 +226,49 @@ public class Matrix {
 		try {
 			AbstractTile target = getTile(x,y);
 			
-			if(target.getRep() == 2) {
+			if(target.getRep() == 2 || target.getRep() == 3) {
 
-				if (target != parent) {
-					ilogicalPlacerRec(x,y+1, target);
+				
+				try {
+					if (getTile(x,y+1) != parent) {
+						ilogicalPlacerRec(x,y+1, target);
+					}
+				} catch(IndexOutOfBoundsException e) {
+					System.out.println("Matrix: x,y+1 indexoutofboundsexception");
 				}
-				if (target != parent) {
-					ilogicalPlacerRec(x,y-1, target);
+				try {
+					if (getTile(x,y-1) != parent) {
+						ilogicalPlacerRec(x,y-1, target);
+					}
+				} catch(IndexOutOfBoundsException e) {
+					System.out.println("Matrix: x,y-1 indexoutofboundsexception");
 				}
-				if (target != parent) {
-					ilogicalPlacerRec(x+1,y, target);			
+				try {
+
+					if (getTile(x+1,y) != parent) {
+						ilogicalPlacerRec(x+1,y, target);			
+					}
+				} catch(IndexOutOfBoundsException e) {
+					System.out.println("Matrix: x+1,y indexoutofboundsexception");
 				}
-				if (target != parent) {
-					ilogicalPlacerRec(x-1,y, target);			
-				}	
+				try {
+
+					if (getTile(x-1,y) != parent) {
+						ilogicalPlacerRec(x-1,y, target);			
+					}
+				} catch(IndexOutOfBoundsException e) {
+					System.out.println("Matrix: x-1,y indexoutofboundsexception");
+				}
+					
 			}
 			else if (target.getRep() == 0) {
 				setTile(x,y,new Ilogical());
 			}
 			
 			
+			
 		}catch(IndexOutOfBoundsException e) {
+			System.out.println("Matrix: x,y+1 indexoutofboundsexception");
 			
 		}
 	}

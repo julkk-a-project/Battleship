@@ -39,23 +39,16 @@ import javafx.scene.text.Text;
 public class Window extends Application {
 	
 	BorderPane border = new BorderPane();		//Adding new borderPane to organize shit
-	RadioButton horizontal, vertical;
+	static RadioButton horizontal;
+	RadioButton vertical;
 	private ToggleGroup group;
 
 	public static Text text2;
-	public static Tile[][] myTiles;
-	public static Tile[][] itTiles;
-	public static String[] subHeading = {"Aircraft Carrier", "Battleship", "Destroyer", "Submarine", "Torpedo Boat"};
+	private static Tile[][] myTiles;
+	private static Tile[][] itTiles;
+	private static String[] subHeading = {"Aircraft Carrier", "Battleship", "Destroyer", "Submarine", "Torpedo Boat"};
 
 	private static TextArea log;
-
-
-	
-	/*public Window() {
-		
-	}*/
-	
-	
 	
 	//Our gridPane
 	public Parent addGridPane() {
@@ -89,19 +82,19 @@ public class Window extends Application {
 
 	
 	
-	//Constructor should replace this:
-	//public static void main(String[] args) {
+	/*Constructor should replace this:
+	public static void main(String[] args) {
 		
-		/*//TEMPORARY
+		//TEMPORARY
 		myMatrix = new Matrix(10,10);
 		myMatrix.putHull(2);
 		
 		itMatrix = new Matrix(10,10);
-		itMatrix.putHull(3);*/
+		itMatrix.putHull(3);
 		
-	//	launch(Window.class, args);
-		//System.out.println(javafx.scene.text.Font.getFamilies());			//Gets what fonts available
-	//}
+		launch(Window.class, args);
+		System.out.println(javafx.scene.text.Font.getFamilies());			//Gets what fonts available
+		}*/
 	
 	
 	
@@ -135,36 +128,27 @@ public class Window extends Application {
 	    vBoxLeft.setPrefSize(200, 600);							//Preferred size
 	    vBoxLeft.setSpacing(1);									//Adding space between stuff
 	    vBoxLeft.setStyle("-fx-background-color: #f0f8ff;");	//Set background color
-
 	    
-	    //Saved in case I would need a button:
-	    
-	    /*Button btnSend = new Button("Send Message");
-	    btnSend.setPrefSize(100, 20);
-	    Button buttonProjected = new Button("Projected");
-	    buttonProjected.setPrefSize(100, 20);
-	    vBoxLeft.getChildren().addAll(btnSend, buttonProjected);*/
-
 	    return vBoxLeft;
 	}
 	
 	
-	/*
-	//Creating FlowPane (In FlowPane the nodes are laid out consecutively and wrap at the boundary set for the pane.)
+	
+	/*//Creating FlowPane (In FlowPane the nodes are laid out consecutively and wrap at the boundary set for the pane.)
 	public FlowPane addFlowPane() {
 		FlowPane flow = new FlowPane();
 		flow.setPadding(new Insets(15, 15, 15, 15));
 		flow.setVgap(4);
 		flow.setHgap(4);
-		//flow.setPrefWrapLength(170); // preferred width allows for two columns
+		flow.setPrefWrapLength(170); // preferred width allows for two columns
 		flow.setStyle("-fx-background-color: DAE6F3;");
 
 		ImageView pages[] = new ImageView[5];
 		for (int i=0; i<5; i++) {
 			//i = subHeading[i];
 			pages[i] = new ImageView(
-					new Image(Window.class.getResourceAsStream(
-							"Boat"+(i+1)+".gif")));
+						new Image(Window.class.getResourceAsStream(
+								"Boat"+(i+1)+".gif")));
 			flow.getChildren().add(pages[i]);
 		}
 
@@ -177,7 +161,6 @@ public class Window extends Application {
 		ships.setFont(new Font("Agency FB", 20));					//Set font and size for heading
 		
 		//Should be an easier way to add lots of subHeadings, but this works
-		
 		Text subHeading1 = new Text("Aircraft Carrier (5 tiles) ");	//Create subHeadings for ships
 	    Text subHeading2 = new Text("Battleship (4 tiles) ");
 	    Text subHeading3 = new Text("Submarine (3 tiles) ");
@@ -195,7 +178,6 @@ public class Window extends Application {
 		
 	    
 	    //Should be an easier way to add lots of pics, but this works
-		
 	    Image aircraftCarrier = new Image("AircraftCarrier.gif", 115, 115, true, true);		//Create image (inputStream, requestedWidth, requestedHeight, preserveRatio, smooth)
 	    Image battleship = new Image("Battleship.gif", 100, 100, true, false);
 	    Image submarine = new Image("Submarine.gif", 85, 85, true, false);
@@ -227,6 +209,20 @@ public class Window extends Application {
 	    vBoxRight.setPrefSize(200, 600);								//Preferred size
 	    vBoxRight.setSpacing(5);										//Adding space between stuff
 	    vBoxRight.setStyle("-fx-background-color: #f0f8ff;");			//Set background color
+	    
+	    //////////////////////////////////////////////////////
+	    //	Action for radioButtons vertical and horizontal	//
+	    //////////////////////////////////////////////////////
+	    group.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+	    @Override
+	    public void changed(ObservableValue<? extends Toggle> ov, Toggle oldToggle, Toggle newToggle) {
+	    	 if (newToggle.isSelected()) {
+	    		 handleRadioButtons();
+	    	 } else {
+            	 handleRadioButtons();
+             }   
+	        }
+	    });
 	    
 	    return vBoxRight;
 	}
@@ -375,22 +371,7 @@ public class Window extends Application {
 			}
 		});
 		
-		group.selectedToggleProperty().addListener(new ChangeListener<Toggle>()
-	    {
-	    @Override
-	    public void changed(ObservableValue<? extends Toggle> ov, Toggle oldToggle, Toggle newToggle)
-	        {
-	    	 if (newToggle.isSelected()) {
-	    		 handleRadioButtons();
-	    	 }
-                
-             else {
-            	 handleRadioButtons();
-             }
-                 
-                
-	        }
-	    });
+		
 
 		//////////////////////////////////////
 		//  Some action to 'Settings'-menu	//
@@ -414,7 +395,9 @@ public class Window extends Application {
 		});
 		
 		return pane;
-	}
+	} //addMenuBar() end
+	
+	
 	
 	public static void draw() {
 		for(int i = 0; i < 10; i++) {
@@ -426,14 +409,19 @@ public class Window extends Application {
 	}	
 	
 	
+	
 	public static void appendLog(String string) {
 		log.appendText(string+"\n");
 	}
+	
+	
 	
 	public void stop() throws Exception{
 		controller.Controller.disconnectAny();
 		System.exit(0);
 	}
+	
+	
 	
 	public void handleRadioButtons() {
 		if(horizontal.isSelected()) {
@@ -443,6 +431,5 @@ public class Window extends Application {
 			main.Main.vertical = true;
 		}
 	}
-		
-	
+			
 }
