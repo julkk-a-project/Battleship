@@ -15,24 +15,22 @@ import javafx.util.Duration;
 import matrix.Matrix;
 
 public class Tile extends StackPane {
+	
 	public boolean isOpen;
+	private Rectangle border;
+	private static Color color;
 	private Text text = new Text();
 	private int[] cords;
 	private int x;
 	private int y;
 	
-	/*
-	 *  overview:			rep		AICanHit	use
+	/*		overview:		rep		AICanHit	use
 	 *  	Water 		= 	0		true		empty tile
 	 * 		Illogical	= 	1		false		for AI logic
 	 * 		Hull 		=	2		false		ship part
 	 * 		Hit 		=	3		false		broken ship part
-	 * 		Miss 		=	4		false		a shot that landed in water
-	 */
-	
-	//Make sure colors are saved in the order they are in the table above
-	
-	private static Color[] colorList = {	//CUSTOMIZED COLORS
+	 * 		Miss 		=	4		false		a shot that landed in water */
+	private static Color[] colorList = {												//CUSTOMIZED COLORS
 									new Color(0, 0, 1, 1.0), 							//[0] water = blue
 									new Color(1, 1, 1, 1.0),							//[1] illogical = black
 									new Color(0.75, 0.75, 0.75, 1.0),					//[2] hull = gray
@@ -40,10 +38,9 @@ public class Tile extends StackPane {
 									new Color(1, 1, 0, 1.0),							//[4] miss = yellow
 									new Color(0.96078431, 0.96078431, 0.86274510, 1.0)	//[5] default = beige	
 									};
-	private Rectangle border;
 	
-	private static Color color;
-
+	
+	
 	public Tile(int x, int y) {
 		cords = new int[2];
 		cords[0] = x;
@@ -77,6 +74,8 @@ public class Tile extends StackPane {
 		return border;
 	}
 
+	
+	
 	public Rectangle setColorRep(int rep) {
 		border.setFill(getColor(rep));	
 		return border;
@@ -95,7 +94,7 @@ public class Tile extends StackPane {
 		System.out.println("openCalled");
 		
 		//When working correctly, color should change, and after shot is processed, color should...
-		//change to rep that tile has changed to.
+		//...change to rep that tile has changed to.
 		
 		//FadeTransition ft = new FadeTransition(Duration.seconds(0.6),setColorRep(5));
 		//ft.setToValue(1);
@@ -104,8 +103,9 @@ public class Tile extends StackPane {
 		
 		if (main.Main.itMatrix.isLeagalCord(x,y) && controller.Controller.canCord()) {
 			controller.Controller.cords = cords;
+			System.out.println("coordsChanged");
 			controller.Controller.waker();
-			System.out.println("cordsChanged");
+			
 		}
 		else if (main.Main.gameMode == "2") {
 			ShipPlacer.setCords(x,y);
@@ -113,7 +113,7 @@ public class Tile extends StackPane {
 		}
 		
 		else {
-			System.out.println("cordsNotChanged");
+			System.out.println("coordsNotChanged");
 			window.Window.draw();
 		}
 		

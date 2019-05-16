@@ -1,7 +1,7 @@
 package controller;
 
 
-//TODO: This should propably be used as an object created in main...
+//TODO: This should probably be used as an object created in main...
 
 public class ShipPlacer {
 	
@@ -31,7 +31,7 @@ public class ShipPlacer {
 			controller.Controller.waiter();
 			if(main.Main.myMatrix.placeShip(x, y, length, !main.Main.vertical)) {
 				window.Window.draw();
-				//window.Window.draw2();
+				//window.Window.drawLower(); //TODO: should this be instead of draw()???
 				return;
 				//controller.Controller.waker();
 			}	

@@ -434,9 +434,18 @@ public class Window extends Application {
 				itTiles[i][j].draw(main.Main.itMatrix);
 			}
 		}
+	}
+	
+	public static void drawUpper() {
+		for(int i = 0; i < 10; i++) {
+			for(int j = 0; j < 10; j++) {
+				//myTiles[i][j].draw(main.Main.myMatrix);
+				itTiles[i][j].draw(main.Main.itMatrix);
+			}
+		}
 	}	
 	
-	public static void draw2() {
+	public static void drawLower() {
 		for(int i = 0; i < 10; i++) {
 			for(int j = 0; j < 10; j++) {
 				myTiles[i][j].draw(main.Main.myMatrix);

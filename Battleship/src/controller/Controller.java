@@ -32,7 +32,7 @@ public class Controller {
 		
 		//Reset everything to water
 		//Place ships
-		//Creates ur playingField
+		//Creates your playingField
         main.Main.myMatrix = new Matrix(10,10,this);
         
         

@@ -26,7 +26,7 @@ public class Main {
 	public static void main(String[] args) {
 		controller = new Controller();
 
-		//initilaizes default water matrixes, to avoid search in empty matrix.
+		//initializes default water matrixes, to avoid search in empty matrix.
         myMatrix = new Matrix(10,10,controller);
         itMatrix = new Matrix(10,10,controller);
 
@@ -68,7 +68,7 @@ public class Main {
         	}
         }.start();
 
-        //start javaFX thread that notifs all to make code above happen (after wait)
+        //start javaFX thread that notify all to make code above happen (after wait)
         new Thread() {
 
         	public void run() {

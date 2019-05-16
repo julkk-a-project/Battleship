@@ -51,7 +51,7 @@ public class Matrix {
 	
 	
 	/*
-	 * replaces tile on cordinate x,y to 3rd parameter (AbstractTile). make sure to make it a new object.
+	 * replaces tile on coordinate x,y to 3rd parameter (AbstractTile). make sure to make it a new object.
 	 */
 	public void setTile(int x, int y, AbstractTile replacement) {
 		matrix[x][y] = replacement;	
@@ -109,51 +109,51 @@ public class Matrix {
 	}
 	
 	/*
-	 * ShipPlacementChekker. cheks if a ship can be placed where you want it to be placed.
+	 * ShipPlacementChekker. checks if a ship can be placed where you want it to be placed.
 	 * first two parameters for north-western corner
 	 * 3rd for how long the ship is in tiles
 	 * 4th boolean for if the ship is vertical, else horizontal.
 	 */
 	private boolean canPlaceShip(int x, int y, int length, boolean vertical) {
-		boolean anserw = false;
+		boolean answer = false;
 		
 		
-		//Chek if it can fit where you want it to
+		//Check if it can fit where you want it to
 		if (vertical) {
 			//when vertical
 			if ((this.y - y) >= length) {
-				anserw = true;
+				answer = true;
 			}else {
 				return false;
 			}
 		}else {
 			//when horizontal
 			if ((this.x - x) >= length) {
-				anserw = true;
+				answer = true;
 			}else {
 				return false;
 			}
 		}
 		
 		
-		//Chek if it intersects only "Water"
+		//Check if it intersects only "Water"
 		if (vertical) {
 			//when vertical
 			for (int i = 0; i < length; i++) {
 				if (!(getTile(x,y+i).getRep() == 0)) {
-					anserw = false;
+					answer = false;
 				}
 			}
 		}else {
 			//when horizontal
 			for (int i = 0; i < length; i++) {
 				if (!(getTile(x+i,y).getRep() == 0)) {
-					anserw = false;
+					answer = false;
 				}
 			}
 		}
 		
-		return anserw;
+		return answer;
 	}
 	
 	
@@ -185,7 +185,7 @@ public class Matrix {
 			}
 		}
 		
-		//places illogical from origin point to prevent you from placing illeagal ships :)
+		//places illogical from origin point to prevent you from placing illegal ships :)
 		ilogicalPlacer(x,y);
 		
 		return true;
@@ -212,7 +212,7 @@ public class Matrix {
 			ilogicalPlacerRec(x-1,y, target);
 			 
 			if(target.getRep() == 2) {
-				//setTile(x,y, new Hit()); //IDK WHY tHsi IS HERE :S				
+				//setTile(x,y, new Hit()); //IDK WHY tHis IS HERE :S				
 			}
 
 		}
@@ -277,7 +277,7 @@ public class Matrix {
 	
 	
 	/*
-	 * Cheks if you can leagally shoot at a specific tile
+	 * Checks if you can legally shoot at a specific tile
 	 */
 	public boolean isLeagalCord(int x, int y) {
 		if((this.x >= x && x > -1) && (this.y >= y && y > -1)) {
@@ -311,7 +311,7 @@ public class Matrix {
 	 * Handle hits on main board
 	 */
 	public String hitOrMiss(String xString, String yString) {
-		String anserw = "";
+		String answer = "";
 		
 		//parse
 		int x = Integer.parseInt(xString);
@@ -322,27 +322,27 @@ public class Matrix {
 		
 		
 		//Was it a hull?
-				anserw += hitEffectHandler(x,y);
+				answer += hitEffectHandler(x,y);
 
 		//Was there a boat that got sunk?
 		
 				//Handle that shit here :S AAMUJA!!!!
 			
 			//temporary:
-				anserw += "0,";
+				answer += "0,";
 		
 		
 		//did you just loose?
 		
 				if (countTiles(new Hull()) <= 0) {
-					anserw += "1";
+					answer += "1";
 					controller.loose();
 				}else {
-					anserw += "0";
+					answer += "0";
 				}
 
 		
-		return anserw;
+		return answer;
 	}
 	
 	
