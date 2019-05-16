@@ -128,9 +128,9 @@ public class NewGame extends Application {
 		/////////////////////////////
 		
 		//'Name'-field
-		//plyrName.setUserData(Object value);	//maybeShould use this to get the userData? Not sure.
+		//you can find this action in handleButtonAction()
 		
-		//'Cancel'-button
+		//'Re-place ships'-button
 	    rePlaceShips.setOnAction(e -> {
 	    	main.Main.controller.initializeGame();
 	    	main.Main.gameMode = "2";
@@ -206,7 +206,7 @@ public class NewGame extends Application {
 		
 		window.Window.text2.setText(name.getText());
 		
-		main.Main.controller.initializeGame();
+		
 		
 		Controller.waker();
 

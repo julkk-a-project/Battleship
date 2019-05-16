@@ -31,6 +31,7 @@ public class ShipPlacer {
 			controller.Controller.waiter();
 			if(main.Main.myMatrix.placeShip(x, y, length, !main.Main.vertical)) {
 				window.Window.draw();
+				//window.Window.draw2();
 				return;
 				//controller.Controller.waker();
 			}	
