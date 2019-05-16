@@ -70,7 +70,7 @@ public class NewGame extends Application {
 		name.autosize();									//autoSize textField
 		
 		ipAddress = new TextField();						//Create textField
-		//ipAddress.setVisible(false);						//TODO: actionlistener for togglegroup to know when join is selected and then IPaddress is shown.
+		//ipAddress.setVisible(false);						//TODO: actionListener for toggleGroup to know when join is selected and then IPaddress should pop up.
 		ipAddress.setFont(new Font("Agency FB", 12));		//set font and size
 		ipAddress.setTranslateY(45);						//Position of RadioButton Y-axis
 		ipAddress.autosize();								//autoSize textField
@@ -182,14 +182,17 @@ public class NewGame extends Application {
 	private String handleButtonAction(ActionEvent e) {
 		String value;
 		if(computer.isSelected()) {
+			ipAddress.setVisible(false);
 			value = "0";
 			main.Main.gameMode = value;
 			System.out.println("Computer is selected " + value);
 		} else if (host.isSelected()) {
+			ipAddress.setVisible(false);
 			value = "1";
 			main.Main.gameMode = value;
 			System.out.println("Host is selected " + value);
 		} else {
+			ipAddress.setVisible(true);
 			value = getIp();
 			System.out.println("\""+value+"\"");
 			if (value.length() < 6) {

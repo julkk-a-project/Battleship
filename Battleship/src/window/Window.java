@@ -46,8 +46,6 @@ public class Window extends Application {
 	public static Text text2;
 	private static Tile[][] myTiles;
 	private static Tile[][] itTiles;
-	private static String[] subHeading = {"Aircraft Carrier", "Battleship", "Destroyer", "Submarine", "Torpedo Boat"};
-
 	private static TextArea log;
 	
 	//Our gridPane
@@ -365,8 +363,7 @@ public class Window extends Application {
 					controller.Controller.disconnectAny();
 					System.exit(0);
 				} else {
-					//TODO: How to get this to go back to program in 1 click
-					alert.showAndWait();
+					alert.close();
 				}	
 			}
 		});
