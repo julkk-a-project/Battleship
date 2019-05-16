@@ -294,18 +294,122 @@ public class Matrix {
 	/*
 	 * HitEffectHandler
 	 */
-	private String hitEffectHandler(int x, int y){
+	private boolean hitEffectHandler(int x, int y){
 		AbstractTile target = getTile(x,y);
 		if(target.hit()) {
 			setTile(x,y, new Hit());
-			return "1,";
+			return true;
 		}else {
 			setTile(x,y, new Miss());
-			return "0,";
+			return false;
 		}
 	}
 	
-	
+
+	/*
+	 * Cheks if ship still floating
+	 */
+    private boolean chekShip(int x, int y) {
+    	
+    	boolean shipSunk = false;
+    	
+    	
+    	//system that branches to all the four directions.
+    	
+    	//stops when finds ILOGICAL or something unexpected
+    	
+    	//if finds only hit and no Hull, then shipSunk should be true.
+    	
+
+    	//down
+    	boolean shouldContinue = true;
+    	int tempX = x;
+    	int tempY = y;
+    	try {
+        	while(shouldContinue) {
+        		tempY++;
+        		int tempRep = getTile(tempX, tempY).getRep();
+        		if (tempRep == 2 || tempRep == 3) {
+        			if (tempRep == 2) {
+        				return false;
+        			}else {
+        				shipSunk = true;
+        			}
+        		}else {
+        			shouldContinue = false;
+        		}
+        	}	
+    	}catch(IndexOutOfBoundsException e){
+    		
+    	}
+    	//up
+    	shouldContinue = true;
+    	tempX = x;
+    	tempY = y;
+    	try {
+        	while(shouldContinue) {
+        		tempY--;
+        		int tempRep = getTile(tempX, tempY).getRep();
+        		if (tempRep == 2 || tempRep == 3) {
+        			if (tempRep == 2) {
+        				return false;
+        			}else {
+        				shipSunk = true;
+        			}
+        		}else {
+        			shouldContinue = false;
+        		}
+        	}	
+    	}catch(IndexOutOfBoundsException e){
+    		
+    	}
+    	//left
+    	shouldContinue = true;
+    	tempX = x;
+    	tempY = y;
+    	try {
+        	while(shouldContinue) {
+        		tempX--;
+        		int tempRep = getTile(tempX, tempY).getRep();
+        		if (tempRep == 2 || tempRep == 3) {
+        			if (tempRep == 2) {
+        				return false;
+        			}else {
+        				shipSunk = true;
+        			}
+        		}else {
+        			shouldContinue = false;
+        		}
+        	}	
+    	}catch(IndexOutOfBoundsException e){
+    		
+    	}
+    	//right
+    	shouldContinue = true;
+    	tempX = x;
+    	tempY = y;
+    	try {
+        	while(shouldContinue) {
+        		tempX++;
+        		int tempRep = getTile(tempX, tempY).getRep();
+        		if (tempRep == 2 || tempRep == 3) {
+        			if (tempRep == 2) {
+        				return false;
+        			}else {
+        				shipSunk = true;
+        			}
+        		}else {
+        			shouldContinue = false;
+        		}
+        	}	
+    	}catch(IndexOutOfBoundsException e){
+    		
+    	}
+    	
+    	
+		return shipSunk;
+	}
+    	
 
 	/*
 	 * Handle hits on main board
@@ -322,15 +426,33 @@ public class Matrix {
 		
 		
 		//Was it a hull?
-				anserw += hitEffectHandler(x,y);
+		
+		
+				boolean hitOrMiss = hitEffectHandler(x,y);
 
+				
 		//Was there a boat that got sunk?
 		
 				//Handle that shit here :S AAMUJA!!!!
-			
-			//temporary:
-				anserw += "0,";
 		
+				
+				//appends hit and shipSunk text
+				
+				if (hitOrMiss) {
+					anserw += "1,";
+					if (chekShip(x,y)) {
+						anserw += "1,";
+					}else {
+						anserw += "0,";
+					}
+					
+				}else {
+					anserw += "0,0,";
+				}
+				
+		
+				
+				
 		
 		//did you just loose?
 		
@@ -347,7 +469,10 @@ public class Matrix {
 	
 	
 
-    public void hitReader(String message, int x, int y) {
+
+
+
+	public void hitReader(String message, int x, int y) {
 
     	//handle message here
     	
@@ -373,6 +498,7 @@ public class Matrix {
     	}
     	
     	if(shipSunk == 1) {
+    		ilogicalPlacer(x, y);
     		//TODO: HANDLE SHIPSUNK FACTUM (place illogical)
     	}
     	
