@@ -24,6 +24,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -39,6 +40,7 @@ import javafx.scene.text.Text;
 public class Window extends Application {
 	
 	BorderPane border = new BorderPane();		//Adding new borderPane to organize shit
+	NewGame newGame = new NewGame(); 
 	static RadioButton horizontal;
 	RadioButton vertical;
 	private ToggleGroup group;
@@ -194,12 +196,18 @@ public class Window extends Application {
 		vertical.setTranslateX(0);				//Position of RadioButton X-axis
 		vertical.setTranslateY(20);				//Position of RadioButton Y-axis
 		
+		Button returnNewGame = new Button("Done placing");
+		returnNewGame.setPrefSize(90, 20);				//set size of Button
+		returnNewGame.setTranslateX(0);
+		returnNewGame.setTranslateY(30);
+		
+		
 	    VBox vBoxRight = new VBox(ships, subHeading1, new ImageView(aircraftCarrier), 		//Putting heading, subHeadings and images into the vBox
 	    								 subHeading2, new ImageView(battleship), 
 	    								 subHeading3, new ImageView(submarine), 
 	    								 subHeading4, new ImageView(destroyer), 
 	    								 subHeading5, new ImageView(torpedoBoat),
-	    								 subHeading6, horizontal, vertical);
+	    								 subHeading6, horizontal, vertical, returnNewGame);
 	    
 	    
 	    
@@ -208,9 +216,11 @@ public class Window extends Application {
 	    vBoxRight.setSpacing(5);										//Adding space between stuff
 	    vBoxRight.setStyle("-fx-background-color: #f0f8ff;");			//Set background color
 	    
-	    //////////////////////////////////////////////////////
-	    //	Action for radioButtons vertical and horizontal	//
-	    //////////////////////////////////////////////////////
+	    //////////////////////////
+	    //	Action for buttons	//
+	    //////////////////////////
+	    
+	    //Radiobuttons
 	    group.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
 	    @Override
 	    public void changed(ObservableValue<? extends Toggle> ov, Toggle oldToggle, Toggle newToggle) {
@@ -221,6 +231,28 @@ public class Window extends Application {
              }   
 	        }
 	    });
+	    
+	    //Return to new game
+	    
+	    returnNewGame.setOnAction((event) -> {
+		    //try {
+		        FXMLLoader fxmlLoader = new FXMLLoader();
+		        fxmlLoader.setLocation(getClass().getResource("NewWindow.fxml"));
+		        /* 
+		         * if "fx:controller" is not set in fxml
+		         * fxmlLoader.setController(NewWindowController);
+		         */
+		        Scene scene = new Scene(newGame.load(), 600, 400);
+		        Stage stage = new Stage();
+		        stage.setTitle("New Game");
+		        stage.setScene(scene);
+		        stage.show();
+		   /* } catch (IOException e) {
+		        Logger logger = Logger.getLogger(getClass().getName());
+		        logger.log(Level.SEVERE, "Failed to create new Window.", e);
+		    }*/
+		});
+		
 	    
 	    return vBoxRight;
 	}
@@ -322,7 +354,6 @@ public class Window extends Application {
 		//////////////////////////////////
 		
 		//ActionEvent for click on 'New Game'
-		NewGame newGame = new NewGame(); 
 		itmNew.setOnAction((event) -> {
 		    //try {
 		        FXMLLoader fxmlLoader = new FXMLLoader();
@@ -395,12 +426,21 @@ public class Window extends Application {
 	} //addMenuBar() end
 	
 	
-	
+
 	public static void draw() {
 		for(int i = 0; i < 10; i++) {
 			for(int j = 0; j < 10; j++) {
 				myTiles[i][j].draw(main.Main.myMatrix);
 				itTiles[i][j].draw(main.Main.itMatrix);
+			}
+		}
+	}	
+	
+	public static void draw2() {
+		for(int i = 0; i < 10; i++) {
+			for(int j = 0; j < 10; j++) {
+				myTiles[i][j].draw(main.Main.myMatrix);
+				//itTiles[i][j].draw(main.Main.itMatrix);
 			}
 		}
 	}	

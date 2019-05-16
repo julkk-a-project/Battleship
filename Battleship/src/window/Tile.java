@@ -97,9 +97,9 @@ public class Tile extends StackPane {
 		//When working correctly, color should change, and after shot is processed, color should...
 		//change to rep that tile has changed to.
 		
-		FadeTransition ft = new FadeTransition(Duration.seconds(0.6),setColorRep(5));
-		ft.setToValue(1);
-		ft.play();
+		//FadeTransition ft = new FadeTransition(Duration.seconds(0.6),setColorRep(5));
+		//ft.setToValue(1);
+		//ft.play();
 		
 		
 		if (main.Main.itMatrix.isLeagalCord(x,y) && controller.Controller.canCord()) {
