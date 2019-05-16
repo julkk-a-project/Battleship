@@ -51,7 +51,7 @@ public class Matrix {
 	
 	
 	/*
-	 * replaces tile on coordinate x,y to 3rd parameter (AbstractTile). make sure to make it a new object.
+	 * replaces tile on cordinate x,y to 3rd parameter (AbstractTile). make sure to make it a new object.
 	 */
 	public void setTile(int x, int y, AbstractTile replacement) {
 		matrix[x][y] = replacement;	
@@ -109,51 +109,51 @@ public class Matrix {
 	}
 	
 	/*
-	 * ShipPlacementChekker. checks if a ship can be placed where you want it to be placed.
+	 * ShipPlacementChekker. cheks if a ship can be placed where you want it to be placed.
 	 * first two parameters for north-western corner
 	 * 3rd for how long the ship is in tiles
 	 * 4th boolean for if the ship is vertical, else horizontal.
 	 */
 	private boolean canPlaceShip(int x, int y, int length, boolean vertical) {
-		boolean answer = false;
+		boolean anserw = false;
 		
 		
-		//Check if it can fit where you want it to
+		//Chek if it can fit where you want it to
 		if (vertical) {
 			//when vertical
 			if ((this.y - y) >= length) {
-				answer = true;
+				anserw = true;
 			}else {
 				return false;
 			}
 		}else {
 			//when horizontal
 			if ((this.x - x) >= length) {
-				answer = true;
+				anserw = true;
 			}else {
 				return false;
 			}
 		}
 		
 		
-		//Check if it intersects only "Water"
+		//Chek if it intersects only "Water"
 		if (vertical) {
 			//when vertical
 			for (int i = 0; i < length; i++) {
 				if (!(getTile(x,y+i).getRep() == 0)) {
-					answer = false;
+					anserw = false;
 				}
 			}
 		}else {
 			//when horizontal
 			for (int i = 0; i < length; i++) {
 				if (!(getTile(x+i,y).getRep() == 0)) {
-					answer = false;
+					anserw = false;
 				}
 			}
 		}
 		
-		return answer;
+		return anserw;
 	}
 	
 	
@@ -185,7 +185,7 @@ public class Matrix {
 			}
 		}
 		
-		//places illogical from origin point to prevent you from placing illegal ships :)
+		//places illogical from origin point to prevent you from placing illeagal ships :)
 		ilogicalPlacer(x,y);
 		
 		return true;
@@ -212,7 +212,7 @@ public class Matrix {
 			ilogicalPlacerRec(x-1,y, target);
 			 
 			if(target.getRep() == 2) {
-				//setTile(x,y, new Hit()); //IDK WHY tHis IS HERE :S				
+				//setTile(x,y, new Hit()); //IDK WHY tHsi IS HERE :S				
 			}
 
 		}
@@ -277,7 +277,7 @@ public class Matrix {
 	
 	
 	/*
-	 * Checks if you can legally shoot at a specific tile
+	 * Cheks if you can leagally shoot at a specific tile
 	 */
 	public boolean isLeagalCord(int x, int y) {
 		if((this.x >= x && x > -1) && (this.y >= y && y > -1)) {
@@ -294,24 +294,128 @@ public class Matrix {
 	/*
 	 * HitEffectHandler
 	 */
-	private String hitEffectHandler(int x, int y){
+	private boolean hitEffectHandler(int x, int y){
 		AbstractTile target = getTile(x,y);
 		if(target.hit()) {
 			setTile(x,y, new Hit());
-			return "1,";
+			return true;
 		}else {
 			setTile(x,y, new Miss());
-			return "0,";
+			return false;
 		}
 	}
 	
-	
+
+	/*
+	 * Cheks if ship still floating
+	 */
+    private boolean chekShip(int x, int y) {
+    	
+    	boolean shipSunk = false;
+    	
+    	
+    	//system that branches to all the four directions.
+    	
+    	//stops when finds ILOGICAL or something unexpected
+    	
+    	//if finds only hit and no Hull, then shipSunk should be true.
+    	
+
+    	//down
+    	boolean shouldContinue = true;
+    	int tempX = x;
+    	int tempY = y;
+    	try {
+        	while(shouldContinue) {
+        		tempY++;
+        		int tempRep = getTile(tempX, tempY).getRep();
+        		if (tempRep == 2 || tempRep == 3) {
+        			if (tempRep == 2) {
+        				return false;
+        			}else {
+        				shipSunk = true;
+        			}
+        		}else {
+        			shouldContinue = false;
+        		}
+        	}	
+    	}catch(IndexOutOfBoundsException e){
+    		
+    	}
+    	//up
+    	shouldContinue = true;
+    	tempX = x;
+    	tempY = y;
+    	try {
+        	while(shouldContinue) {
+        		tempY--;
+        		int tempRep = getTile(tempX, tempY).getRep();
+        		if (tempRep == 2 || tempRep == 3) {
+        			if (tempRep == 2) {
+        				return false;
+        			}else {
+        				shipSunk = true;
+        			}
+        		}else {
+        			shouldContinue = false;
+        		}
+        	}	
+    	}catch(IndexOutOfBoundsException e){
+    		
+    	}
+    	//left
+    	shouldContinue = true;
+    	tempX = x;
+    	tempY = y;
+    	try {
+        	while(shouldContinue) {
+        		tempX--;
+        		int tempRep = getTile(tempX, tempY).getRep();
+        		if (tempRep == 2 || tempRep == 3) {
+        			if (tempRep == 2) {
+        				return false;
+        			}else {
+        				shipSunk = true;
+        			}
+        		}else {
+        			shouldContinue = false;
+        		}
+        	}	
+    	}catch(IndexOutOfBoundsException e){
+    		
+    	}
+    	//right
+    	shouldContinue = true;
+    	tempX = x;
+    	tempY = y;
+    	try {
+        	while(shouldContinue) {
+        		tempX++;
+        		int tempRep = getTile(tempX, tempY).getRep();
+        		if (tempRep == 2 || tempRep == 3) {
+        			if (tempRep == 2) {
+        				return false;
+        			}else {
+        				shipSunk = true;
+        			}
+        		}else {
+        			shouldContinue = false;
+        		}
+        	}	
+    	}catch(IndexOutOfBoundsException e){
+    		
+    	}
+    	
+    	
+		return shipSunk;
+	}
+    	
 
 	/*
 	 * Handle hits on main board
 	 */
 	public String hitOrMiss(String xString, String yString) {
-		String answer = "";
+		String anserw = "";
 		
 		//parse
 		int x = Integer.parseInt(xString);
@@ -322,32 +426,53 @@ public class Matrix {
 		
 		
 		//Was it a hull?
-				answer += hitEffectHandler(x,y);
+		
+		
+				boolean hitOrMiss = hitEffectHandler(x,y);
 
+				
 		//Was there a boat that got sunk?
 		
 				//Handle that shit here :S AAMUJA!!!!
-			
-			//temporary:
-				answer += "0,";
 		
+				
+				//appends hit and shipSunk text
+				
+				if (hitOrMiss) {
+					anserw += "1,";
+					if (chekShip(x,y)) {
+						anserw += "1,";
+					}else {
+						anserw += "0,";
+					}
+					
+				}else {
+					anserw += "0,0,";
+				}
+				
+		
+				
+				
 		
 		//did you just loose?
 		
 				if (countTiles(new Hull()) <= 0) {
-					answer += "1";
+					anserw += "1";
 					controller.loose();
 				}else {
-					answer += "0";
+					anserw += "0";
 				}
 
 		
-		return answer;
+		return anserw;
 	}
 	
 	
 
-    public void hitReader(String message, int x, int y) {
+
+
+
+	public void hitReader(String message, int x, int y) {
 
     	//handle message here
     	
@@ -373,6 +498,7 @@ public class Matrix {
     	}
     	
     	if(shipSunk == 1) {
+    		ilogicalPlacer(x, y);
     		//TODO: HANDLE SHIPSUNK FACTUM (place illogical)
     	}
     	
