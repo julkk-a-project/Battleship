@@ -234,24 +234,24 @@ public class Window extends Application {
 	    
 	    //Return to new game
 	    
-	    returnNewGame.setOnAction((event) -> {
+	    /*returnNewGame.setOnAction((event) -> {
 		    //try {
 		        FXMLLoader fxmlLoader = new FXMLLoader();
 		        fxmlLoader.setLocation(getClass().getResource("NewWindow.fxml"));
-		        /* 
-		         * if "fx:controller" is not set in fxml
-		         * fxmlLoader.setController(NewWindowController);
-		         */
+		         
+		         // if "fx:controller" is not set in fxml
+		         // fxmlLoader.setController(NewWindowController);
+		         
 		        Scene scene = new Scene(newGame.load(), 600, 400);
 		        Stage stage = new Stage();
 		        stage.setTitle("New Game");
 		        stage.setScene(scene);
 		        stage.show();
-		   /* } catch (IOException e) {
-		        Logger logger = Logger.getLogger(getClass().getName());
-		        logger.log(Level.SEVERE, "Failed to create new Window.", e);
-		    }*/
-		});
+		    //} catch (IOException e) {
+		        //Logger logger = Logger.getLogger(getClass().getName());
+		        //logger.log(Level.SEVERE, "Failed to create new Window.", e);
+		    //}
+		});*/
 		
 	    
 	    return vBoxRight;

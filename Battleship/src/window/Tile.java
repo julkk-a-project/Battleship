@@ -57,7 +57,7 @@ public class Tile extends StackPane {
 		setAlignment(Pos.CENTER);
 		getChildren().addAll(border, text);
 		setOnMouseClicked(event -> open());
-		close();
+		//close();
 	}
 	
 	
