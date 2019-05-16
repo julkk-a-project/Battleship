@@ -117,6 +117,12 @@ public class Tile extends StackPane {
 			window.Window.draw();
 		}
 		
+		if(main.Main.hasBuffer()) {
+			String string = main.Main.getBuffer(); 
+			window.Window.appendLog(string);
+			
+		}
+		
 	}
 	
 	

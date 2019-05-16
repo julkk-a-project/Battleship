@@ -1,5 +1,6 @@
 package window;
 
+import java.io.File;
 import java.util.Optional;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
@@ -33,6 +34,8 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -457,7 +460,7 @@ public class Window extends Application {
 	
 	
 	public static void appendLog(String string) {
-		//log.appendText(string+"\n");
+		log.appendText(string+"\n");
 	}
 	
 	
@@ -477,5 +480,14 @@ public class Window extends Application {
 			main.Main.vertical = true;
 		}
 	}
-			
+	
+	public void soundEffect(String mp3Path) {
+		//TODO: add some soundEffects
+		String musicFile = mp3Path;     // For example
+
+		Media sound = new Media(new File(musicFile).toURI().toString());
+		MediaPlayer mediaPlayer = new MediaPlayer(sound);
+		mediaPlayer.play();
+	}
+		
 }

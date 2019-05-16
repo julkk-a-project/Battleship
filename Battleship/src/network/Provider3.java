@@ -181,7 +181,7 @@ public class Provider3 {
      */
     public static void appendLog(String string) {
     	//add stuff that makes this add stuff to log
-    	window.Window.appendLog(string);
+    	main.Main.addToBuffer(string);
     }
     
     /*

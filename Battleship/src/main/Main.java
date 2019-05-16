@@ -18,6 +18,8 @@ public class Main {
 	private static boolean lost = false;
 	private static boolean won = false;
 	public static boolean vertical;
+	private static String logBuffer;
+	private static boolean hasBuffer;
 	
 	
 	
@@ -75,5 +77,31 @@ public class Main {
                 window.Window.launch(Window.class, args);                
         	}
         }.start();
+	}
+
+
+
+
+	public static void addToBuffer(String string) {
+		logBuffer += string + "\n";
+		hasBuffer = true;
+		
+	}
+
+
+
+
+	public static boolean hasBuffer() {
+		return hasBuffer;
+	}
+
+
+
+
+	public static String getBuffer() {
+		String temp = logBuffer;
+		logBuffer = "";
+		hasBuffer = false;
+		return temp;
 	}
 }

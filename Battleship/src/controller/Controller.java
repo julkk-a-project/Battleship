@@ -70,15 +70,16 @@ public class Controller {
         
         for (int i = 0; i < 10; i++) {
         	System.out.println("HIS TURN");
-        	window.Window.appendLog("HIS TURN");
+        	main.Main.addToBuffer("HIS TURN");
         	hisTurn = true;
 	        while(hisTurn){
 	            hisTurn = server.run();
 	        }
+	        
 	        draw();
 	        
 	        System.out.println("UR TURN");
-	        window.Window.appendLog("UR TURN");
+	        main.Main.addToBuffer("UR TURN");
 	        /*
 	        int cordX = Integer.parseInt(JOptionPane.showInputDialog("cord X"));
 	        int cordY = Integer.parseInt(JOptionPane.showInputDialog("cord Y"));
@@ -114,7 +115,7 @@ public class Controller {
         hisTurn = false;
   
         System.out.println("UR TURN");
-        window.Window.appendLog("UR TURN");
+        main.Main.addToBuffer("UR TURN");
 
     	System.out.println("givecords changes...1");
         draw();
@@ -138,7 +139,7 @@ public class Controller {
         	giveCords = false;
         	
 	        System.out.println("HIS TURN");
-	        window.Window.appendLog("HIS TURN");
+	        main.Main.addToBuffer("HIS TURN");
 	        
 	        hisTurn = true;
 	        
@@ -148,7 +149,7 @@ public class Controller {
 	        draw();
 	        
 	        System.out.println("UR TURN");
-	        window.Window.appendLog("UR TURN");
+	        main.Main.addToBuffer("UR TURN");
 	        
         }
         client.disconnect();
