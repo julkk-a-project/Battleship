@@ -483,6 +483,7 @@ public class Window extends Application {
 	
 	public void soundEffect(String mp3Path) {
 		//TODO: add some soundEffects
+		//added this comment to be able to push again
 		String musicFile = mp3Path;     // For example
 
 		Media sound = new Media(new File(musicFile).toURI().toString());
