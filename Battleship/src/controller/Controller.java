@@ -1,5 +1,7 @@
 package controller;
 
+import javax.swing.JOptionPane;
+
 import main.Waiter;
 import main.WaiterRunner;
 import matrix.Matrix;
@@ -68,7 +70,7 @@ public class Controller {
         	connected = server.connect();
         }
         
-        for (int i = 0; i < 10; i++) {
+        while (!hasWon() || !hasLost()) {
         	System.out.println("HIS TURN");
         	main.Main.addToBuffer("HIS TURN");
         	hisTurn = true;
@@ -93,6 +95,14 @@ public class Controller {
 	        server.run(cords);
 	        draw();
         	giveCords = false;
+        }
+        
+        //TODO: MAYBE SOMETHING HAPPENS WHEN YOU WIN
+        if(hasWon()) {
+            JOptionPane.showMessageDialog(null, "you won.");        	
+        }
+        if(hasLost()) {
+        	JOptionPane.showMessageDialog(null, "you lost :(");
         }
 
         server.disconnect();		
@@ -119,8 +129,8 @@ public class Controller {
 
     	System.out.println("givecords changes...1");
         draw();
-        
-        for (int i = 0; i < 10; i++) {
+
+        while (!hasWon() || !hasLost()) {
         	/*
 	        int cordX = Integer.parseInt(JOptionPane.showInputDialog("cord X"));
 	        int cordY = Integer.parseInt(JOptionPane.showInputDialog("cord Y"));
@@ -152,6 +162,16 @@ public class Controller {
 	        main.Main.addToBuffer("UR TURN");
 	        
         }
+        
+
+        //TODO: MAYBE SOMETHING HAPPENS WHEN YOU WIN
+        if(hasWon()) {
+            JOptionPane.showMessageDialog(null, "you won.");        	
+        }
+        if(hasLost()) {
+        	JOptionPane.showMessageDialog(null, "you lost :(");
+        }
+        
         client.disconnect();
 	}
 	
