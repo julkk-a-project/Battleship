@@ -101,28 +101,30 @@ public class Tile extends StackPane {
 		//ft.play();
 		
 		
-		if (main.Main.itMatrix.isLeagalCord(x,y) && controller.Controller.canCord()) {
-			controller.Controller.cords = cords;
-			System.out.println("coordsChanged");
-			controller.Controller.waker();
+		if((main.Main.myMatrix.getTile(x, y).getRep() == 0 && main.Main.gameMode == "2") || (main.Main.itMatrix.getTile(x, y).getRep() == 0 && main.Main.gameMode != "2")) {
+			if (main.Main.itMatrix.isLeagalCord(x,y) && controller.Controller.canCord()) {
+				controller.Controller.cords = cords;
+				System.out.println("coordsChanged");
+				controller.Controller.waker();
+				
+			}
+			else if (main.Main.gameMode == "2") {
+				ShipPlacer.setCords(x,y);
+				controller.Controller.waker();
+			}
 			
-		}
-		else if (main.Main.gameMode == "2") {
-			ShipPlacer.setCords(x,y);
-			controller.Controller.waker();
-		}
-		
-		else {
-			System.out.println("coordsNotChanged");
-			window.Window.draw();
-		}
-		
-		if(main.Main.hasBuffer()) {
-			String string = main.Main.getBuffer(); 
-			window.Window.appendLog(string);
+			else {
+				System.out.println("coordsNotChanged");
+				//window.Window.draw();
+			}
 			
+			if(main.Main.hasBuffer()) {
+				String string = main.Main.getBuffer(); 
+				window.Window.appendLog(string);
+				
+			}
 		}
-		
+				
 	}
 	
 	
