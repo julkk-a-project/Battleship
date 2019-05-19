@@ -3,11 +3,17 @@ package main;
 import controller.Controller;
 import controller.ShipPlacer;
 import matrix.Matrix;
+import model.Model;
 import window.Tile;
 import window.Window;
 
 public class Main {
 
+	
+	public static Model model;
+	
+	
+	
 	public static Matrix myMatrix;
 	public static Matrix itMatrix;
 	public static Tile tile;
@@ -25,7 +31,12 @@ public class Main {
 	
 	
 	
+	
+	
+	
 	public static void main(String[] args) {
+
+		model = new Model();
 		controller = new Controller();
 
 		//initializes default water matrixes, to avoid search in empty matrix.

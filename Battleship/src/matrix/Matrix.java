@@ -478,6 +478,8 @@ public class Matrix {
     	
     	String[] response = message.split(",");
     					//HIT?,SHIPSUNK?,WON?
+    	
+    	main.Main.model.setLastEvent(response[0], response[1]);
 
 		//parse (can be boolean if optimizing)
 		int hit = Integer.parseInt(response[0]);

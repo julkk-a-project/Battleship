@@ -81,7 +81,8 @@ public class Controller {
 	        while(hisTurn){
 	            hisTurn = server.run();
 	        }
-	        
+
+	    	soundEffect(getSFXPath());
 	        draw();
 	        
 	        System.out.println("UR TURN");
@@ -97,6 +98,8 @@ public class Controller {
 	        
 	        //Check if cords point to a water tile on own map to avoid dumb shooting.
 	        server.run(cords);
+
+	    	soundEffect(getSFXPath());
 	        draw();
         	giveCords = false;
         }
@@ -132,7 +135,8 @@ public class Controller {
         main.Main.addToBuffer("UR TURN");
 
     	System.out.println("givecords changes...1");
-        draw();
+    	soundEffect(getSFXPath());
+    	draw();
 
         while (!hasWon() || !hasLost()) {
         	/*
@@ -160,6 +164,7 @@ public class Controller {
 	        while(hisTurn){
 	            hisTurn = client.run();
 	        }
+	    	soundEffect(getSFXPath());
 	        draw();
 	        
 	        System.out.println("UR TURN");
@@ -236,6 +241,27 @@ public class Controller {
 		MediaPlayer mediaPlayer = new MediaPlayer(sound);
 		mediaPlayer.play();
 	}
+	
+	public void setLastEvent(String hit, String sunk) {
+		
+	}
+	
+	
+	public String getSFXPath() {
+		String mp3File;
+		String lastEvent = main.Main.model.getLastEvent();
+		if(lastEvent == "1,0") {
+			mp3File = "hit.mp3";
+		} else if (lastEvent == "1,1") {
+			mp3File = "shipSunk.mp3";
+		} else {
+			mp3File = "miss.mp3";
+		}
+			
+		return mp3File;
+	}
+	
+	
 		
 
 
