@@ -253,7 +253,7 @@ public class Controller {
 		if(lastEvent.equals("1,0")) {
 			mp3File = "hit.mp3";
 		} else if (lastEvent.equals("1,1")) {
-			mp3File = "shipSunk.mp3";
+			mp3File = "sunk.mp3";
 		} else {
 			mp3File = "miss.mp3";
 		}
