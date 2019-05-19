@@ -14,6 +14,7 @@ public class Model {
 
 	public void setLastEvent(String hit, String sunk) {
 		lastEvent = hit+","+sunk;
+		System.out.println(lastEvent);
 		
 	}
 
