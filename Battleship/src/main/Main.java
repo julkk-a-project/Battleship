@@ -50,11 +50,6 @@ public class Main {
         		
         		won = false;
         		lost = false;
-        		/*
-        		System.out.println("before waiter");
-        		Controller.waiter();
-        		System.out.println("after waiter");
-        		*/
 				
 				//host or join
         		while(true) {
