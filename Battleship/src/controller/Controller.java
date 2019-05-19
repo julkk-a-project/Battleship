@@ -135,7 +135,6 @@ public class Controller {
         main.Main.addToBuffer("UR TURN");
 
     	System.out.println("givecords changes...1");
-    	soundEffect(getSFXPath());
     	draw();
 
         while (!hasWon() || !hasLost()) {
@@ -153,6 +152,7 @@ public class Controller {
 	        
 	        //Check if cords point to a water tile on own map to avoid dumb shooting.
 	        client.run(cords);
+	    	soundEffect(getSFXPath());
 	        draw();
         	giveCords = false;
         	
