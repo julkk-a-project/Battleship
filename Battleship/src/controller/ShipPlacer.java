@@ -16,6 +16,7 @@ public class ShipPlacer {
 		for(int i = 0; i<ships.length; i++) {
 			individualShipPlacer(ships[i]);
 		}
+		//TODO: window.Window.showNewGame();
 	}
 	
 	private static void individualShipPlacer(int length){

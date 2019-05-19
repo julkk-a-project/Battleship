@@ -1,11 +1,14 @@
 package window;
 
+import java.util.EventObject;
+
 import javax.swing.JOptionPane;
 
 import controller.Controller;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -17,12 +20,15 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import tiles.Hull;
 
 public class NewGame extends Application {
 	
 	RadioButton computer, host, join;
 	TextField name, ipAddress;
-	Button startGame, cancel;
+	static Button startGame;
+	Button cancel;
+	private static Scene scene;
 	
 	/*public NewGame() {
 		//border.setCenter(load());	
@@ -42,7 +48,7 @@ public class NewGame extends Application {
 		BorderPane border = new BorderPane();
 		border.setCenter(load());
 		//Sets everything visible
-	    Scene scene = new Scene(border);
+	    scene = new Scene(border);
         primaryStage.setScene(scene);
         primaryStage.setTitle("New Game");
         primaryStage.show();	
@@ -136,7 +142,7 @@ public class NewGame extends Application {
 	    	main.Main.gameMode = "2";
 	    	controller.Controller.waker();
 	    	Stage stage = (Stage) rePlaceShips.getScene().getWindow();
-	    	stage.close();
+	    	stage.hide();
 	    });
 		
 		//'New Game'-button
@@ -182,17 +188,14 @@ public class NewGame extends Application {
 	private String handleButtonAction(ActionEvent e) {
 		String value;
 		if(computer.isSelected()) {
-			ipAddress.setVisible(false);
 			value = "0";
 			main.Main.gameMode = value;
 			System.out.println("Computer is selected " + value);
 		} else if (host.isSelected()) {
-			ipAddress.setVisible(false);
 			value = "1";
 			main.Main.gameMode = value;
 			System.out.println("Host is selected " + value);
 		} else {
-			ipAddress.setVisible(true);
 			value = getIp();
 			System.out.println("\""+value+"\"");
 			if (value.length() < 6) {
@@ -221,4 +224,15 @@ public class NewGame extends Application {
 		
 		return ipAddress.getText();
 	}	
+	
+	public static void showNewGame(Node event) {
+		if (main.Main.myMatrix.countTiles (new Hull()) <= 0) {
+			startGame.setDisable(true);
+		} else {
+			startGame.setDisable(false);
+		}
+		
+		//TODO: window.Window.showNewGame();
+		
+	}
 }

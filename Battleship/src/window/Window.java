@@ -10,6 +10,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -37,6 +38,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
+import tiles.Hull;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
  
@@ -47,6 +49,7 @@ public class Window extends Application {
 	static RadioButton horizontal;
 	RadioButton vertical;
 	private ToggleGroup group;
+	private static Stage stageNewGame;
 
 	public static Text text2;
 	private static Tile[][] myTiles;
@@ -366,10 +369,10 @@ public class Window extends Application {
 		         * fxmlLoader.setController(NewWindowController);
 		         */
 		        Scene scene = new Scene(newGame.load(), 600, 400);
-		        Stage stage = new Stage();
-		        stage.setTitle("New Game");
-		        stage.setScene(scene);
-		        stage.show();
+		        stageNewGame = new Stage();
+		        stageNewGame.setTitle("New Game");
+		        stageNewGame.setScene(scene);
+		        stageNewGame.show();
 		   /* } catch (IOException e) {
 		        Logger logger = Logger.getLogger(getClass().getName());
 		        logger.log(Level.SEVERE, "Failed to create new Window.", e);
@@ -480,4 +483,9 @@ public class Window extends Application {
 			main.Main.vertical = true;
 		}
 	}
+	
+	//TODO:
+	/*public static void showNewGame() {
+		((Node)stageNewGame).getScene().show();
+	}*/
 }
