@@ -250,9 +250,9 @@ public class Controller {
 	public String getSFXPath() {
 		String mp3File;
 		String lastEvent = main.Main.model.getLastEvent();
-		if(lastEvent == "1,0") {
+		if(lastEvent.equals("1,0")) {
 			mp3File = "hit.mp3";
-		} else if (lastEvent == "1,1") {
+		} else if (lastEvent.equals("1,1")) {
 			mp3File = "shipSunk.mp3";
 		} else {
 			mp3File = "miss.mp3";
