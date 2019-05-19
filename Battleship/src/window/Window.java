@@ -480,14 +480,4 @@ public class Window extends Application {
 			main.Main.vertical = true;
 		}
 	}
-	
-	public void soundEffect(String mp3Path) {
-		//TODO: add some soundEffects
-		String musicFile = mp3Path;     // For example
-
-		Media sound = new Media(new File(musicFile).toURI().toString());
-		MediaPlayer mediaPlayer = new MediaPlayer(sound);
-		mediaPlayer.play();
-	}
-		
 }

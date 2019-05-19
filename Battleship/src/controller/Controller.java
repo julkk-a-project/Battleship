@@ -1,7 +1,11 @@
 package controller;
 
+import java.io.File;
+
 import javax.swing.JOptionPane;
 
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import main.Waiter;
 import main.WaiterRunner;
 import matrix.Matrix;
@@ -219,6 +223,20 @@ public class Controller {
 	public boolean hasWon() {
 		return won;
 	}
+	
+
+	/*
+	 * SFX. USE RELATIVE PATH IN STRING FORMAT
+	 */
+	public void soundEffect(String mp3Path) {
+		//TODO: add some soundEffects
+		String musicFile = mp3Path;     // For example
+
+		Media sound = new Media(new File(musicFile).toURI().toString());
+		MediaPlayer mediaPlayer = new MediaPlayer(sound);
+		mediaPlayer.play();
+	}
+		
 
 
 }
