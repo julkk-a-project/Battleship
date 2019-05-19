@@ -235,6 +235,13 @@ public class Controller {
 	 */
 	public void soundEffect(String mp3Path) {
 		//TODO: add some soundEffects
+		
+		//hack:
+		if (mp3Path.equals("nullSound.mp3")) {
+			return;
+		}
+		
+		
 		String musicFile = mp3Path;     // For example
 
 		Media sound = new Media(new File(musicFile).toURI().toString());
@@ -250,14 +257,19 @@ public class Controller {
 	public String getSFXPath() {
 		String mp3File;
 		String lastEvent = main.Main.model.getLastEvent();
-		if(lastEvent.equals("1,0")) {
-			mp3File = "hit.mp3";
-		} else if (lastEvent.equals("1,1")) {
-			mp3File = "sunk.mp3";
-		} else {
-			mp3File = "miss.mp3";
+		try {
+
+			if(lastEvent.equals("1,0")) {
+				mp3File = "hit.mp3";
+			} else if (lastEvent.equals("1,1")) {
+				mp3File = "sunk.mp3";
+			} else {
+				mp3File = "miss.mp3";
+			}
+				
+		}catch(Exception e) {
+			mp3File = "nullSound.mp3";
 		}
-			
 		return mp3File;
 	}
 	
