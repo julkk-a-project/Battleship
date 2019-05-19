@@ -442,12 +442,15 @@ public class Matrix {
 					anserw += "1,";
 					if (chekShip(x,y)) {
 						anserw += "1,";
+				    	main.Main.model.setLastEvent("1", "1");
 					}else {
 						anserw += "0,";
+				    	main.Main.model.setLastEvent("1", "0");
 					}
 					
 				}else {
 					anserw += "0,0,";
+			    	main.Main.model.setLastEvent("0", "0");
 				}
 				
 		
