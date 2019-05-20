@@ -7,6 +7,7 @@ import java.util.List;
 public class AI {
 	List<String> coords;
 	List<Boolean> vertical;
+	private int coordIndex;
 	
 
 	//For testing only
@@ -35,9 +36,8 @@ public class AI {
 	
 	
 	public void shuffleCoords() {
-		Collections.shuffle(coordsX);
-		Collections.shuffle(coordsY);
-		System.out.println(coordsX + "\n" + coordsY);
+		Collections.shuffle(coords);
+		System.out.println(coords);
 		
 	}
 	
@@ -75,7 +75,7 @@ public class AI {
 			if(main.Main.myMatrix.placeShip(coords[0], coords[1], length, vertical.get(0))) {
 				return;
 			}		
-			if(main.Main.myMatrix.placeShip(x, y, length, vertical.get(1))) {
+			if(main.Main.myMatrix.placeShip(coords[0], coords[1], length, vertical.get(1))) {
 				return;
 			}	
 		}
@@ -84,28 +84,16 @@ public class AI {
 
 
 	private int[] getNextCoords() {
+		if (coordIndex > coords.size()) {
+			coordIndex = 0;
+		}
+		String[] SCords = coords.get(coordIndex).split(",");
+		int cordX = Integer.parseInt(SCords[0]);
+		int cordY = Integer.parseInt(SCords[0]);
+		int[] ICords = {cordX, cordY};
+		coordIndex++;
+		return ICords;
 		
-		return coords;
-	}
-
-
-	private int getNextY() {
-		if (indexY == coordsY.size()) {
-			indexY = 0;
-		}
-		int y = coordsY.get(indexY);
-		indexY++;
-		return y;
-	}
-
-
-	private int getNextX() {
-		if (indexX == coordsX.size()) {
-			indexX = 0;
-		}
-		int x = coordsX.get(indexX);
-		indexX++;
-		return x;
 	}
 
 }
