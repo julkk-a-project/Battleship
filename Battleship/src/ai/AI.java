@@ -40,8 +40,10 @@ public class AI {
 		itMatrix = new Matrix(10,10, controller);
 		myMatrix = new Matrix(10,10, controller);
 		
+		shipPlacer(); //should place ships according to shuffled coord list 
 		
-		
+
+		shuffleCoords(); //so that AI is not predictable according to shooting pattern
 		
 		
 		
@@ -68,6 +70,35 @@ public class AI {
 	
 	
 	
+	public String getHit (int[] cords) {
+		return "0,0,0";
+	}
+	
+	
+	/*
+	 * VERY SIMPLE AI TO SHOOT AT YOUR TILES. ESSENTUALLY IT FIRES AT EVERY TILE IT CAN,
+	 * EXCEPT ON ILLOGICAL TILES AND PLACES IT HAS TRIED IN THE PAST
+	 */
+	public int[] fireAt () {
+		int[] cords = getNextCoords();
+		boolean notLeagal = true;
+		while(notLeagal) {
+			if (itMatrix.getTile(cords[0], cords[1]).AICanHit()) {
+				notLeagal = false;
+			}else {
+				cords = getNextCoords();
+			}
+		}
+		
+		return cords;
+	}
+	
+	public void handleItMatrix(int[] cords) {
+		
+	}
+	
+	
+	
 	
 	 
 	public void shipPlacer() {
@@ -85,13 +116,15 @@ public class AI {
 		while(i < 200) {
 			
 			int[] coords = getNextCoords();
+
+			shuffleVertical(); //to get random orientation
 			
 			
 			
-			if(main.Main.myMatrix.placeShip(coords[0], coords[1], length, vertical.get(0))) {
+			if(myMatrix.placeShip(coords[0], coords[1], length, vertical.get(0))) {
 				return;
 			}		
-			if(main.Main.myMatrix.placeShip(coords[0], coords[1], length, vertical.get(1))) {
+			if(myMatrix.placeShip(coords[0], coords[1], length, vertical.get(1))) {
 				return;
 			}	
 		}
