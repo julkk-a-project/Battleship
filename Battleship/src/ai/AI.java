@@ -71,7 +71,7 @@ public class AI {
 	
 	
 	public String getHit (int[] cords) {
-		return "0,0,0";
+		return myMatrix.hitOrMiss(cords[0]+"", cords[1]+""); //TODO: this is ineffective. the citation marks make the ints to string, then the method makes it back into an int...
 	}
 	
 	
