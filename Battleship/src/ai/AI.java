@@ -89,6 +89,10 @@ public class AI {
 				cords = getNextCoords();
 			}
 		}
+
+		
+		itMatrix.hitReader(main.Main.myMatrix.hitOrMiss(cords[0]+"", cords[1]+""),cords[0], cords[1]);
+		
 		
 		return cords;
 	}
@@ -114,6 +118,7 @@ public class AI {
 	private void individualShipPlacer(int length){
 		int i = 0;
 		while(i < 200) {
+			i++;
 			
 			int[] coords = getNextCoords();
 
@@ -133,7 +138,7 @@ public class AI {
 
 
 	private int[] getNextCoords() {
-		if (coordIndex > coords.size()) {
+		if (coordIndex >= coords.size()) {
 			coordIndex = 0;
 		}
 		String[] SCords = coords.get(coordIndex).split(",");
