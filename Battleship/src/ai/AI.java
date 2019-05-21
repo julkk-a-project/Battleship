@@ -4,21 +4,25 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import controller.Controller;
+import matrix.Matrix;
+
 public class AI {
 	List<String> coords;
 	List<Boolean> vertical;
 	private int coordIndex;
+	private Matrix myMatrix;
+	private Matrix itMatrix;
 	
 
 	//For testing only
 	public static void main(String[] args) {
-		AI ai = new AI();
-		ai.shuffleCoords();
-		ai.shuffleVertical();
+		Controller controller = new Controller();
+		AI ai = new AI(controller);
 	}
 	
 	
-	public AI() {
+	public AI(Controller controller) {
 		coords = new ArrayList<>();
 		vertical = new ArrayList<>();
         vertical.add(true);
@@ -29,6 +33,18 @@ public class AI {
 		        coords.add(i+","+j);
 			}
 		}	
+
+		shuffleCoords();
+		shuffleVertical();
+		
+		itMatrix = new Matrix(10,10, controller);
+		myMatrix = new Matrix(10,10, controller);
+		
+		
+		
+		
+		
+		
 		
 		
 	}
