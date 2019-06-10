@@ -1,7 +1,5 @@
 package window;
 
-import java.util.EventObject;
-
 import javax.swing.JOptionPane;
 
 import controller.Controller;
