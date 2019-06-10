@@ -13,11 +13,12 @@ public class AI {
 	private int coordIndex;
 	private Matrix myMatrix;
 	private Matrix itMatrix;
+	private static Controller controller;
 	
 
 	//For testing only
 	public static void main(String[] args) {
-		Controller controller = new Controller();
+		controller = new Controller();
 		AI ai = new AI(controller);
 	}
 	
@@ -38,9 +39,16 @@ public class AI {
 		shuffleVertical();
 		
 		itMatrix = new Matrix(10,10, controller);
-		myMatrix = new Matrix(10,10, controller);
 		
-		shipPlacer(); //should place ships according to shuffled coord list 
+		boolean shipsPlaced = false;
+		
+		//tries to place ships until placed logically
+		while(!shipsPlaced) {
+			createMyMatrix(); //to clear the field incase of faulty system
+			shipsPlaced = shipPlacer(myMatrix); //should place ships according to shuffled coord list			
+		}
+		System.out.println(myMatrix.drawMatrix());
+ 
 		
 
 		shuffleCoords(); //so that AI is not predictable according to shooting pattern
@@ -63,7 +71,7 @@ public class AI {
 	
 	public void shuffleVertical() {
 		Collections.shuffle(vertical);
-		System.out.println(vertical+"");
+		//System.out.println(vertical+"");
 		
 	}
 	
@@ -105,17 +113,24 @@ public class AI {
 	
 	
 	 
-	public void shipPlacer() {
+	public boolean shipPlacer(Matrix matrix) {
 		//public boolean placeShip(int x, int y, int length, boolean vertical) 
 		int[]ships = {5,4,3,3,2}; //TODO: IF WE MAKE THIS A CHANGING VARIABLE, STORE IN MODEL.
+		boolean working = true;
 		
 		for(int i = 0; i<ships.length; i++) {
-			individualShipPlacer(ships[i]);
+			System.out.println("placing "+ships[i]);
+			working = individualShipPlacer(ships[i], matrix);
+			if (!working) {
+				return false;
+			}
 		}
+		return true;
+		
 		//TODO: window.Window.showNewGame();
 	}
 	
-	private void individualShipPlacer(int length){
+	private boolean individualShipPlacer(int length, Matrix matrix){
 		int i = 0;
 		while(i < 200) {
 			i++;
@@ -126,28 +141,36 @@ public class AI {
 			
 			
 			
-			if(myMatrix.placeShip(coords[0], coords[1], length, vertical.get(0))) {
-				return;
+			if(matrix.placeShip(coords[0], coords[1], length, vertical.get(0))) {
+				return true;
 			}		
-			if(myMatrix.placeShip(coords[0], coords[1], length, vertical.get(1))) {
-				return;
+			if(matrix.placeShip(coords[0], coords[1], length, vertical.get(1))) {
+				return true;
 			}	
 		}
 		System.out.println("AI SUCKS AT PLACING SHIPS");
+		System.out.println(matrix.drawMatrix());
+		return false;
 	}
 
 
 	private int[] getNextCoords() {
 		if (coordIndex >= coords.size()) {
+			System.out.println("looping" + coordIndex);
 			coordIndex = 0;
 		}
 		String[] SCords = coords.get(coordIndex).split(",");
 		int cordX = Integer.parseInt(SCords[0]);
-		int cordY = Integer.parseInt(SCords[0]);
+		int cordY = Integer.parseInt(SCords[1]);
 		int[] ICords = {cordX, cordY};
 		coordIndex++;
+		System.out.println(ICords[0] + "," + ICords[1]);
 		return ICords;
 		
+	}
+	
+	private void createMyMatrix() {
+		myMatrix = new Matrix(10,10, controller);
 	}
 
 }

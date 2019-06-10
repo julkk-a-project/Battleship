@@ -514,5 +514,22 @@ public class Matrix {
     	
 	}
 	
+	/*
+	 * used for devTesting pourposes
+	 * gives you a string that should show what the matrix looks like
+	 */
+	public String drawMatrix() {
+		String string = "";
+
+		for (int i = 0; i < x; i++) {
+			for (int j = 0; j < y; j++) {
+				string += getTile(i,j).getRep() + ",";
+				
+			}
+			string += "\n";
+		}
+		return string;
+	}
+	
 	
 }
