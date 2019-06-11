@@ -74,7 +74,7 @@ public class Controller {
         	connected = server.connect();
         }
         
-        while (!hasWon() || !hasLost()) {
+        while (!hasWon() && !hasLost()) {
         	System.out.println("HIS TURN");
         	main.Main.addToBuffer("HIS TURN");
         	hisTurn = true;
@@ -137,7 +137,7 @@ public class Controller {
     	System.out.println("givecords changes...1");
     	draw();
 
-        while (!hasWon() || !hasLost()) {
+        while (!hasWon() && !hasLost()) {
         	/*
 	        int cordX = Integer.parseInt(JOptionPane.showInputDialog("cord X"));
 	        int cordY = Integer.parseInt(JOptionPane.showInputDialog("cord Y"));
