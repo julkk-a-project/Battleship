@@ -229,6 +229,11 @@ public class Controller {
 		return won;
 	}
 	
+	public void resetGameState() {
+		won = false;
+		lost = false;
+	}
+	
 
 	/*
 	 * SFX. USE RELATIVE PATH IN STRING FORMAT

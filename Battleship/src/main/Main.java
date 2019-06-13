@@ -21,8 +21,6 @@ public class Main {
 	public static Controller controller;
 	public static String gameMode; //ALSO USED FOR IP
 	
-	private static boolean lost = false;
-	private static boolean won = false;
 	public static boolean vertical;
 	private static String logBuffer;
 	private static boolean hasBuffer;
@@ -48,9 +46,6 @@ public class Main {
         	public void run() {
         		
         		
-        		won = false;
-        		lost = false;
-				
 				//host or join
         		while(true) {
             		System.out.println("before waiter");
@@ -59,9 +54,11 @@ public class Main {
         			
         			if (gameMode == "0"){
             			System.out.println("INSERT AI GAME MODE HERE AHAHAHA ÄKSDEE");
+            			controller.resetGameState();
             		}
             		else if (gameMode == "1") {
     					controller.host();
+    					controller.resetGameState();
     				}
             		else if(gameMode == "2") {
             			System.out.println("Entered shipBuilding Mode");
@@ -70,6 +67,7 @@ public class Main {
     				else {
     					//check if IP inPutted
     					controller.join(gameMode);
+    					controller.resetGameState();
     				}
         		}
         		
