@@ -16,9 +16,9 @@ public class WaiterRunner implements Runnable {
 	
 	public void runWaker(){
 		try {
-			Thread.sleep(5000);
+			//Thread.sleep(1); //WAS 5000
 			waiter.waker();
-		} catch (InterruptedException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

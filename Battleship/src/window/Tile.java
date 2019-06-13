@@ -90,9 +90,12 @@ public class Tile extends StackPane {
 	
 	
 	public void open() {
-
+		long time3 = 0;
+		long time4 = 0;
+		long time5 = 0;
+		long time1 = System.currentTimeMillis();
 		System.out.println("openCalled");
-		
+
 		//When working correctly, color should change, and after shot is processed, color should...
 		//...change to rep that tile has changed to.
 		
@@ -109,8 +112,11 @@ public class Tile extends StackPane {
 				
 			}
 			else if (main.Main.gameMode == "2") {
+				time3 = System.currentTimeMillis();
 				ShipPlacer.setCords(x,y);
+				time4 = System.currentTimeMillis();
 				controller.Controller.waker();
+				time5 = System.currentTimeMillis();
 			}
 			
 			else {
@@ -124,6 +130,11 @@ public class Tile extends StackPane {
 				
 			}
 		}
+		long time2 = System.currentTimeMillis();
+		System.out.println(time3 - time1);
+		System.out.println(time4 - time1);
+		System.out.println(time5 - time1);
+		System.out.println(time2 - time1);
 				
 	}
 	
