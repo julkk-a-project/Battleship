@@ -86,7 +86,7 @@ public class Controller {
 	        System.out.println("UR TURN");
 	        main.Main.addToBuffer("UR TURN");
 	    	soundEffect(getSFXPath());
-	        drawUpper();
+	        drawLower();
 	        /*
 	        int cordX = Integer.parseInt(JOptionPane.showInputDialog("cord X"));
 	        int cordY = Integer.parseInt(JOptionPane.showInputDialog("cord Y"));
@@ -102,7 +102,7 @@ public class Controller {
 	        }
 
 	    	soundEffect(getSFXPath());
-	        drawLower();
+	        drawUpper();
         	giveCords = false;
         }
         
@@ -148,7 +148,7 @@ public class Controller {
 	    	soundEffect(getSFXPath());
 	        System.out.println("HIS TURN");
 	        main.Main.addToBuffer("HIS TURN");
-	        drawUpper();
+	        drawLower();
         	giveCords = false;
         	
 	        
@@ -161,7 +161,7 @@ public class Controller {
 	        System.out.println("UR TURN");
 	        main.Main.addToBuffer("UR TURN");
 	    	soundEffect(getSFXPath());
-	        drawLower();
+	        drawUpper();
 	        
 	        
         }

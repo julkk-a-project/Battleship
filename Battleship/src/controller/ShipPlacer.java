@@ -1,7 +1,5 @@
 package controller;
 
-import java.sql.Time;
-
 //TODO: This should probably be used as an object created in main...
 
 public class ShipPlacer {
