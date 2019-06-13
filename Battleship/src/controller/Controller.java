@@ -82,11 +82,11 @@ public class Controller {
 	            hisTurn = server.run();
 	        }
 
-	    	soundEffect(getSFXPath());
-	        draw();
 	        
 	        System.out.println("UR TURN");
 	        main.Main.addToBuffer("UR TURN");
+	    	soundEffect(getSFXPath());
+	        drawUpper();
 	        /*
 	        int cordX = Integer.parseInt(JOptionPane.showInputDialog("cord X"));
 	        int cordY = Integer.parseInt(JOptionPane.showInputDialog("cord Y"));
@@ -97,10 +97,12 @@ public class Controller {
 	        waiter();    
 	        
 	        //Check if cords point to a water tile on own map to avoid dumb shooting.
-	        server.run(cords);
+	        if (!hasWon() && !hasLost()) {
+		        server.run(cords);	
+	        }
 
 	    	soundEffect(getSFXPath());
-	        draw();
+	        drawLower();
         	giveCords = false;
         }
         
@@ -116,7 +118,7 @@ public class Controller {
 	}
 	
 	
-	
+
 	public void join(String ip) {
 
 		//Joiner
@@ -134,41 +136,33 @@ public class Controller {
         System.out.println("UR TURN");
         main.Main.addToBuffer("UR TURN");
 
-    	System.out.println("givecords changes...1");
     	draw();
 
         while (!hasWon() && !hasLost()) {
-        	/*
-	        int cordX = Integer.parseInt(JOptionPane.showInputDialog("cord X"));
-	        int cordY = Integer.parseInt(JOptionPane.showInputDialog("cord Y"));
-
-	        cords[0] = cordX;
-	        cords[1] = cordY;
-	        */
-        	System.out.println("givecords changes...2");
+        	
         	giveCords = true;
-        	System.out.println("givecords changed!");
-	        waiter();
 	        
-	        //Check if cords point to a water tile on own map to avoid dumb shooting.
+        	waiter();
+	        
 	        client.run(cords);
 	    	soundEffect(getSFXPath());
-	        draw();
-        	giveCords = false;
-        	
 	        System.out.println("HIS TURN");
 	        main.Main.addToBuffer("HIS TURN");
+	        drawUpper();
+        	giveCords = false;
+        	
 	        
 	        hisTurn = true;
 	        
 	        while(hisTurn){
 	            hisTurn = client.run();
 	        }
-	    	soundEffect(getSFXPath());
-	        draw();
-	        
+
 	        System.out.println("UR TURN");
 	        main.Main.addToBuffer("UR TURN");
+	    	soundEffect(getSFXPath());
+	        drawLower();
+	        
 	        
         }
         
@@ -199,9 +193,15 @@ public class Controller {
 			
 		}
 	}
-	
+
 	private void draw() {
         window.Window.draw();
+	}
+	private void drawUpper() {
+        window.Window.drawUpper();
+	}
+	private void drawLower() {
+        window.Window.drawLower();
 	}
 
 	public static void waiter() {
@@ -234,17 +234,13 @@ public class Controller {
 	 * SFX. USE RELATIVE PATH IN STRING FORMAT
 	 */
 	public void soundEffect(String mp3Path) {
-		//TODO: add some soundEffects
 		
-		//hack:
+		//hack: (prevents crashes if there is no path in lastEvent.)
 		if (mp3Path.equals("nullSound.mp3")) {
 			return;
 		}
-		
-		
-		String musicFile = mp3Path;     // For example
 
-		Media sound = new Media(new File(musicFile).toURI().toString());
+		Media sound = new Media(new File(mp3Path).toURI().toString());
 		MediaPlayer mediaPlayer = new MediaPlayer(sound);
 		mediaPlayer.play();
 	}
@@ -266,7 +262,8 @@ public class Controller {
 			} else {
 				mp3File = "miss.mp3";
 			}
-				
+
+			//hack: (prevents crashes if there is no path in lastEvent.)
 		}catch(Exception e) {
 			mp3File = "nullSound.mp3";
 		}

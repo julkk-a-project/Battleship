@@ -1,5 +1,6 @@
 package controller;
 
+import java.sql.Time;
 
 //TODO: This should probably be used as an object created in main...
 
@@ -31,7 +32,7 @@ public class ShipPlacer {
 			//MAKE SURE IT CAN ONLY HAPPEN WHEN IN GAMEMODE 2
 			controller.Controller.waiter();
 			if(main.Main.myMatrix.placeShip(x, y, length, !main.Main.vertical)) {
-				window.Window.draw();
+				window.Window.drawLower();
 				//window.Window.drawLower(); //TODO: should this be instead of draw()???
 				return;
 				//controller.Controller.waker();
