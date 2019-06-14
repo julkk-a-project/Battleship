@@ -53,7 +53,7 @@ public class Main {
             		System.out.println("after waiter");
         			
         			if (gameMode == "0"){
-            			System.out.println("INSERT AI GAME MODE HERE AHAHAHA ÄKSDEE");
+        				controller.AIGame();
             			controller.resetGameState();
             		}
             		else if (gameMode == "1") {

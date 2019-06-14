@@ -4,6 +4,7 @@ import java.io.File;
 
 import javax.swing.JOptionPane;
 
+import ai.AI;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import main.Waiter;
@@ -55,7 +56,62 @@ public class Controller {
         main.Main.myMatrix.putHull(3);
         
 	}
-	
+
+	public void AIGame() {
+
+		AI ai = new AI(this);
+		String message = "0,0,0";
+		
+        hisTurn = false;
+  
+        System.out.println("UR TURN");
+        main.Main.addToBuffer("UR TURN");
+
+    	draw();
+
+        while (!hasWon() && !hasLost()) {
+        	
+        	giveCords = true;
+	        
+        	waiter();
+	        
+	        message = ai.getHit(cords);
+
+			main.Main.itMatrix.hitReader(message, cords[0], cords[1]);
+
+	        
+	    	soundEffect(getSFXPath());
+	        System.out.println("HIS TURN");
+	        main.Main.addToBuffer("HIS TURN");
+	        drawLower();
+        	giveCords = false;
+        	
+	        
+	        hisTurn = true;
+	        
+	        //for singleplayer
+	        
+	        ai.fireAt();
+	        
+	        System.out.println("UR TURN");
+	        main.Main.addToBuffer("UR TURN");
+	    	soundEffect(getSFXPath());
+	        drawUpper();
+	        
+	        
+        }
+        
+
+        //TODO: MAYBE SOMETHING HAPPENS WHEN YOU WIN
+        if(hasWon()) {
+            JOptionPane.showMessageDialog(null, "you won.");        	
+        }
+        if(hasLost()) {
+        	JOptionPane.showMessageDialog(null, "you lost :(");
+        }
+        
+        client.disconnect();
+	}
 	
 	public void host() {
 		//Host
@@ -274,6 +330,7 @@ public class Controller {
 		}
 		return mp3File;
 	}
+
 	
 	
 		
