@@ -170,7 +170,7 @@ public class AI {
 	}
 	
 	private void createMyMatrix() {
-		myMatrix = new Matrix(10,10, controller);
+		myMatrix = new Matrix(10,10, new Controller());
 	}
 
 }

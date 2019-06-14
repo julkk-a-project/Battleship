@@ -18,8 +18,8 @@ public class Controller {
 	
 	private static boolean hisTurn;
 	private static boolean giveCords;
-	private static boolean lost = false;
-	private static boolean won = false;
+	private boolean lost;
+	private boolean won;
 	public static WaiterRunner waiterRunner;
 
 	private static Provider3 server;
@@ -29,6 +29,10 @@ public class Controller {
 	
 
 	public Controller() {
+		@SuppressWarnings("unused")
+		boolean lost = false;
+		@SuppressWarnings("unused")
+		boolean won = false;
 		Waiter waiter = new Waiter();
         waiterRunner = new WaiterRunner(waiter);
 		
@@ -59,7 +63,7 @@ public class Controller {
 
 	public void AIGame() {
 
-		AI ai = new AI(this);
+		AI ai = new AI(new Controller());
 		String message = "0,0,0";
 		
         hisTurn = false;
@@ -110,7 +114,6 @@ public class Controller {
         	JOptionPane.showMessageDialog(null, "you lost :(");
         }
         
-        client.disconnect();
 	}
 	
 	public void host() {
