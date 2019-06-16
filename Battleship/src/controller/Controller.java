@@ -207,20 +207,20 @@ public class Controller {
 	    	soundEffect(getSFXPath());
 	        System.out.println("HIS TURN");
 	        main.Main.addToBuffer("HIS TURN");
-	        drawLower();
+	        drawUpper();
         	giveCords = false;
         	
 	        
 	        hisTurn = true;
 	        
-	        while(hisTurn || !hasWon()){
+	        while(hisTurn && !hasWon()){
 	            hisTurn = client.run();
 	        }
 
 	        System.out.println("UR TURN");
 	        main.Main.addToBuffer("UR TURN");
 	    	soundEffect(getSFXPath());
-	        drawUpper();
+	        drawLower();
 	        
 	        
         }
