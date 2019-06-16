@@ -213,7 +213,7 @@ public class Controller {
 	        
 	        hisTurn = true;
 	        
-	        while(hisTurn){
+	        while(hisTurn || !hasWon()){
 	            hisTurn = client.run();
 	        }
 
