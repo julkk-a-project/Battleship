@@ -291,6 +291,7 @@ public class Controller {
 	public void resetGameState() {
 		won = false;
 		lost = false;
+		main.Main.itMatrix = new Matrix(10,10,this);
 	}
 	
 
